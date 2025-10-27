@@ -1,0 +1,140 @@
+{
+  "jugadores": [
+    {
+      "id": 1,
+      "nombre": "Erling Haaland",
+      "equipo": "Manchester City",
+      "liga": "Premier League",
+      "pais": "Noruega",
+      "posicion": "Delantero",
+      "edad": 24,
+      "valor": 15000000,
+      "puntos": 0,
+      "estadisticas": {
+        "goles": 0,
+        "asistencias": 0,
+        "tarjetasAmarillas": 0,
+        "tarjetasRojas": 0,
+        "minutosJugados": 0
+      },
+      "promedioPuntos": 6.5
+    },
+    {
+      "id": 46,
+      "nombre": "Marcus Rashford",
+      "equipo": "Manchester United",
+      "liga": "Premier League",
+      "pais": "Inglaterra",
+      "posicion": "Delantero",
+      "edad": 27,
+      "valor": 8000000,
+      "puntos": 0,
+      "estadisticas": {
+        "goles": 0,
+        "asistencias": 0,
+        "tarjetasAmarillas": 0,
+        "tarjetasRojas": 0,
+        "minutosJugados": 0
+      },
+      "promedioPuntos": 6.6
+    },
+    {
+      "id": 47,
+      "nombre": "Bernardo Silva",
+      "equipo": "Manchester City",
+      "liga": "Premier League",
+      "pais": "Portugal",
+      "posicion": "Mediocampista",
+      "edad": 30,
+      "valor": 8500000,
+      "puntos": 0,
+      "estadisticas": {
+        "goles": 0,
+        "asistencias": 0,
+        "tarjetasAmarillas": 0,
+        "tarjetasRojas": 0,
+        "minutosJugados": 0
+      },
+      "promedioPuntos": 6.8
+    },
+    {
+      "id": 48,
+      "nombre": "Aurélien Tchouaméni",
+      "equipo": "Real Madrid",
+      "liga": "La Liga",
+      "pais": "Francia",
+      "posicion": "Mediocampista",
+      "edad": 24,
+      "valor": 8000000,
+      "puntos": 0,
+      "estadisticas": {
+        "goles": 0,
+        "asistencias": 0,
+        "tarjetasAmarillas": 0,
+        "tarjetasRojas": 0,
+        "minutosJugados": 0
+      },
+      "promedioPuntos": 6.4
+    },
+    {
+      "id": 49,
+      "nombre": "Joshua Kimmich",
+      "equipo": "Bayern Munich",
+      "liga": "Bundesliga",
+      "pais": "Alemania",
+      "posicion": "Mediocampista",
+      "edad": 29,
+      "valor": 7500000,
+      "puntos": 0,
+      "estadisticas": {
+        "goles": 0,
+        "asistencias": 0,
+        "tarjetasAmarillas": 0,
+        "tarjetasRojas": 0,
+        "minutosJugados": 0
+      },
+      "promedioPuntos": 6.6
+    },
+    {
+      "id": 50,
+      "nombre": "Enzo Fernández",
+      "equipo": "Chelsea",
+      "liga": "Premier League",
+      "pais": "Argentina",
+      "posicion": "Mediocampista",
+      "edad": 23,
+      "valor": 8000000,
+      "puntos": 0,
+      "estadisticas": {
+        "goles": 0,
+        "asistencias": 0,
+        "tarjetasAmarillas": 0,
+        "tarjetasRojas": 0,
+        "minutosJugados": 0
+      },
+      "promedioPuntos": 6.5
+    }
+  ],
+  "configuracion": {
+    "puntaje": {
+      "gol": 5,
+      "asistencia": 3,
+      "minutoJugado": 0.01,
+      "tarjetaAmarilla": -1,
+      "tarjetaRoja": -3,
+      "atajarPenal": 5,
+      "golesPorContra": -0.5,
+      "vallaInvicta": 4
+    },
+    "presupuestoInicial": 100000000,
+    "jugadoresPorEquipo": 11,
+    "formaciones": [
+      "4-4-2",
+      "4-3-3",
+      "3-5-2",
+      "5-3-2",
+      "3-4-3"
+    ]
+  }
+}
+   
