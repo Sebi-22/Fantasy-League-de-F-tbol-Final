@@ -123,12 +123,13 @@ function handleLogin(e) {
       // Login exitoso
       const sessionData = {
         email: user.email,
-        name: user.name,
+        name: user.name || user.username,
         loggedIn: true,
-        loginTime: new Date().toISOString()
+        loginTime: new Date().toISOString(),
+        username: user.username
       };
       
-      // Guardar sesión
+      // Guardar sesión usando el mismo formato que session.js espera
       if (rememberMe) {
         localStorage.setItem('fantasySession', JSON.stringify(sessionData));
       } else {

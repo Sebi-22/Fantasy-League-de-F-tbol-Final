@@ -1,5 +1,3 @@
-// signup.js - Sistema de registro para Fantasy League
-
 // Función para obtener usuarios almacenados
 function getStoredUsers() {
   const users = localStorage.getItem('fantasyUsers');

@@ -1,6 +1,63 @@
 {
   "jugadores": [
     {
+      "id": 2,
+      "nombre": "Thibaut Courtois",
+      "equipo": "Real Madrid",
+      "liga": "La Liga",
+      "pais": "Bélgica",
+      "posicion": "Arquero",
+      "edad": 31,
+      "valor": 700000,
+      "puntos": 0,
+      "estadisticas": {
+        "goles": 0,
+        "asistencias": 0,
+        "tarjetasAmarillas": 0,
+        "tarjetasRojas": 0,
+        "minutosJugados": 0
+      },
+      "promedioPuntos": 6.8
+    },
+    {
+      "id": 3,
+      "nombre": "Virgil van Dijk",
+      "equipo": "Liverpool",
+      "liga": "Premier League",
+      "pais": "Países Bajos",
+      "posicion": "Defensor",
+      "edad": 32,
+      "valor": 900000,
+      "puntos": 0,
+      "estadisticas": {
+        "goles": 0,
+        "asistencias": 0,
+        "tarjetasAmarillas": 0,
+        "tarjetasRojas": 0,
+        "minutosJugados": 0
+      },
+      "promedioPuntos": 6.7
+    },
+    {
+      "id": 4,
+      "nombre": "Kevin De Bruyne",
+      "equipo": "Manchester City",
+      "liga": "Premier League",
+      "pais": "Bélgica",
+      "posicion": "Mediocampista",
+      "edad": 32,
+      "valor": 1200000,
+      "puntos": 0,
+      "estadisticas": {
+        "goles": 0,
+        "asistencias": 0,
+        "tarjetasAmarillas": 0,
+        "tarjetasRojas": 0,
+        "minutosJugados": 0
+      },
+      "promedioPuntos": 7.2
+    },
+    {
       "id": 1,
       "nombre": "Erling Haaland",
       "equipo": "Manchester City",
@@ -8,7 +65,7 @@
       "pais": "Noruega",
       "posicion": "Delantero",
       "edad": 24,
-      "valor": 15000000,
+      "valor": 1500000,
       "puntos": 0,
       "estadisticas": {
         "goles": 0,
@@ -27,7 +84,7 @@
       "pais": "Inglaterra",
       "posicion": "Delantero",
       "edad": 27,
-      "valor": 8000000,
+      "valor": 800000,
       "puntos": 0,
       "estadisticas": {
         "goles": 0,
@@ -46,7 +103,7 @@
       "pais": "Portugal",
       "posicion": "Mediocampista",
       "edad": 30,
-      "valor": 8500000,
+      "valor": 850000,
       "puntos": 0,
       "estadisticas": {
         "goles": 0,
@@ -113,6 +170,519 @@
         "minutosJugados": 0
       },
       "promedioPuntos": 6.5
+    },
+    {
+      "id": 51,
+      "nombre": "Gianluigi Donnarumma",
+      "equipo": "PSG",
+      "liga": "Ligue 1",
+      "pais": "Italia",
+      "posicion": "Arquero",
+      "edad": 24,
+      "valor": 7000000,
+      "puntos": 0,
+      "estadisticas": {
+        "goles": 0,
+        "asistencias": 0,
+        "tarjetasAmarillas": 0,
+        "tarjetasRojas": 0,
+        "minutosJugados": 0
+      },
+      "promedioPuntos": 6.7
+    },
+    {
+      "id": 52,
+      "nombre": "Alessandro Bastoni",
+      "equipo": "Inter",
+      "liga": "Serie A",
+      "pais": "Italia",
+      "posicion": "Defensor",
+      "edad": 24,
+      "valor": 7500000,
+      "puntos": 0,
+      "estadisticas": {
+        "goles": 0,
+        "asistencias": 0,
+        "tarjetasAmarillas": 0,
+        "tarjetasRojas": 0,
+        "minutosJugados": 0
+      },
+      "promedioPuntos": 6.6
+    },
+    {
+      "id": 53,
+      "nombre": "Gavi",
+      "equipo": "Barcelona",
+      "liga": "La Liga",
+      "pais": "España",
+      "posicion": "Mediocampista",
+      "edad": 19,
+      "valor": 8500000,
+      "puntos": 0,
+      "estadisticas": {
+        "goles": 0,
+        "asistencias": 0,
+        "tarjetasAmarillas": 0,
+        "tarjetasRojas": 0,
+        "minutosJugados": 0
+      },
+      "promedioPuntos": 6.7
+    },
+    {
+      "id": 54,
+      "nombre": "Darwin Núñez",
+      "equipo": "Liverpool",
+      "liga": "Premier League",
+      "pais": "Uruguay",
+      "posicion": "Delantero",
+      "edad": 24,
+      "valor": 9000000,
+      "puntos": 0,
+      "estadisticas": {
+        "goles": 0,
+        "asistencias": 0,
+        "tarjetasAmarillas": 0,
+        "tarjetasRojas": 0,
+        "minutosJugados": 0
+      },
+      "promedioPuntos": 6.6
+    },
+    {
+      "id": 55,
+      "nombre": "Jan Oblak",
+      "equipo": "Atlético Madrid",
+      "liga": "La Liga",
+      "pais": "Eslovenia",
+      "posicion": "Arquero",
+      "edad": 31,
+      "valor": 7000000,
+      "puntos": 0,
+      "estadisticas": {
+        "goles": 0,
+        "asistencias": 0,
+        "tarjetasAmarillas": 0,
+        "tarjetasRojas": 0,
+        "minutosJugados": 0
+      },
+      "promedioPuntos": 6.8
+    },
+    {
+      "id": 56,
+      "nombre": "Rodri",
+      "equipo": "Manchester City",
+      "liga": "Premier League",
+      "pais": "España",
+      "posicion": "Mediocampista",
+      "edad": 27,
+      "valor": 9000000,
+      "puntos": 0,
+      "estadisticas": {
+        "goles": 0,
+        "asistencias": 0,
+        "tarjetasAmarillas": 0,
+        "tarjetasRojas": 0,
+        "minutosJugados": 0
+      },
+      "promedioPuntos": 7.0
+    },
+    {
+      "id": 57,
+      "nombre": "João Cancelo",
+      "equipo": "Barcelona",
+      "liga": "La Liga",
+      "pais": "Portugal",
+      "posicion": "Defensor",
+      "edad": 29,
+      "valor": 8000000,
+      "puntos": 0,
+      "estadisticas": {
+        "goles": 0,
+        "asistencias": 0,
+        "tarjetasAmarillas": 0,
+        "tarjetasRojas": 0,
+        "minutosJugados": 0
+      },
+      "promedioPuntos": 6.8
+    },
+    {
+      "id": 58,
+      "nombre": "Bukayo Saka",
+      "equipo": "Arsenal",
+      "liga": "Premier League",
+      "pais": "Inglaterra",
+      "posicion": "Mediocampista",
+      "edad": 22,
+      "valor": 9500000,
+      "puntos": 0,
+      "estadisticas": {
+        "goles": 0,
+        "asistencias": 0,
+        "tarjetasAmarillas": 0,
+        "tarjetasRojas": 0,
+        "minutosJugados": 0
+      },
+      "promedioPuntos": 7.1
+    },
+    {
+      "id": 59,
+      "nombre": "Phil Foden",
+      "equipo": "Manchester City",
+      "liga": "Premier League",
+      "pais": "Inglaterra",
+      "posicion": "Mediocampista",
+      "edad": 23,
+      "valor": 9000000,
+      "puntos": 0,
+      "estadisticas": {
+        "goles": 0,
+        "asistencias": 0,
+        "tarjetasAmarillas": 0,
+        "tarjetasRojas": 0,
+        "minutosJugados": 0
+      },
+      "promedioPuntos": 6.9
+    },
+    {
+      "id": 60,
+      "nombre": "Leroy Sané",
+      "equipo": "Bayern Munich",
+      "liga": "Bundesliga",
+      "pais": "Alemania",
+      "posicion": "Delantero",
+      "edad": 28,
+      "valor": 8500000,
+      "puntos": 0,
+      "estadisticas": {
+        "goles": 0,
+        "asistencias": 0,
+        "tarjetasAmarillas": 0,
+        "tarjetasRojas": 0,
+        "minutosJugados": 0
+      },
+      "promedioPuntos": 6.7
+    },
+    {
+      "id": 61,
+      "nombre": "Jules Koundé",
+      "equipo": "Barcelona",
+      "liga": "La Liga",
+      "pais": "Francia",
+      "posicion": "Defensor",
+      "edad": 25,
+      "valor": 7500000,
+      "puntos": 0,
+      "estadisticas": {
+        "goles": 0,
+        "asistencias": 0,
+        "tarjetasAmarillas": 0,
+        "tarjetasRojas": 0,
+        "minutosJugados": 0
+      },
+      "promedioPuntos": 6.7
+    },
+    {
+      "id": 62,
+      "nombre": "Trent Alexander-Arnold",
+      "equipo": "Liverpool",
+      "liga": "Premier League",
+      "pais": "Inglaterra",
+      "posicion": "Defensor",
+      "edad": 25,
+      "valor": 8500000,
+      "puntos": 0,
+      "estadisticas": {
+        "goles": 0,
+        "asistencias": 0,
+        "tarjetasAmarillas": 0,
+        "tarjetasRojas": 0,
+        "minutosJugados": 0
+      },
+      "promedioPuntos": 6.9
+    },
+    {
+      "id": 63,
+      "nombre": "Kim Min-jae",
+      "equipo": "Bayern Munich",
+      "liga": "Bundesliga",
+      "pais": "Corea del Sur",
+      "posicion": "Defensor",
+      "edad": 27,
+      "valor": 7800000,
+      "puntos": 0,
+      "estadisticas": {
+        "goles": 0,
+        "asistencias": 0,
+        "tarjetasAmarillas": 0,
+        "tarjetasRojas": 0,
+        "minutosJugados": 0
+      },
+      "promedioPuntos": 6.8
+    },
+    {
+      "id": 64,
+      "nombre": "Theo Hernández",
+      "equipo": "AC Milan",
+      "liga": "Serie A",
+      "pais": "Francia",
+      "posicion": "Defensor",
+      "edad": 26,
+      "valor": 8000000,
+      "puntos": 0,
+      "estadisticas": {
+        "goles": 0,
+        "asistencias": 0,
+        "tarjetasAmarillas": 0,
+        "tarjetasRojas": 0,
+        "minutosJugados": 0
+      },
+      "promedioPuntos": 6.8
+    },
+    {
+      "id": 65,
+      "nombre": "Achraf Hakimi",
+      "equipo": "PSG",
+      "liga": "Ligue 1",
+      "pais": "Marruecos",
+      "posicion": "Defensor",
+      "edad": 25,
+      "valor": 8200000,
+      "puntos": 0,
+      "estadisticas": {
+        "goles": 0,
+        "asistencias": 0,
+        "tarjetasAmarillas": 0,
+        "tarjetasRojas": 0,
+        "minutosJugados": 0
+      },
+      "promedioPuntos": 6.9
+    },
+    {
+      "id": 66,
+      "nombre": "Antonio Rüdiger",
+      "equipo": "Real Madrid",
+      "liga": "La Liga",
+      "pais": "Alemania",
+      "posicion": "Defensor",
+      "edad": 30,
+      "valor": 7600000,
+      "puntos": 0,
+      "estadisticas": {
+        "goles": 0,
+        "asistencias": 0,
+        "tarjetasAmarillas": 0,
+        "tarjetasRojas": 0,
+        "minutosJugados": 0
+      },
+      "promedioPuntos": 6.7
+    },
+    {
+      "id": 67,
+      "nombre": "Reece James",
+      "equipo": "Chelsea",
+      "liga": "Premier League",
+      "pais": "Inglaterra",
+      "posicion": "Defensor",
+      "edad": 24,
+      "valor": 7900000,
+      "puntos": 0,
+      "estadisticas": {
+        "goles": 0,
+        "asistencias": 0,
+        "tarjetasAmarillas": 0,
+        "tarjetasRojas": 0,
+        "minutosJugados": 0
+      },
+      "promedioPuntos": 6.8
+    },
+    {
+      "id": 68,
+      "nombre": "Marquinhos",
+      "equipo": "PSG",
+      "liga": "Ligue 1",
+      "pais": "Brasil",
+      "posicion": "Defensor",
+      "edad": 29,
+      "valor": 8100000,
+      "puntos": 0,
+      "estadisticas": {
+        "goles": 0,
+        "asistencias": 0,
+        "tarjetasAmarillas": 0,
+        "tarjetasRojas": 0,
+        "minutosJugados": 0
+      },
+      "promedioPuntos": 6.8
+    },
+    {
+      "id": 69,
+      "nombre": "Joško Gvardiol",
+      "equipo": "Manchester City",
+      "liga": "Premier League",
+      "pais": "Croacia",
+      "posicion": "Defensor",
+      "edad": 22,
+      "valor": 8300000,
+      "puntos": 0,
+      "estadisticas": {
+        "goles": 0,
+        "asistencias": 0,
+        "tarjetasAmarillas": 0,
+        "tarjetasRojas": 0,
+        "minutosJugados": 0
+      },
+      "promedioPuntos": 6.7
+    },
+    {
+      "id": 70,
+      "nombre": "David Alaba",
+      "equipo": "Real Madrid",
+      "liga": "La Liga",
+      "pais": "Austria",
+      "posicion": "Defensor",
+      "edad": 31,
+      "valor": 7700000,
+      "puntos": 0,
+      "estadisticas": {
+        "goles": 0,
+        "asistencias": 0,
+        "tarjetasAmarillas": 0,
+        "tarjetasRojas": 0,
+        "minutosJugados": 0
+      },
+      "promedioPuntos": 6.8
+    },
+    {
+      "id": 71,
+      "nombre": "Harry Kane",
+      "equipo": "Bayern Munich",
+      "liga": "Bundesliga",
+      "pais": "Inglaterra",
+      "posicion": "Delantero",
+      "edad": 30,
+      "valor": 1200000,
+      "puntos": 0,
+      "estadisticas": {
+        "goles": 0,
+        "asistencias": 0,
+        "tarjetasAmarillas": 0,
+        "tarjetasRojas": 0,
+        "minutosJugados": 0
+      },
+      "promedioPuntos": 7.2
+    },
+    {
+      "id": 72,
+      "nombre": "Kylian Mbappé",
+      "equipo": "PSG",
+      "liga": "Ligue 1",
+      "pais": "Francia",
+      "posicion": "Delantero",
+      "edad": 24,
+      "valor": 1400000,
+      "puntos": 0,
+      "estadisticas": {
+        "goles": 0,
+        "asistencias": 0,
+        "tarjetasAmarillas": 0,
+        "tarjetasRojas": 0,
+        "minutosJugados": 0
+      },
+      "promedioPuntos": 7.4
+    },
+    {
+      "id": 73,
+      "nombre": "Victor Osimhen",
+      "equipo": "Napoli",
+      "liga": "Serie A",
+      "pais": "Nigeria",
+      "posicion": "Delantero",
+      "edad": 24,
+      "valor": 1100000,
+      "puntos": 0,
+      "estadisticas": {
+        "goles": 0,
+        "asistencias": 0,
+        "tarjetasAmarillas": 0,
+        "tarjetasRojas": 0,
+        "minutosJugados": 0
+      },
+      "promedioPuntos": 7.0
+    },
+    {
+      "id": 74,
+      "nombre": "Lautaro Martínez",
+      "equipo": "Inter",
+      "liga": "Serie A",
+      "pais": "Argentina",
+      "posicion": "Delantero",
+      "edad": 26,
+      "valor": 1000000,
+      "puntos": 0,
+      "estadisticas": {
+        "goles": 0,
+        "asistencias": 0,
+        "tarjetasAmarillas": 0,
+        "tarjetasRojas": 0,
+        "minutosJugados": 0
+      },
+      "promedioPuntos": 6.9
+    },
+    {
+      "id": 75,
+      "nombre": "Robert Lewandowski",
+      "equipo": "Barcelona",
+      "liga": "La Liga",
+      "pais": "Polonia",
+      "posicion": "Delantero",
+      "edad": 35,
+      "valor": 1100000,
+      "puntos": 0,
+      "estadisticas": {
+        "goles": 0,
+        "asistencias": 0,
+        "tarjetasAmarillas": 0,
+        "tarjetasRojas": 0,
+        "minutosJugados": 0
+      },
+      "promedioPuntos": 7.1
+    },
+    {
+      "id": 76,
+      "nombre": "Mohamed Salah",
+      "equipo": "Liverpool",
+      "liga": "Premier League",
+      "pais": "Egipto",
+      "posicion": "Delantero",
+      "edad": 31,
+      "valor": 1200000,
+      "puntos": 0,
+      "estadisticas": {
+        "goles": 0,
+        "asistencias": 0,
+        "tarjetasAmarillas": 0,
+        "tarjetasRojas": 0,
+        "minutosJugados": 0
+      },
+      "promedioPuntos": 7.3
+    },
+    {
+      "id": 77,
+      "nombre": "Julián Álvarez",
+      "equipo": "Manchester City",
+      "liga": "Premier League",
+      "pais": "Argentina",
+      "posicion": "Delantero",
+      "edad": 23,
+      "valor": 900000,
+      "puntos": 0,
+      "estadisticas": {
+        "goles": 0,
+        "asistencias": 0,
+        "tarjetasAmarillas": 0,
+        "tarjetasRojas": 0,
+        "minutosJugados": 0
+      },
+      "promedioPuntos": 6.8
     }
   ],
   "configuracion": {
