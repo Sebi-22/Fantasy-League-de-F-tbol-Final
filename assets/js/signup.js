@@ -1,28 +1,33 @@
 // Función para obtener usuarios almacenados
 function getStoredUsers() {
   const users = localStorage.getItem('fantasyUsers');
+  // JSON.parse: Convierte una cadena JSON en un objeto JS (array aquí)
   return users ? JSON.parse(users) : [];
 }
 
 // Función para guardar usuarios
 function saveUsers(users) {
+  // JSON.stringify: Convierte un objeto JS en una cadena JSON
   localStorage.setItem('fantasyUsers', JSON.stringify(users));
 }
 
 // Función para validar email
 function isValidEmail(email) {
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  // test: Verifica si la cadena coincide con la regex, devuelve true/false
   return regex.test(email);
 }
 
 // Función para validar nombre
 function isValidName(name) {
+  // trim: Elimina espacios al inicio y final de la cadena
   return name.trim().length >= 3;
 }
 
 // Función para validar contraseña
 function validatePassword(password) {
   const minLength = 6;
+  // test: Verifica si la cadena cumple con patrones de regex
   const hasUpperCase = /[A-Z]/.test(password);
   const hasLowerCase = /[a-z]/.test(password);
   const hasNumbers = /\d/.test(password);
@@ -51,6 +56,7 @@ function calculatePasswordStrength(password) {
   if (/\d/.test(password)) strength += 10;
   if (/[!@#$%^&*(),.?":{}|<>]/.test(password)) strength += 10;
   
+  // Math.min: Devuelve el menor valor entre los argumentos (limita a 100)
   return Math.min(strength, 100);
 }
 
@@ -146,6 +152,7 @@ function handleSignup(e) {
   document.getElementById('signupAlert').classList.add('d-none');
   
   // Obtener valores
+  // trim: Elimina espacios al inicio y final de la cadena
   const fullName = document.getElementById('fullName').value.trim();
   const email = document.getElementById('email').value.trim();
   const password = document.getElementById('password').value;
@@ -174,6 +181,7 @@ function handleSignup(e) {
   } else {
     // Verificar si el email ya está registrado
     const users = getStoredUsers();
+    // users.some: Verifica si al menos un elemento del array cumple la condición
     const emailExists = users.some(u => u.email.toLowerCase() === email.toLowerCase());
     
     if (emailExists) {
@@ -221,6 +229,7 @@ function handleSignup(e) {
   // Simular registro en API
   setTimeout(() => {
     // Crear nuevo usuario
+    // Date.now: Devuelve el timestamp actual en milisegundos desde 1970
     const newUser = {
       id: Date.now(),
       name: fullName,
@@ -254,6 +263,7 @@ function checkExistingSession() {
   
   if (session) {
     try {
+      // JSON.parse: Convierte una cadena JSON en un objeto JS
       const sessionData = JSON.parse(session);
       if (sessionData.loggedIn) {
         // Ya hay una sesión activa, redirigir

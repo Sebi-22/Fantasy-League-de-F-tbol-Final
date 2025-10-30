@@ -10,17 +10,20 @@ const DEMO_USERS = [
 // Función para obtener usuarios almacenados
 function getStoredUsers() {
   const users = localStorage.getItem('fantasyUsers');
+  // JSON.parse: Convierte una cadena JSON en un objeto JS (array aquí)
   return users ? JSON.parse(users) : DEMO_USERS;
 }
 
 // Función para guardar usuarios
 function saveUsers(users) {
+  // JSON.stringify: Convierte un objeto JS en una cadena JSON
   localStorage.setItem('fantasyUsers', JSON.stringify(users));
 }
 
 // Función para validar email
 function isValidEmail(email) {
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  // test: Verifica si la cadena coincide con la regex, devuelve true/false
   return regex.test(email);
 }
 
@@ -83,6 +86,7 @@ function handleLogin(e) {
   document.getElementById('loginAlert').classList.add('d-none');
   
   // Obtener valores
+  // trim: Elimina espacios al inicio y final de la cadena
   const email = document.getElementById('email').value.trim();
   const password = document.getElementById('password').value;
   const rememberMe = document.getElementById('rememberMe').checked;
@@ -117,6 +121,7 @@ function handleLogin(e) {
   // Simular llamada a API
   setTimeout(() => {
     const users = getStoredUsers();
+    // find: Busca el primer elemento del array que cumple la condición
     const user = users.find(u => u.email === email && u.password === password);
     
     if (user) {
@@ -131,6 +136,7 @@ function handleLogin(e) {
       
       // Guardar sesión usando el mismo formato que session.js espera
       if (rememberMe) {
+        // JSON.stringify: Convierte un objeto JS en una cadena JSON
         localStorage.setItem('fantasySession', JSON.stringify(sessionData));
       } else {
         sessionStorage.setItem('fantasySession', JSON.stringify(sessionData));
@@ -156,6 +162,7 @@ function handleLogin(e) {
 
 // Función para recuperar contraseña
 function handlePasswordRecovery() {
+  // trim: Elimina espacios al inicio y final de la cadena
   const recoverEmail = document.getElementById('recoverEmail').value.trim();
   const recoverBtn = document.getElementById('recoverBtn');
   
@@ -174,8 +181,12 @@ function handlePasswordRecovery() {
     recoverBtn.textContent = 'Enviar enlace';
     
     // Cerrar modal
+    // getInstance: Obtiene la instancia del modal de Bootstrap
     const modal = bootstrap.Modal.getInstance(document.getElementById('forgotPasswordModal'));
-    if (modal) modal.hide();
+    if (modal) {
+      // hide: Oculta el modal de Bootstrap
+      modal.hide();
+    }
     
     document.getElementById('recoverEmail').value = '';
   }, 1500);
@@ -190,6 +201,7 @@ function checkExistingSession() {
   
   if (session) {
     try {
+      // JSON.parse: Convierte una cadena JSON en un objeto JS
       const sessionData = JSON.parse(session);
       if (sessionData.loggedIn) {
         // Ya hay una sesión activa, redirigir
@@ -204,6 +216,7 @@ function checkExistingSession() {
 // Función para manejar parámetros de URL
 function handleURLParams() {
   const urlParams = new URLSearchParams(window.location.search);
+  // get: Obtiene el valor de un parámetro de la URL
   const email = urlParams.get('email');
   const registered = urlParams.get('registered');
   
