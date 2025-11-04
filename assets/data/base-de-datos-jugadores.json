@@ -1,710 +1,554 @@
 {
   "jugadores": [
     {
+      "id": 1,
+      "nombre": "Emiliano Martínez",
+      "equipo": "Aston Villa",
+      "posicion": "arquero",
+      "precio": 8,
+      "puntosPromedio": 7.5,
+      "nacionalidad": "Argentina",
+      "foto": "assets/imagenes/dibu-martinez.jpg"
+    },
+    {
       "id": 2,
       "nombre": "Thibaut Courtois",
       "equipo": "Real Madrid",
-      "liga": "La Liga",
-      "pais": "Bélgica",
-      "posicion": "Arquero",
-      "edad": 31,
-      "valor": 700000,
-      "puntos": 0,
-      "estadisticas": {
-        "goles": 0,
-        "asistencias": 0,
-        "tarjetasAmarillas": 0,
-        "tarjetasRojas": 0,
-        "minutosJugados": 0
-      },
-      "promedioPuntos": 6.8
+      "posicion": "arquero",
+      "precio": 9,
+      "puntosPromedio": 8.2,
+      "nacionalidad": "Bélgica",
+      "foto": "assets/imagenes/Courtoi.jpg"
     },
     {
       "id": 3,
-      "nombre": "Virgil van Dijk",
+      "nombre": "Alisson Becker",
       "equipo": "Liverpool",
-      "liga": "Premier League",
-      "pais": "Países Bajos",
-      "posicion": "Defensor",
-      "edad": 32,
-      "valor": 900000,
-      "puntos": 0,
-      "estadisticas": {
-        "goles": 0,
-        "asistencias": 0,
-        "tarjetasAmarillas": 0,
-        "tarjetasRojas": 0,
-        "minutosJugados": 0
-      },
-      "promedioPuntos": 6.7
+      "posicion": "arquero",
+      "precio": 9,
+      "puntosPromedio": 8.0,
+      "nacionalidad": "Brasil",
+      "foto": "assets/imagenes/Alisson.jpeg"
     },
     {
       "id": 4,
-      "nombre": "Kevin De Bruyne",
-      "equipo": "Manchester City",
-      "liga": "Premier League",
-      "pais": "Bélgica",
-      "posicion": "Mediocampista",
-      "edad": 32,
-      "valor": 1200000,
-      "puntos": 0,
-      "estadisticas": {
-        "goles": 0,
-        "asistencias": 0,
-        "tarjetasAmarillas": 0,
-        "tarjetasRojas": 0,
-        "minutosJugados": 0
-      },
-      "promedioPuntos": 7.2
+      "nombre": "Marc-André ter Stegen",
+      "equipo": "Barcelona",
+      "posicion": "arquero",
+      "precio": 8,
+      "puntosPromedio": 7.8,
+      "nacionalidad": "Alemania",
+      "foto": "assets/imagenes/tER Stegen.jpg"
     },
     {
-      "id": 1,
+      "id": 5,
+      "nombre": "Gianluigi Donnarumma",
+      "equipo": "Manchester City",
+      "posicion": "arquero",
+      "precio": 7,
+      "puntosPromedio": 7.3,
+      "nacionalidad": "Italia",
+      "foto": "assets/imagenes/Donorruma.jpeg"
+    },
+    {
+      "id": 6,
+      "nombre": "Virgil van Dijk",
+      "equipo": "Liverpool",
+      "posicion": "defensa",
+      "precio": 12,
+      "puntosPromedio": 8.5,
+      "nacionalidad": "Holanda",
+      "foto": "/assets/imagenes/jugadores/vandijk.jpg"
+    },
+    {
+      "id": 7,
+      "nombre": "Rúben Dias",
+      "equipo": "Manchester City",
+      "posicion": "defensa",
+      "precio": 11,
+      "puntosPromedio": 8.3,
+      "nacionalidad": "Portugal",
+      "foto": "/assets/imagenes/jugadores/dias.jpg"
+    },
+    {
+      "id": 8,
+      "nombre": "Antonio Rüdiger",
+      "equipo": "Real Madrid",
+      "posicion": "defensa",
+      "precio": 10,
+      "puntosPromedio": 8.0,
+      "nacionalidad": "Alemania",
+      "foto": "/assets/imagenes/jugadores/rudiger.jpg"
+    },
+    {
+      "id": 9,
+      "nombre": "Cristian Romero",
+      "equipo": "Tottenham",
+      "posicion": "defensa",
+      "precio": 9,
+      "puntosPromedio": 7.8,
+      "nacionalidad": "Argentina",
+      "foto": "/assets/imagenes/jugadores/romero.jpg"
+    },
+    {
+      "id": 10,
+      "nombre": "Marquinhos",
+      "equipo": "PSG",
+      "posicion": "defensa",
+      "precio": 10,
+      "puntosPromedio": 7.9,
+      "nacionalidad": "Brasil",
+      "foto": "/assets/imagenes/jugadores/marquinhos.jpg"
+    },
+    {
+      "id": 11,
+      "nombre": "Kyle Walker",
+      "equipo": "Manchester City",
+      "posicion": "defensa",
+      "precio": 8,
+      "puntosPromedio": 7.5,
+      "nacionalidad": "Inglaterra",
+      "foto": "/assets/imagenes/jugadores/walker.jpg"
+    },
+    {
+      "id": 12,
+      "nombre": "Theo Hernández",
+      "equipo": "AC Milan",
+      "posicion": "defensa",
+      "precio": 9,
+      "puntosPromedio": 7.7,
+      "nacionalidad": "Francia",
+      "foto": "/assets/imagenes/jugadores/theo.jpg"
+    },
+    {
+      "id": 13,
+      "nombre": "João Cancelo",
+      "equipo": "Barcelona",
+      "posicion": "defensa",
+      "precio": 9,
+      "puntosPromedio": 7.6,
+      "nacionalidad": "Portugal",
+      "foto": "/assets/imagenes/jugadores/cancelo.jpg"
+    },
+    {
+      "id": 14,
+      "nombre": "Alphonso Davies",
+      "equipo": "Bayern München",
+      "posicion": "defensa",
+      "precio": 8,
+      "puntosPromedio": 7.4,
+      "nacionalidad": "Canadá",
+      "foto": "/assets/imagenes/jugadores/davies.jpg"
+    },
+    {
+      "id": 15,
+      "nombre": "Eder Militão",
+      "equipo": "Real Madrid",
+      "posicion": "defensa",
+      "precio": 9,
+      "puntosPromedio": 7.7,
+      "nacionalidad": "Brasil",
+      "foto": "/assets/imagenes/jugadores/militao.jpg"
+    },
+    {
+      "id": 16,
+      "nombre": "Lisandro Martínez",
+      "equipo": "Manchester United",
+      "posicion": "defensa",
+      "precio": 8,
+      "puntosPromedio": 7.5,
+      "nacionalidad": "Argentina",
+      "foto": "/assets/imagenes/jugadores/licha.jpg"
+    },
+    {
+      "id": 17,
+      "nombre": "William Saliba",
+      "equipo": "Arsenal",
+      "posicion": "defensa",
+      "precio": 8,
+      "puntosPromedio": 7.6,
+      "nacionalidad": "Francia",
+      "foto": "/assets/imagenes/jugadores/saliba.jpg"
+    },
+    {
+      "id": 18,
+      "nombre": "Ronald Araújo",
+      "equipo": "Barcelona",
+      "posicion": "defensa",
+      "precio": 8,
+      "puntosPromedio": 7.4,
+      "nacionalidad": "Uruguay",
+      "foto": "/assets/imagenes/jugadores/araujo.jpg"
+    },
+    {
+      "id": 19,
+      "nombre": "Jules Koundé",
+      "equipo": "Barcelona",
+      "posicion": "defensa",
+      "precio": 8,
+      "puntosPromedio": 7.5,
+      "nacionalidad": "Francia",
+      "foto": "/assets/imagenes/jugadores/kounde.jpg"
+    },
+    {
+      "id": 20,
+      "nombre": "Kevin De Bruyne",
+      "equipo": "Manchester City",
+      "posicion": "mediocampista",
+      "precio": 15,
+      "puntosPromedio": 9.2,
+      "nacionalidad": "Bélgica",
+      "foto": "/assets/imagenes/jugadores/debruyne.jpg"
+    },
+    {
+      "id": 21,
+      "nombre": "Jude Bellingham",
+      "equipo": "Real Madrid",
+      "posicion": "mediocampista",
+      "precio": 14,
+      "puntosPromedio": 8.9,
+      "nacionalidad": "Inglaterra",
+      "foto": "/assets/imagenes/jugadores/bellingham.jpg"
+    },
+    {
+      "id": 22,
+      "nombre": "Bruno Fernandes",
+      "equipo": "Manchester United",
+      "posicion": "mediocampista",
+      "precio": 12,
+      "puntosPromedio": 8.4,
+      "nacionalidad": "Portugal",
+      "foto": "/assets/imagenes/jugadores/bruno.jpg"
+    },
+    {
+      "id": 23,
+      "nombre": "Luka Modrić",
+      "equipo": "Real Madrid",
+      "posicion": "mediocampista",
+      "precio": 10,
+      "puntosPromedio": 8.0,
+      "nacionalidad": "Croacia",
+      "foto": "/assets/imagenes/jugadores/modric.jpg"
+    },
+    {
+      "id": 24,
+      "nombre": "Rodri",
+      "equipo": "Manchester City",
+      "posicion": "mediocampista",
+      "precio": 11,
+      "puntosPromedio": 8.3,
+      "nacionalidad": "España",
+      "foto": "/assets/imagenes/jugadores/rodri.jpg"
+    },
+    {
+      "id": 25,
+      "nombre": "Federico Valverde",
+      "equipo": "Real Madrid",
+      "posicion": "mediocampista",
+      "precio": 11,
+      "puntosPromedio": 8.1,
+      "nacionalidad": "Uruguay",
+      "foto": "/assets/imagenes/jugadores/valverde.jpg"
+    },
+    {
+      "id": 26,
+      "nombre": "Martin Ødegaard",
+      "equipo": "Arsenal",
+      "posicion": "mediocampista",
+      "precio": 10,
+      "puntosPromedio": 8.0,
+      "nacionalidad": "Noruega",
+      "foto": "/assets/imagenes/jugadores/odegaard.jpg"
+    },
+    {
+      "id": 27,
+      "nombre": "Joshua Kimmich",
+      "equipo": "Bayern München",
+      "posicion": "mediocampista",
+      "precio": 10,
+      "puntosPromedio": 7.9,
+      "nacionalidad": "Alemania",
+      "foto": "/assets/imagenes/jugadores/kimmich.jpg"
+    },
+    {
+      "id": 28,
+      "nombre": "Frenkie de Jong",
+      "equipo": "Barcelona",
+      "posicion": "mediocampista",
+      "precio": 10,
+      "puntosPromedio": 7.8,
+      "nacionalidad": "Holanda",
+      "foto": "/assets/imagenes/jugadores/dejong.jpg"
+    },
+    {
+      "id": 29,
+      "nombre": "Alexis Mac Allister",
+      "equipo": "Liverpool",
+      "posicion": "mediocampista",
+      "precio": 9,
+      "puntosPromedio": 7.6,
+      "nacionalidad": "Argentina",
+      "foto": "/assets/imagenes/jugadores/macallister.jpg"
+    },
+    {
+      "id": 30,
+      "nombre": "Bernardo Silva",
+      "equipo": "Manchester City",
+      "posicion": "mediocampista",
+      "precio": 11,
+      "puntosPromedio": 8.2,
+      "nacionalidad": "Portugal",
+      "foto": "/assets/imagenes/jugadores/bernardo.jpg"
+    },
+    {
+      "id": 31,
+      "nombre": "Declan Rice",
+      "equipo": "Arsenal",
+      "posicion": "mediocampista",
+      "precio": 10,
+      "puntosPromedio": 7.7,
+      "nacionalidad": "Inglaterra",
+      "foto": "/assets/imagenes/jugadores/rice.jpg"
+    },
+    {
+      "id": 32,
+      "nombre": "Enzo Fernández",
+      "equipo": "Chelsea",
+      "posicion": "mediocampista",
+      "precio": 10,
+      "puntosPromedio": 7.5,
+      "nacionalidad": "Argentina",
+      "foto": "/assets/imagenes/jugadores/enzo.jpg"
+    },
+    {
+      "id": 33,
+      "nombre": "Aurélien Tchouaméni",
+      "equipo": "Real Madrid",
+      "posicion": "mediocampista",
+      "precio": 9,
+      "puntosPromedio": 7.4,
+      "nacionalidad": "Francia",
+      "foto": "/assets/imagenes/jugadores/tchouameni.jpg"
+    },
+    {
+      "id": 34,
+      "nombre": "Casemiro",
+      "equipo": "Manchester United",
+      "posicion": "mediocampista",
+      "precio": 9,
+      "puntosPromedio": 7.6,
+      "nacionalidad": "Brasil",
+      "foto": "/assets/imagenes/jugadores/casemiro.jpg"
+    },
+    {
+      "id": 35,
+      "nombre": "Jamal Musiala",
+      "equipo": "Bayern München",
+      "posicion": "mediocampista",
+      "precio": 10,
+      "puntosPromedio": 8.1,
+      "nacionalidad": "Alemania",
+      "foto": "/assets/imagenes/jugadores/musiala.jpg"
+    },
+    {
+      "id": 36,
+      "nombre": "Pedri",
+      "equipo": "Barcelona",
+      "posicion": "mediocampista",
+      "precio": 10,
+      "puntosPromedio": 7.9,
+      "nacionalidad": "España",
+      "foto": "/assets/imagenes/jugadores/pedri.jpg"
+    },
+    {
+      "id": 37,
+      "nombre": "Gavi",
+      "equipo": "Barcelona",
+      "posicion": "mediocampista",
+      "precio": 9,
+      "puntosPromedio": 7.6,
+      "nacionalidad": "España",
+      "foto": "/assets/imagenes/jugadores/gavi.jpg"
+    },
+    {
+      "id": 38,
       "nombre": "Erling Haaland",
       "equipo": "Manchester City",
-      "liga": "Premier League",
-      "pais": "Noruega",
-      "posicion": "Delantero",
-      "edad": 24,
-      "valor": 1500000,
-      "puntos": 0,
-      "estadisticas": {
-        "goles": 0,
-        "asistencias": 0,
-        "tarjetasAmarillas": 0,
-        "tarjetasRojas": 0,
-        "minutosJugados": 0
-      },
-      "promedioPuntos": 6.5
+      "posicion": "delantero",
+      "precio": 18,
+      "puntosPromedio": 9.8,
+      "nacionalidad": "Noruega",
+      "foto": "/assets/imagenes/jugadores/haaland.jpg"
+    },
+    {
+      "id": 39,
+      "nombre": "Kylian Mbappé",
+      "equipo": "Real Madrid",
+      "posicion": "delantero",
+      "precio": 18,
+      "puntosPromedio": 9.7,
+      "nacionalidad": "Francia",
+      "foto": "/assets/imagenes/jugadores/mbappe.jpg"
+    },
+    {
+      "id": 40,
+      "nombre": "Harry Kane",
+      "equipo": "Bayern München",
+      "posicion": "delantero",
+      "precio": 16,
+      "puntosPromedio": 9.3,
+      "nacionalidad": "Inglaterra",
+      "foto": "/assets/imagenes/jugadores/kane.jpg"
+    },
+    {
+      "id": 41,
+      "nombre": "Robert Lewandowski",
+      "equipo": "Barcelona",
+      "posicion": "delantero",
+      "precio": 14,
+      "puntosPromedio": 8.9,
+      "nacionalidad": "Polonia",
+      "foto": "/assets/imagenes/jugadores/lewandowski.jpg"
+    },
+    {
+      "id": 42,
+      "nombre": "Mohamed Salah",
+      "equipo": "Liverpool",
+      "posicion": "delantero",
+      "precio": 15,
+      "puntosPromedio": 9.1,
+      "nacionalidad": "Egipto",
+      "foto": "/assets/imagenes/jugadores/salah.jpg"
+    },
+    {
+      "id": 43,
+      "nombre": "Vinícius Jr.",
+      "equipo": "Real Madrid",
+      "posicion": "delantero",
+      "precio": 16,
+      "puntosPromedio": 9.2,
+      "nacionalidad": "Brasil",
+      "foto": "/assets/imagenes/jugadores/vinicius.jpg"
+    },
+    {
+      "id": 44,
+      "nombre": "Lautaro Martínez",
+      "equipo": "Inter Milan",
+      "posicion": "delantero",
+      "precio": 13,
+      "puntosPromedio": 8.6,
+      "nacionalidad": "Argentina",
+      "foto": "/assets/imagenes/jugadores/lautaro.jpg"
+    },
+    {
+      "id": 45,
+      "nombre": "Victor Osimhen",
+      "equipo": "Napoli",
+      "posicion": "delantero",
+      "precio": 14,
+      "puntosPromedio": 8.8,
+      "nacionalidad": "Nigeria",
+      "foto": "/assets/imagenes/jugadores/osimhen.jpg"
     },
     {
       "id": 46,
-      "nombre": "Marcus Rashford",
-      "equipo": "Manchester United",
-      "liga": "Premier League",
-      "pais": "Inglaterra",
-      "posicion": "Delantero",
-      "edad": 27,
-      "valor": 800000,
-      "puntos": 0,
-      "estadisticas": {
-        "goles": 0,
-        "asistencias": 0,
-        "tarjetasAmarillas": 0,
-        "tarjetasRojas": 0,
-        "minutosJugados": 0
-      },
-      "promedioPuntos": 6.6
+      "nombre": "Bukayo Saka",
+      "equipo": "Arsenal",
+      "posicion": "delantero",
+      "precio": 12,
+      "puntosPromedio": 8.4,
+      "nacionalidad": "Inglaterra",
+      "foto": "/assets/imagenes/jugadores/saka.jpg"
     },
     {
       "id": 47,
-      "nombre": "Bernardo Silva",
-      "equipo": "Manchester City",
-      "liga": "Premier League",
-      "pais": "Portugal",
-      "posicion": "Mediocampista",
-      "edad": 30,
-      "valor": 850000,
-      "puntos": 0,
-      "estadisticas": {
-        "goles": 0,
-        "asistencias": 0,
-        "tarjetasAmarillas": 0,
-        "tarjetasRojas": 0,
-        "minutosJugados": 0
-      },
-      "promedioPuntos": 6.8
+      "nombre": "Rafael Leão",
+      "equipo": "AC Milan",
+      "posicion": "delantero",
+      "precio": 12,
+      "puntosPromedio": 8.3,
+      "nacionalidad": "Portugal",
+      "foto": "/assets/imagenes/jugadores/leao.jpg"
     },
     {
       "id": 48,
-      "nombre": "Aurélien Tchouaméni",
-      "equipo": "Real Madrid",
-      "liga": "La Liga",
-      "pais": "Francia",
-      "posicion": "Mediocampista",
-      "edad": 24,
-      "valor": 8000000,
-      "puntos": 0,
-      "estadisticas": {
-        "goles": 0,
-        "asistencias": 0,
-        "tarjetasAmarillas": 0,
-        "tarjetasRojas": 0,
-        "minutosJugados": 0
-      },
-      "promedioPuntos": 6.4
+      "nombre": "Phil Foden",
+      "equipo": "Manchester City",
+      "posicion": "delantero",
+      "precio": 12,
+      "puntosPromedio": 8.5,
+      "nacionalidad": "Inglaterra",
+      "foto": "/assets/imagenes/jugadores/foden.jpg"
     },
     {
       "id": 49,
-      "nombre": "Joshua Kimmich",
-      "equipo": "Bayern Munich",
-      "liga": "Bundesliga",
-      "pais": "Alemania",
-      "posicion": "Mediocampista",
-      "edad": 29,
-      "valor": 7500000,
-      "puntos": 0,
-      "estadisticas": {
-        "goles": 0,
-        "asistencias": 0,
-        "tarjetasAmarillas": 0,
-        "tarjetasRojas": 0,
-        "minutosJugados": 0
-      },
-      "promedioPuntos": 6.6
+      "nombre": "Julián Álvarez",
+      "equipo": "Atlético Madrid",
+      "posicion": "delantero",
+      "precio": 11,
+      "puntosPromedio": 8.0,
+      "nacionalidad": "Argentina",
+      "foto": "/assets/imagenes/jugadores/julian.jpg"
     },
     {
       "id": 50,
-      "nombre": "Enzo Fernández",
-      "equipo": "Chelsea",
-      "liga": "Premier League",
-      "pais": "Argentina",
-      "posicion": "Mediocampista",
-      "edad": 23,
-      "valor": 8000000,
-      "puntos": 0,
-      "estadisticas": {
-        "goles": 0,
-        "asistencias": 0,
-        "tarjetasAmarillas": 0,
-        "tarjetasRojas": 0,
-        "minutosJugados": 0
-      },
-      "promedioPuntos": 6.5
+      "nombre": "Son Heung-min",
+      "equipo": "Tottenham",
+      "posicion": "delantero",
+      "precio": 13,
+      "puntosPromedio": 8.6,
+      "nacionalidad": "Corea del Sur",
+      "foto": "/assets/imagenes/jugadores/son.jpg"
     },
     {
       "id": 51,
-      "nombre": "Gianluigi Donnarumma",
-      "equipo": "PSG",
-      "liga": "Ligue 1",
-      "pais": "Italia",
-      "posicion": "Arquero",
-      "edad": 24,
-      "valor": 7000000,
-      "puntos": 0,
-      "estadisticas": {
-        "goles": 0,
-        "asistencias": 0,
-        "tarjetasAmarillas": 0,
-        "tarjetasRojas": 0,
-        "minutosJugados": 0
-      },
-      "promedioPuntos": 6.7
+      "nombre": "Dusan Vlahović",
+      "equipo": "Juventus",
+      "posicion": "delantero",
+      "precio": 11,
+      "puntosPromedio": 8.1,
+      "nacionalidad": "Serbia",
+      "foto": "/assets/imagenes/jugadores/vlahovic.jpg"
     },
     {
       "id": 52,
-      "nombre": "Alessandro Bastoni",
-      "equipo": "Inter",
-      "liga": "Serie A",
-      "pais": "Italia",
-      "posicion": "Defensor",
-      "edad": 24,
-      "valor": 7500000,
-      "puntos": 0,
-      "estadisticas": {
-        "goles": 0,
-        "asistencias": 0,
-        "tarjetasAmarillas": 0,
-        "tarjetasRojas": 0,
-        "minutosJugados": 0
-      },
-      "promedioPuntos": 6.6
+      "nombre": "Khvicha Kvaratskhelia",
+      "equipo": "Napoli",
+      "posicion": "delantero",
+      "precio": 11,
+      "puntosPromedio": 8.2,
+      "nacionalidad": "Georgia",
+      "foto": "/assets/imagenes/jugadores/kvara.jpg"
     },
     {
       "id": 53,
-      "nombre": "Gavi",
-      "equipo": "Barcelona",
-      "liga": "La Liga",
-      "pais": "España",
-      "posicion": "Mediocampista",
-      "edad": 19,
-      "valor": 8500000,
-      "puntos": 0,
-      "estadisticas": {
-        "goles": 0,
-        "asistencias": 0,
-        "tarjetasAmarillas": 0,
-        "tarjetasRojas": 0,
-        "minutosJugados": 0
-      },
-      "promedioPuntos": 6.7
+      "nombre": "Marcus Rashford",
+      "equipo": "Manchester United",
+      "posicion": "delantero",
+      "precio": 11,
+      "puntosPromedio": 7.9,
+      "nacionalidad": "Inglaterra",
+      "foto": "/assets/imagenes/jugadores/rashford.jpg"
     },
     {
       "id": 54,
       "nombre": "Darwin Núñez",
       "equipo": "Liverpool",
-      "liga": "Premier League",
-      "pais": "Uruguay",
-      "posicion": "Delantero",
-      "edad": 24,
-      "valor": 9000000,
-      "puntos": 0,
-      "estadisticas": {
-        "goles": 0,
-        "asistencias": 0,
-        "tarjetasAmarillas": 0,
-        "tarjetasRojas": 0,
-        "minutosJugados": 0
-      },
-      "promedioPuntos": 6.6
+      "posicion": "delantero",
+      "precio": 11,
+      "puntosPromedio": 7.8,
+      "nacionalidad": "Uruguay",
+      "foto": "/assets/imagenes/jugadores/nunez.jpg"
     },
     {
       "id": 55,
-      "nombre": "Jan Oblak",
-      "equipo": "Atlético Madrid",
-      "liga": "La Liga",
-      "pais": "Eslovenia",
-      "posicion": "Arquero",
-      "edad": 31,
-      "valor": 7000000,
-      "puntos": 0,
-      "estadisticas": {
-        "goles": 0,
-        "asistencias": 0,
-        "tarjetasAmarillas": 0,
-        "tarjetasRojas": 0,
-        "minutosJugados": 0
-      },
-      "promedioPuntos": 6.8
-    },
-    {
-      "id": 56,
-      "nombre": "Rodri",
+      "nombre": "Ederson",
       "equipo": "Manchester City",
-      "liga": "Premier League",
-      "pais": "España",
-      "posicion": "Mediocampista",
-      "edad": 27,
-      "valor": 9000000,
-      "puntos": 0,
-      "estadisticas": {
-        "goles": 0,
-        "asistencias": 0,
-        "tarjetasAmarillas": 0,
-        "tarjetasRojas": 0,
-        "minutosJugados": 0
-      },
-      "promedioPuntos": 7.0
-    },
-    {
-      "id": 57,
-      "nombre": "João Cancelo",
-      "equipo": "Barcelona",
-      "liga": "La Liga",
-      "pais": "Portugal",
-      "posicion": "Defensor",
-      "edad": 29,
-      "valor": 8000000,
-      "puntos": 0,
-      "estadisticas": {
-        "goles": 0,
-        "asistencias": 0,
-        "tarjetasAmarillas": 0,
-        "tarjetasRojas": 0,
-        "minutosJugados": 0
-      },
-      "promedioPuntos": 6.8
-    },
-    {
-      "id": 58,
-      "nombre": "Bukayo Saka",
-      "equipo": "Arsenal",
-      "liga": "Premier League",
-      "pais": "Inglaterra",
-      "posicion": "Mediocampista",
-      "edad": 22,
-      "valor": 9500000,
-      "puntos": 0,
-      "estadisticas": {
-        "goles": 0,
-        "asistencias": 0,
-        "tarjetasAmarillas": 0,
-        "tarjetasRojas": 0,
-        "minutosJugados": 0
-      },
-      "promedioPuntos": 7.1
-    },
-    {
-      "id": 59,
-      "nombre": "Phil Foden",
-      "equipo": "Manchester City",
-      "liga": "Premier League",
-      "pais": "Inglaterra",
-      "posicion": "Mediocampista",
-      "edad": 23,
-      "valor": 9000000,
-      "puntos": 0,
-      "estadisticas": {
-        "goles": 0,
-        "asistencias": 0,
-        "tarjetasAmarillas": 0,
-        "tarjetasRojas": 0,
-        "minutosJugados": 0
-      },
-      "promedioPuntos": 6.9
-    },
-    {
-      "id": 60,
-      "nombre": "Leroy Sané",
-      "equipo": "Bayern Munich",
-      "liga": "Bundesliga",
-      "pais": "Alemania",
-      "posicion": "Delantero",
-      "edad": 28,
-      "valor": 8500000,
-      "puntos": 0,
-      "estadisticas": {
-        "goles": 0,
-        "asistencias": 0,
-        "tarjetasAmarillas": 0,
-        "tarjetasRojas": 0,
-        "minutosJugados": 0
-      },
-      "promedioPuntos": 6.7
-    },
-    {
-      "id": 61,
-      "nombre": "Jules Koundé",
-      "equipo": "Barcelona",
-      "liga": "La Liga",
-      "pais": "Francia",
-      "posicion": "Defensor",
-      "edad": 25,
-      "valor": 7500000,
-      "puntos": 0,
-      "estadisticas": {
-        "goles": 0,
-        "asistencias": 0,
-        "tarjetasAmarillas": 0,
-        "tarjetasRojas": 0,
-        "minutosJugados": 0
-      },
-      "promedioPuntos": 6.7
-    },
-    {
-      "id": 62,
-      "nombre": "Trent Alexander-Arnold",
-      "equipo": "Liverpool",
-      "liga": "Premier League",
-      "pais": "Inglaterra",
-      "posicion": "Defensor",
-      "edad": 25,
-      "valor": 8500000,
-      "puntos": 0,
-      "estadisticas": {
-        "goles": 0,
-        "asistencias": 0,
-        "tarjetasAmarillas": 0,
-        "tarjetasRojas": 0,
-        "minutosJugados": 0
-      },
-      "promedioPuntos": 6.9
-    },
-    {
-      "id": 63,
-      "nombre": "Kim Min-jae",
-      "equipo": "Bayern Munich",
-      "liga": "Bundesliga",
-      "pais": "Corea del Sur",
-      "posicion": "Defensor",
-      "edad": 27,
-      "valor": 7800000,
-      "puntos": 0,
-      "estadisticas": {
-        "goles": 0,
-        "asistencias": 0,
-        "tarjetasAmarillas": 0,
-        "tarjetasRojas": 0,
-        "minutosJugados": 0
-      },
-      "promedioPuntos": 6.8
-    },
-    {
-      "id": 64,
-      "nombre": "Theo Hernández",
-      "equipo": "AC Milan",
-      "liga": "Serie A",
-      "pais": "Francia",
-      "posicion": "Defensor",
-      "edad": 26,
-      "valor": 8000000,
-      "puntos": 0,
-      "estadisticas": {
-        "goles": 0,
-        "asistencias": 0,
-        "tarjetasAmarillas": 0,
-        "tarjetasRojas": 0,
-        "minutosJugados": 0
-      },
-      "promedioPuntos": 6.8
-    },
-    {
-      "id": 65,
-      "nombre": "Achraf Hakimi",
-      "equipo": "PSG",
-      "liga": "Ligue 1",
-      "pais": "Marruecos",
-      "posicion": "Defensor",
-      "edad": 25,
-      "valor": 8200000,
-      "puntos": 0,
-      "estadisticas": {
-        "goles": 0,
-        "asistencias": 0,
-        "tarjetasAmarillas": 0,
-        "tarjetasRojas": 0,
-        "minutosJugados": 0
-      },
-      "promedioPuntos": 6.9
-    },
-    {
-      "id": 66,
-      "nombre": "Antonio Rüdiger",
-      "equipo": "Real Madrid",
-      "liga": "La Liga",
-      "pais": "Alemania",
-      "posicion": "Defensor",
-      "edad": 30,
-      "valor": 7600000,
-      "puntos": 0,
-      "estadisticas": {
-        "goles": 0,
-        "asistencias": 0,
-        "tarjetasAmarillas": 0,
-        "tarjetasRojas": 0,
-        "minutosJugados": 0
-      },
-      "promedioPuntos": 6.7
-    },
-    {
-      "id": 67,
-      "nombre": "Reece James",
-      "equipo": "Chelsea",
-      "liga": "Premier League",
-      "pais": "Inglaterra",
-      "posicion": "Defensor",
-      "edad": 24,
-      "valor": 7900000,
-      "puntos": 0,
-      "estadisticas": {
-        "goles": 0,
-        "asistencias": 0,
-        "tarjetasAmarillas": 0,
-        "tarjetasRojas": 0,
-        "minutosJugados": 0
-      },
-      "promedioPuntos": 6.8
-    },
-    {
-      "id": 68,
-      "nombre": "Marquinhos",
-      "equipo": "PSG",
-      "liga": "Ligue 1",
-      "pais": "Brasil",
-      "posicion": "Defensor",
-      "edad": 29,
-      "valor": 8100000,
-      "puntos": 0,
-      "estadisticas": {
-        "goles": 0,
-        "asistencias": 0,
-        "tarjetasAmarillas": 0,
-        "tarjetasRojas": 0,
-        "minutosJugados": 0
-      },
-      "promedioPuntos": 6.8
-    },
-    {
-      "id": 69,
-      "nombre": "Joško Gvardiol",
-      "equipo": "Manchester City",
-      "liga": "Premier League",
-      "pais": "Croacia",
-      "posicion": "Defensor",
-      "edad": 22,
-      "valor": 8300000,
-      "puntos": 0,
-      "estadisticas": {
-        "goles": 0,
-        "asistencias": 0,
-        "tarjetasAmarillas": 0,
-        "tarjetasRojas": 0,
-        "minutosJugados": 0
-      },
-      "promedioPuntos": 6.7
-    },
-    {
-      "id": 70,
-      "nombre": "David Alaba",
-      "equipo": "Real Madrid",
-      "liga": "La Liga",
-      "pais": "Austria",
-      "posicion": "Defensor",
-      "edad": 31,
-      "valor": 7700000,
-      "puntos": 0,
-      "estadisticas": {
-        "goles": 0,
-        "asistencias": 0,
-        "tarjetasAmarillas": 0,
-        "tarjetasRojas": 0,
-        "minutosJugados": 0
-      },
-      "promedioPuntos": 6.8
-    },
-    {
-      "id": 71,
-      "nombre": "Harry Kane",
-      "equipo": "Bayern Munich",
-      "liga": "Bundesliga",
-      "pais": "Inglaterra",
-      "posicion": "Delantero",
-      "edad": 30,
-      "valor": 1200000,
-      "puntos": 0,
-      "estadisticas": {
-        "goles": 0,
-        "asistencias": 0,
-        "tarjetasAmarillas": 0,
-        "tarjetasRojas": 0,
-        "minutosJugados": 0
-      },
-      "promedioPuntos": 7.2
-    },
-    {
-      "id": 72,
-      "nombre": "Kylian Mbappé",
-      "equipo": "PSG",
-      "liga": "Ligue 1",
-      "pais": "Francia",
-      "posicion": "Delantero",
-      "edad": 24,
-      "valor": 1400000,
-      "puntos": 0,
-      "estadisticas": {
-        "goles": 0,
-        "asistencias": 0,
-        "tarjetasAmarillas": 0,
-        "tarjetasRojas": 0,
-        "minutosJugados": 0
-      },
-      "promedioPuntos": 7.4
-    },
-    {
-      "id": 73,
-      "nombre": "Victor Osimhen",
-      "equipo": "Napoli",
-      "liga": "Serie A",
-      "pais": "Nigeria",
-      "posicion": "Delantero",
-      "edad": 24,
-      "valor": 1100000,
-      "puntos": 0,
-      "estadisticas": {
-        "goles": 0,
-        "asistencias": 0,
-        "tarjetasAmarillas": 0,
-        "tarjetasRojas": 0,
-        "minutosJugados": 0
-      },
-      "promedioPuntos": 7.0
-    },
-    {
-      "id": 74,
-      "nombre": "Lautaro Martínez",
-      "equipo": "Inter",
-      "liga": "Serie A",
-      "pais": "Argentina",
-      "posicion": "Delantero",
-      "edad": 26,
-      "valor": 1000000,
-      "puntos": 0,
-      "estadisticas": {
-        "goles": 0,
-        "asistencias": 0,
-        "tarjetasAmarillas": 0,
-        "tarjetasRojas": 0,
-        "minutosJugados": 0
-      },
-      "promedioPuntos": 6.9
-    },
-    {
-      "id": 75,
-      "nombre": "Robert Lewandowski",
-      "equipo": "Barcelona",
-      "liga": "La Liga",
-      "pais": "Polonia",
-      "posicion": "Delantero",
-      "edad": 35,
-      "valor": 1100000,
-      "puntos": 0,
-      "estadisticas": {
-        "goles": 0,
-        "asistencias": 0,
-        "tarjetasAmarillas": 0,
-        "tarjetasRojas": 0,
-        "minutosJugados": 0
-      },
-      "promedioPuntos": 7.1
-    },
-    {
-      "id": 76,
-      "nombre": "Mohamed Salah",
-      "equipo": "Liverpool",
-      "liga": "Premier League",
-      "pais": "Egipto",
-      "posicion": "Delantero",
-      "edad": 31,
-      "valor": 1200000,
-      "puntos": 0,
-      "estadisticas": {
-        "goles": 0,
-        "asistencias": 0,
-        "tarjetasAmarillas": 0,
-        "tarjetasRojas": 0,
-        "minutosJugados": 0
-      },
-      "promedioPuntos": 7.3
-    },
-    {
-      "id": 77,
-      "nombre": "Julián Álvarez",
-      "equipo": "Manchester City",
-      "liga": "Premier League",
-      "pais": "Argentina",
-      "posicion": "Delantero",
-      "edad": 23,
-      "valor": 900000,
-      "puntos": 0,
-      "estadisticas": {
-        "goles": 0,
-        "asistencias": 0,
-        "tarjetasAmarillas": 0,
-        "tarjetasRojas": 0,
-        "minutosJugados": 0
-      },
-      "promedioPuntos": 6.8
+      "posicion": "arquero",
+      "precio": 8,
+      "puntosPromedio": 7.7,
+      "nacionalidad": "Brasil",
+      "foto": "/assets/imagenes/jugadores/ederson.jpg"
     }
-  ],
-  "configuracion": {
-    "puntaje": {
-      "gol": 5,
-      "asistencia": 3,
-      "minutoJugado": 0.01,
-      "tarjetaAmarilla": -1,
-      "tarjetaRoja": -3,
-      "atajarPenal": 5,
-      "golesPorContra": -0.5,
-      "vallaInvicta": 4
-    },
-    "presupuestoInicial": 100000000,
-    "jugadoresPorEquipo": 11,
-    "formaciones": [
-      "4-4-2",
-      "4-3-3",
-      "3-5-2",
-      "5-3-2",
-      "3-4-3"
-    ]
-  }
-}
-   
+  ]
+} 
