@@ -1823,3 +1823,559 @@ footer p:hover {
   height: 1rem;
   border-width: 0.15em;
 }
+/* ============================================
+   ESTILOS PARA SELECCIÓN DE JUGADORES
+   ============================================ */
+
+/* Header de selección */
+.selection-header h1 {
+  font-size: 2rem;
+  animation: fadeInUp 0.6s ease;
+}
+
+.selection-header .emoji {
+  display: inline-block;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+/* Cards con glassmorphism */
+.card {
+  backdrop-filter: blur(15px);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(40, 167, 69, 0.2);
+}
+
+/* Inputs y selects personalizados */
+.form-control,
+.form-select {
+  transition: all 0.3s ease;
+}
+
+.form-control:focus,
+.form-select:focus {
+  box-shadow: 0 0 0 0.25rem rgba(40, 167, 69, 0.25) !important;
+  border-color: #28a745 !important;
+  background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Tabla de jugadores */
+.table-responsive {
+  max-height: 600px;
+  overflow-y: auto;
+  border-radius: 0 0 12px 12px;
+}
+
+.table-responsive::-webkit-scrollbar {
+  width: 8px;
+}
+
+.table-responsive::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #28a745, #20c997);
+  border-radius: 10px;
+}
+
+.table thead {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.table tbody tr {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.table tbody tr:hover {
+  background-color: rgba(40, 167, 69, 0.1) !important;
+  transform: scale(1.01);
+}
+
+.table td {
+  vertical-align: middle;
+  padding: 1rem 0.75rem;
+}
+
+/* Badge de posición en tabla */
+.position-badge-small {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.position-badge-small.arquero {
+  background: rgba(255, 193, 7, 0.2);
+  color: #ffc107;
+  border: 1px solid rgba(255, 193, 7, 0.3);
+}
+
+.position-badge-small.defensa {
+  background: rgba(0, 123, 255, 0.2);
+  color: #0d6efd;
+  border: 1px solid rgba(0, 123, 255, 0.3);
+}
+
+.position-badge-small.mediocampista {
+  background: rgba(13, 202, 240, 0.2);
+  color: #0dcaf0;
+  border: 1px solid rgba(13, 202, 240, 0.3);
+}
+
+.position-badge-small.delantero {
+  background: rgba(220, 53, 69, 0.2);
+  color: #dc3545;
+  border: 1px solid rgba(220, 53, 69, 0.3);
+}
+
+/* Botones en tabla */
+.btn-add-player {
+  padding: 0.4rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-add-player::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.5s, height 0.5s;
+}
+
+.btn-add-player:hover::before {
+  width: 200px;
+  height: 200px;
+}
+
+.btn-add-player:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 20px rgba(40, 167, 69, 0.4);
+}
+
+/* Panel lateral sticky */
+.sticky-top {
+  transition: all 0.3s ease;
+}
+
+/* Badges de posición en panel */
+.position-badge {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.position-badge:hover {
+  transform: translateX(5px);
+  border-color: rgba(40, 167, 69, 0.3);
+  background: rgba(40, 167, 69, 0.05);
+}
+
+.position-badge .emoji {
+  font-size: 1.5rem;
+}
+
+.position-badge .position-name {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  flex: 1;
+}
+
+.position-badge .position-count {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+}
+
+/* Colores específicos por posición */
+.position-badge.arquero:hover {
+  border-color: rgba(255, 193, 7, 0.5);
+  background: rgba(255, 193, 7, 0.05);
+}
+
+.position-badge.defensa:hover {
+  border-color: rgba(0, 123, 255, 0.5);
+  background: rgba(0, 123, 255, 0.05);
+}
+
+.position-badge.mediocampista:hover {
+  border-color: rgba(13, 202, 240, 0.5);
+  background: rgba(13, 202, 240, 0.05);
+}
+
+.position-badge.delantero:hover {
+  border-color: rgba(220, 53, 69, 0.5);
+  background: rgba(220, 53, 69, 0.05);
+}
+
+/* Lista de jugadores seleccionados */
+.players-list {
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.players-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.players-list::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.players-list::-webkit-scrollbar-thumb {
+  background: rgba(40, 167, 69, 0.5);
+  border-radius: 10px;
+}
+
+.players-list::-webkit-scrollbar-thumb:hover {
+  background: rgba(40, 167, 69, 0.7);
+}
+
+.player-item {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-left: 3px solid #28a745;
+  border-radius: 8px;
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+  animation: slideInRight 0.3s ease;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.player-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(40, 167, 69, 0.3);
+  transform: translateX(-5px);
+}
+
+.player-info {
+  flex: 1;
+}
+
+.player-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 0.25rem;
+}
+
+.player-details {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.5);
+  display: flex;
+  gap: 0.5rem;
+}
+
+.player-price {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #ffc107;
+  margin-right: 0.5rem;
+}
+
+.btn-remove-player {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.btn-remove-player:hover {
+  transform: scale(1.1);
+  box-shadow: 0 5px 15px rgba(220, 53, 69, 0.4);
+}
+
+/* Progress bars personalizadas */
+.progress {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.progress-bar {
+  transition: width 0.6s ease;
+  background: linear-gradient(90deg, #28a745, #20c997);
+  box-shadow: 0 0 10px rgba(40, 167, 69, 0.5);
+}
+
+.progress-bar.bg-warning {
+  background: linear-gradient(90deg, #ffc107, #ffb300) !important;
+}
+
+.progress-bar.bg-info {
+  background: linear-gradient(90deg, #0dcaf0, #00b4d8) !important;
+}
+
+/* Alertas personalizadas */
+.alert {
+  border-radius: 12px;
+  border: none;
+  backdrop-filter: blur(10px);
+  animation: slideInUp 0.4s ease;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.alert-warning {
+  background: rgba(255, 193, 7, 0.15);
+  color: #ffc107;
+  border-left: 3px solid #ffc107;
+}
+
+/* Loading spinner */
+#loadingJugadores {
+  animation: fadeIn 0.5s ease;
+}
+
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+  border-width: 0.3rem;
+}
+
+/* Toast notifications */
+.toast {
+  backdrop-filter: blur(20px);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.toast.bg-success {
+  background: rgba(40, 167, 69, 0.95) !important;
+}
+
+.toast.bg-danger {
+  background: rgba(220, 53, 69, 0.95) !important;
+}
+
+.toast.bg-warning {
+  background: rgba(255, 193, 7, 0.95) !important;
+}
+
+/* Botón guardar equipo */
+#btnGuardarEquipo {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+#btnGuardarEquipo::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+#btnGuardarEquipo:not(:disabled):hover::before {
+  width: 400px;
+  height: 400px;
+}
+
+#btnGuardarEquipo:not(:disabled):hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(40, 167, 69, 0.5);
+}
+
+#btnGuardarEquipo:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Animación de entrada para la tabla */
+.table tbody tr {
+  animation: fadeInUp 0.3s ease backwards;
+}
+
+.table tbody tr:nth-child(1) { animation-delay: 0.05s; }
+.table tbody tr:nth-child(2) { animation-delay: 0.1s; }
+.table tbody tr:nth-child(3) { animation-delay: 0.15s; }
+.table tbody tr:nth-child(4) { animation-delay: 0.2s; }
+.table tbody tr:nth-child(5) { animation-delay: 0.25s; }
+
+/* Mensaje sin resultados */
+#sinResultados {
+  animation: fadeIn 0.5s ease;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .sticky-top {
+    position: relative !important;
+    top: 0 !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .selection-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .table {
+    font-size: 0.85rem;
+  }
+
+  .table td {
+    padding: 0.5rem;
+  }
+
+  .player-item {
+    padding: 0.5rem;
+  }
+
+  .position-badge {
+    padding: 0.5rem;
+  }
+
+  .position-badge .emoji {
+    font-size: 1.2rem;
+  }
+}
+
+/* Efectos adicionales */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hover en card header */
+.card-header {
+  transition: all 0.3s ease;
+}
+
+.card:hover .card-header {
+  background: linear-gradient(135deg, #28a745, #20c997) !important;
+}
+
+/* Estado de carga en botones */
+.btn-loading {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.btn-loading::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 50%;
+  left: 50%;
+  margin-left: -8px;
+  margin-top: -8px;
+  border: 2px solid #fff;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Efecto de brillo en badges */
+.badge {
+  position: relative;
+  overflow: hidden;
+}
+
+.badge::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.badge:hover::before {
+  left: 100%;
+}
+
+/* Selector de formación destacado */
+#formacion {
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#formacion option {
+  background: #1a1f3a;
+  color: #fff;
+  padding: 0.5rem;
+}
+
+#formacion:focus {
+  box-shadow: 0 0 0 0.25rem rgba(13, 202, 240, 0.25) !important;
+  border-color: #0dcaf0 !important;
+}

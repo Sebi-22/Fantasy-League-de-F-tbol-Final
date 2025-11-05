@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seleccionar Jugadores | Fantasy League</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body class="bg-dark text-light">
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-black fixed-top shadow-sm">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center fw-bold text-success" href="../index.html">
+        <img src="../assets/imagenes/Logo del juego de Fantasy League.png" alt="Logo" class="logo-img me-2">
+        Fantasy League
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="../index.html">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link active" href="seleccion.html">Seleccionar jugadores</a></li>
+          <li class="nav-item"><a class="nav-link" href="equipo.html">Mi equipo</a></li>
+          <li class="nav-item"><a class="nav-link" href="ranking.html">Ranking</a></li>
+          <li class="nav-item">
+            <button id="logoutBtn" class="btn btn-danger btn-sm">Cerrar sesión</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="container-fluid mt-5 pt-5">
+    <div class="row g-4">
+      
+      <!-- COLUMNA IZQUIERDA: Lista de jugadores -->
+      <div class="col-lg-8">
+        
+        <!-- Header con título y búsqueda -->
+        <div class="selection-header mb-4">
+          <div class="row align-items-center g-3">
+            <div class="col-md-6">
+              <h1 class="text-success fw-bold mb-0">
+                <span class="emoji">⚽</span> Armá tu equipo
+              </h1>
+              <p class="text-white-50 small mb-0">Seleccioná 18 jugadores dentro del presupuesto</p>
+            </div>
+            <div class="col-md-6">
+              <div class="input-group">
+                <span class="input-group-text bg-dark border-success text-success">
+                  🔍
+                </span>
+                <input 
+                  type="text" 
+                  class="form-control bg-dark text-light border-success" 
+                  id="buscarJugador" 
+                  placeholder="Buscar por nombre..."
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filtros -->
+        <div class="card bg-dark border-success mb-4">
+          <div class="card-body">
+            <div class="row g-3">
+              <!-- Filtro por posición -->
+              <div class="col-md-3 col-6">
+                <label class="form-label text-white small">Posición:</label>
+                <select id="filtroPosicion" class="form-select form-select-sm bg-dark text-light border-success">
+                  <option value="">Todas</option>
+                  <option value="arquero">🧤 Arqueros</option>
+                  <option value="defensa">🛡️ Defensas</option>
+                  <option value="mediocampista">⚙️ Mediocampistas</option>
+                  <option value="delantero">⚡ Delanteros</option>
+                </select>
+              </div>
+
+              <!-- Filtro por equipo -->
+              <div class="col-md-3 col-6">
+                <label class="form-label text-white small">Equipo:</label>
+                <select id="filtroEquipo" class="form-select form-select-sm bg-dark text-light border-success">
+                  <option value="">Todos</option>
+                  <!-- Se llena dinámicamente -->
+                </select>
+              </div>
+
+              <!-- Ordenar por -->
+              <div class="col-md-3 col-6">
+                <label class="form-label text-white small">Ordenar por:</label>
+                <select id="ordenar" class="form-select form-select-sm bg-dark text-light border-success">
+                  <option value="nombre">Nombre</option>
+                  <option value="precio-asc">Precio (menor a mayor)</option>
+                  <option value="precio-desc">Precio (mayor a menor)</option>
+                  <option value="puntos">Puntos promedio</option>
+                </select>
+              </div>
+
+              <!-- Botón limpiar filtros -->
+              <div class="col-md-3 col-6 d-flex align-items-end">
+                <button class="btn btn-outline-warning btn-sm w-100" id="limpiarFiltros">
+                  🔄 Limpiar filtros
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tabla de jugadores -->
+        <div class="card bg-dark border-success">
+          <div class="card-header bg-success text-dark fw-bold d-flex justify-content-between align-items-center">
+            <span>Jugadores Disponibles</span>
+            <span class="badge bg-dark" id="totalJugadores">0 jugadores</span>
+          </div>
+          <div class="card-body p-0">
+            <!-- Loading -->
+            <div id="loadingJugadores" class="text-center py-5">
+              <div class="spinner-border text-success" role="status">
+                <span class="visually-hidden">Cargando...</span>
+              </div>
+              <p class="text-white-50 mt-2">Cargando jugadores...</p>
+            </div>
+
+            <!-- Tabla responsive -->
+            <div class="table-responsive d-none" id="tablaContainer">
+              <table class="table table-dark table-hover mb-0">
+                <thead class="table-success sticky-top">
+                  <tr>
+                    <th>Jugador</th>
+                    <th>Posición</th>
+                    <th>Equipo</th>
+                    <th>Precio</th>
+                    <th>Puntos</th>
+                    <th>Acción</th>
+                  </tr>
+                </thead>
+                <tbody id="tablaJugadores">
+                  <!-- Se llena con JS -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Mensaje sin resultados -->
+            <div id="sinResultados" class="text-center py-5 d-none">
+              <div class="text-white-50 mb-3" style="font-size: 3rem;">😕</div>
+              <p class="text-white-50">No se encontraron jugadores</p>
+              <button class="btn btn-outline-success btn-sm" id="limpiarBusqueda">
+                Limpiar búsqueda
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- COLUMNA DERECHA: Panel del equipo -->
+      <div class="col-lg-4">
+        <div class="sticky-top" style="top: 80px;">
+          
+          <!-- Card del equipo -->
+          <div class="card bg-dark border-info mb-3">
+            <div class="card-header bg-info text-dark fw-bold">
+              🏆 Tu Equipo
+            </div>
+            <div class="card-body">
+              
+              <!-- Selector de formación -->
+              <div class="mb-3">
+                <label class="form-label text-white small fw-bold">Formación táctica:</label>
+                <select id="formacion" class="form-select form-select-sm bg-dark text-light border-info">
+                  <option value="4-4-2">4-4-2 (Clásica)</option>
+                  <option value="4-3-3">4-3-3 (Ofensiva)</option>
+                  <option value="3-5-2">3-5-2 (Control)</option>
+                  <option value="3-4-3">3-4-3 (Ataque total)</option>
+                  <option value="5-3-2">5-3-2 (Defensiva)</option>
+                  <option value="5-4-1">5-4-1 (Ultra defensiva)</option>
+                </select>
+                <small class="text-white-50 d-block mt-1" id="formacionInfo">
+                  4 DEF - 4 MED - 2 DEL
+                </small>
+              </div>
+
+              <hr class="border-info">
+
+              <!-- Presupuesto -->
+              <div class="mb-3">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <span class="text-white small">Presupuesto disponible:</span>
+                  <span class="text-warning fw-bold fs-5">$<span id="presupuestoDisponible">100</span>M</span>
+                </div>
+                <div class="progress" style="height: 8px;">
+                  <div 
+                    class="progress-bar bg-warning" 
+                    role="progressbar" 
+                    id="presupuestoBar"
+                    style="width: 100%"
+                  ></div>
+                </div>
+                <small class="text-white-50 d-block mt-1">
+                  Gastado: $<span id="presupuestoGastado">0</span>M
+                </small>
+              </div>
+
+              <!-- Contador de jugadores -->
+              <div class="mb-3">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <span class="text-white small">Progreso:</span>
+                  <span class="text-info fw-bold">
+                    <span id="cantidadJugadores">0</span>/18 jugadores
+                  </span>
+                </div>
+                <div class="progress" style="height: 8px;">
+                  <div 
+                    class="progress-bar bg-info" 
+                    role="progressbar" 
+                    id="jugadoresBar"
+                    style="width: 0%"
+                  ></div>
+                </div>
+              </div>
+
+              <hr class="border-info">
+
+              <!-- Contadores por posición -->
+              <div class="mb-3">
+                <h6 class="text-info mb-3 small fw-bold">Posiciones:</h6>
+                <div class="row g-2">
+                  <div class="col-6">
+                    <div class="position-badge arquero">
+                      <span class="emoji">🧤</span>
+                      <span class="position-name">ARQ</span>
+                      <span class="position-count">
+                        <span id="conteoArqueros">0</span>/2
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="position-badge defensa">
+                      <span class="emoji">🛡️</span>
+                      <span class="position-name">DEF</span>
+                      <span class="position-count">
+                        <span id="conteoDefensas">0</span>/6
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="position-badge mediocampista">
+                      <span class="emoji">⚙️</span>
+                      <span class="position-name">MED</span>
+                      <span class="position-count">
+                        <span id="conteoMediocampistas">0</span>/6
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="position-badge delantero">
+                      <span class="emoji">⚡</span>
+                      <span class="position-name">DEL</span>
+                      <span class="position-count">
+                        <span id="conteoDelanteros">0</span>/4
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <hr class="border-info">
+
+              <!-- Lista de jugadores seleccionados -->
+              <div class="mb-3">
+                <h6 class="text-info mb-3 small fw-bold d-flex justify-content-between align-items-center">
+                  <span>Jugadores seleccionados:</span>
+                  <button class="btn btn-outline-danger btn-sm" id="btnLimpiar" style="font-size: 0.7rem; padding: 0.2rem 0.5rem;">
+                    🗑️ Limpiar
+                  </button>
+                </h6>
+                <div id="listaJugadoresSeleccionados" class="players-list">
+                  <p class="text-white-50 text-center small py-3 mb-0">
+                    Sin jugadores aún
+                  </p>
+                </div>
+              </div>
+
+              <!-- Botón guardar -->
+              <div class="d-grid">
+                <button id="btnGuardarEquipo" class="btn btn-success py-3 fw-bold" disabled>
+                  💾 Guardar Equipo
+                </button>
+              </div>
+
+              <!-- Advertencia -->
+              <div class="alert alert-warning mt-3 small mb-0" role="alert">
+                <strong>⚠️ Importante:</strong> Necesitás exactamente 18 jugadores (2 ARQ, 6 DEF, 6 MED, 4 DEL)
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Card de ayuda -->
+          <div class="card bg-dark border-secondary">
+            <div class="card-body">
+              <h6 class="text-secondary mb-2 small fw-bold">💡 Consejos</h6>
+              <ul class="small text-white-50 mb-0 ps-3">
+                <li>Usá filtros para encontrar jugadores rápido</li>
+                <li>Equilibrá estrellas con jugadores económicos</li>
+                <li>Elegí la formación antes de armar el equipo</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="text-center py-4 bg-black mt-5">
+    <p class="text-light mb-0">© 2025 Fantasy League. Todos los derechos reservados ⚽</p>
+  </footer>
+
+  <!-- Toast para notificaciones -->
+  <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    <div id="toastNotification" class="toast align-items-center text-white border-0" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body" id="toastMessage">
+          Mensaje
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/sistema-puntos.js"></script>
+  <script src="../assets/js/seleccion.js"></script>
+</body>
+</html>
