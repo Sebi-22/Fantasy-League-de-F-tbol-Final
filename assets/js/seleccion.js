@@ -1,392 +1,346 @@
 // ============================================
-// VARIABLES GLOBALES
+// CLASE PRINCIPAL: GESTOR DE SELECCIÓN
 // ============================================
-let todosLosJugadores = [];
-let jugadoresFiltrados = [];
-let miEquipo = {
-  jugadores: [],
-  presupuestoInicial: 100,
-  presupuestoDisponible: 100,
-  formacion: '4-4-2'
-};
-
-// Límites por posición (totales incluyendo suplentes)
-const LIMITES = {
-  arquero: 2,      // 1 titular + 1 suplente
-  defensa: 6,      // 4 titulares + 2 suplentes
-  mediocampista: 6, // 4 titulares + 2 suplentes
-  delantero: 4     // 2 titulares + 2 suplentes
-};
-
-const TOTAL_JUGADORES = 18; // 11 titulares + 7 suplentes
-
-// Formaciones disponibles
-const FORMACIONES = {
-  '4-4-2': { def: 4, med: 4, del: 2 },
-  '4-3-3': { def: 4, med: 3, del: 3 },
-  '3-5-2': { def: 3, med: 5, del: 2 },
-  '3-4-3': { def: 3, med: 4, del: 3 },
-  '5-3-2': { def: 5, med: 3, del: 2 },
-  '5-4-1': { def: 5, med: 4, del: 1 }
-};
-
-// ============================================
-// INICIALIZACIÓN
-// ============================================
-document.addEventListener('DOMContentLoaded', async () => {
-  verificarSesion();
-  await cargarJugadores();
-  inicializarEventos();
-  cargarEquipoGuardado();
-  actualizarInterfaz();
-});
-
-// ============================================
-// VERIFICAR SESIÓN
-// ============================================
-function verificarSesion() {
-  const usuarioLogueado = localStorage.getItem('loggedUser');
-  
-  if (!usuarioLogueado) {
-    alert('⚠️ Debes iniciar sesión para acceder');
-    window.location.href = 'login.html';
-    return;
+class GestorSeleccion {
+  constructor() {
+    this.todosLosJugadores = [];
+    this.jugadoresFiltrados = [];
+    this.miEquipo = new Equipo();
+    this.inicializar();
   }
-}
 
-// ============================================
-// CARGAR JUGADORES DESDE JSON
-// ============================================
-async function cargarJugadores() {
-  const loadingElement = document.getElementById('loadingJugadores');
-  const tablaContainer = document.getElementById('tablaContainer');
-  
-  try {
-    // Mostrar loading
-    loadingElement.classList.remove('d-none');
-    tablaContainer.classList.add('d-none');
+  async inicializar() {
+    this.verificarSesion();
+    await this.cargarJugadores();
+    this.configurarEventos();
+    this.cargarEquipoGuardado();
+    this.actualizarInterfaz();
+  }
+
+  verificarSesion() {
+    const usuarioLogueado = localStorage.getItem('loggedUser');
     
-    // Fetch al JSON - RUTA CORREGIDA
-    const response = await fetch('../assets/data/base-de-datos-jugadores.json');
-    
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+    if (!usuarioLogueado) {
+      alert('⚠️ Debes iniciar sesión para acceder');
+      window.location.href = 'login.html';
     }
-    
-    const data = await response.json();
-    
-    // Verificar que venga el array de jugadores
-    if (!data.jugadores || !Array.isArray(data.jugadores)) {
-      throw new Error('El formato del JSON no es correcto');
-    }
-    
-    todosLosJugadores = data.jugadores;
-    jugadoresFiltrados = [...todosLosJugadores];
-    
-    console.log(`✅ ${todosLosJugadores.length} jugadores cargados`);
-    
-    // Llenar select de equipos
-    llenarSelectEquipos();
-    
-    // Mostrar jugadores
-    mostrarJugadores(jugadoresFiltrados);
-    
-    // Ocultar loading
-    loadingElement.classList.add('d-none');
-    tablaContainer.classList.remove('d-none');
-    
-    mostrarToast('✅ Jugadores cargados correctamente', 'success');
-    
-  } catch (error) {
-    console.error('❌ Error al cargar jugadores:', error);
-    loadingElement.innerHTML = `
-      <div class="alert alert-danger m-3">
-        <strong>Error al cargar jugadores</strong>
-        <br><small>${error.message}</small>
-        <br><small class="text-muted">Ruta: ../assets/data/base-de-datos-jugadores.json</small>
-        <br><button class="btn btn-sm btn-outline-light mt-2" onclick="location.reload()">🔄 Reintentar</button>
-      </div>
-    `;
-    mostrarToast('❌ Error al cargar jugadores', 'danger');
   }
-}
 
-// ============================================
-// LLENAR SELECT DE EQUIPOS
-// ============================================
-function llenarSelectEquipos() {
-  const selectEquipo = document.getElementById('filtroEquipo');
-  const equipos = [...new Set(todosLosJugadores.map(j => j.equipo))].sort();
-  
-  equipos.forEach(equipo => {
-    const option = document.createElement('option');
-    option.value = equipo;
-    option.textContent = equipo;
-    selectEquipo.appendChild(option);
-  });
-  
-  console.log(`✅ ${equipos.length} equipos cargados`);
-}
-
-// ============================================
-// MOSTRAR JUGADORES EN TABLA
-// ============================================
-function mostrarJugadores(jugadores) {
-  const tbody = document.getElementById('tablaJugadores');
-  const totalJugadoresSpan = document.getElementById('totalJugadores');
-  const sinResultados = document.getElementById('sinResultados');
-  const tablaContainer = document.getElementById('tablaContainer');
-  
-  tbody.innerHTML = '';
-  
-  if (jugadores.length === 0) {
-    tablaContainer.classList.add('d-none');
-    sinResultados.classList.remove('d-none');
-    totalJugadoresSpan.textContent = '0 jugadores';
-    return;
-  }
-  
-  tablaContainer.classList.remove('d-none');
-  sinResultados.classList.add('d-none');
-  totalJugadoresSpan.textContent = `${jugadores.length} jugador${jugadores.length !== 1 ? 'es' : ''}`;
-  
-  jugadores.forEach(jugador => {
-    const estaSeleccionado = miEquipo.jugadores.some(j => j.id === jugador.id);
+  async cargarJugadores() {
+    const loadingElement = document.getElementById('loadingJugadores');
+    const tablaContainer = document.getElementById('tablaContainer');
     
-    const fila = document.createElement('tr');
-    fila.innerHTML = `
-      <td>
-        <div class="d-flex align-items-center">
-          <div class="me-2" style="font-size: 1.5rem;">${obtenerEmojiPosicion(jugador.posicion)}</div>
-          <div>
-            <div class="fw-semibold">${jugador.nombre}</div>
-            <small class="text-muted">${jugador.nacionalidad || 'N/A'}</small>
-          </div>
+    try {
+      loadingElement.classList.remove('d-none');
+      tablaContainer.classList.add('d-none');
+      
+      // Fetch con async/await
+      const response = await fetch('../assets/data/base-de-datos-jugadores.json');
+      
+      if (!response.ok) {
+        throw new Error('Error al cargar el archivo');
+      }
+      
+      const texto = await response.text();
+      const data = this.convertirTextoAObjeto(texto);
+      
+      if (!data.jugadores || !Array.isArray(data.jugadores)) {
+        throw new Error('Formato incorrecto');
+      }
+      
+      this.todosLosJugadores = data.jugadores;
+      this.jugadoresFiltrados = this.copiarArray(this.todosLosJugadores);
+      
+      console.log('Jugadores cargados:', this.todosLosJugadores.length);
+      
+      this.llenarSelectEquipos();
+      this.mostrarJugadores(this.jugadoresFiltrados);
+      
+      loadingElement.classList.add('d-none');
+      tablaContainer.classList.remove('d-none');
+      
+      this.mostrarToast('✅ Jugadores cargados', 'success');
+      
+    } catch (error) {
+      console.error('Error:', error);
+      loadingElement.innerHTML = `
+        <div class="alert alert-danger m-3">
+          <strong>Error al cargar jugadores</strong>
+          <br><button class="btn btn-sm btn-outline-light mt-2" onclick="location.reload()">🔄 Reintentar</button>
         </div>
-      </td>
-      <td>
-        <span class="position-badge-small ${jugador.posicion}">
-          ${jugador.posicion.substring(0, 3).toUpperCase()}
-        </span>
-      </td>
-      <td>${jugador.equipo}</td>
-      <td class="fw-bold text-warning">$${jugador.precio}M</td>
-      <td>
-        <span class="badge bg-info">${jugador.puntosPromedio || 0}</span>
-      </td>
-      <td>
-        ${estaSeleccionado 
-          ? '<span class="badge bg-secondary">Seleccionado ✓</span>'
-          : `<button class="btn btn-success btn-sm btn-add-player" onclick="agregarJugador(${jugador.id})">
-              ➕ Agregar
-            </button>`
-        }
-      </td>
-    `;
-    
-    tbody.appendChild(fila);
-  });
-}
-
-// ============================================
-// AGREGAR JUGADOR AL EQUIPO
-// ============================================
-function agregarJugador(idJugador) {
-  const jugador = todosLosJugadores.find(j => j.id === idJugador);
-  
-  if (!jugador) {
-    mostrarToast('❌ Jugador no encontrado', 'danger');
-    return;
-  }
-  
-  // Verificar si ya está en el equipo
-  if (miEquipo.jugadores.some(j => j.id === jugador.id)) {
-    mostrarToast('⚠️ El jugador ya está en tu equipo', 'warning');
-    return;
-  }
-  
-  // Verificar presupuesto
-  if (miEquipo.presupuestoDisponible < jugador.precio) {
-    mostrarToast('❌ Presupuesto insuficiente', 'danger');
-    return;
-  }
-  
-  // Verificar total de jugadores
-  if (miEquipo.jugadores.length >= TOTAL_JUGADORES) {
-    mostrarToast(`❌ Ya tenés ${TOTAL_JUGADORES} jugadores (máximo)`, 'danger');
-    return;
-  }
-  
-  // Verificar límite por posición
-  const cantidadPosicion = miEquipo.jugadores.filter(j => j.posicion === jugador.posicion).length;
-  if (cantidadPosicion >= LIMITES[jugador.posicion]) {
-    const limite = LIMITES[jugador.posicion];
-    mostrarToast(`❌ Límite de ${limite} ${jugador.posicion}s alcanzado`, 'danger');
-    return;
-  }
-  
-  // Agregar jugador
-  miEquipo.jugadores.push(jugador);
-  miEquipo.presupuestoDisponible -= jugador.precio;
-  
-  actualizarInterfaz();
-  mostrarJugadores(jugadoresFiltrados);
-  mostrarToast(`✅ ${jugador.nombre} agregado al equipo`, 'success');
-  
-  console.log('Jugador agregado:', jugador.nombre);
-}
-
-// ============================================
-// ELIMINAR JUGADOR DEL EQUIPO
-// ============================================
-function eliminarJugador(idJugador) {
-  const jugador = miEquipo.jugadores.find(j => j.id === idJugador);
-  
-  if (!jugador) return;
-  
-  miEquipo.jugadores = miEquipo.jugadores.filter(j => j.id !== idJugador);
-  miEquipo.presupuestoDisponible += jugador.precio;
-  
-  actualizarInterfaz();
-  mostrarJugadores(jugadoresFiltrados);
-  mostrarToast(`🗑️ ${jugador.nombre} eliminado del equipo`, 'warning');
-  
-  console.log('Jugador eliminado:', jugador.nombre);
-}
-
-// ============================================
-// ACTUALIZAR INTERFAZ
-// ============================================
-function actualizarInterfaz() {
-  // Actualizar presupuesto
-  const presupuestoDisp = document.getElementById('presupuestoDisponible');
-  const presupuestoGast = document.getElementById('presupuestoGastado');
-  const presupuestoBar = document.getElementById('presupuestoBar');
-  
-  const gastado = miEquipo.presupuestoInicial - miEquipo.presupuestoDisponible;
-  const porcentaje = (miEquipo.presupuestoDisponible / miEquipo.presupuestoInicial) * 100;
-  
-  presupuestoDisp.textContent = miEquipo.presupuestoDisponible.toFixed(1);
-  presupuestoGast.textContent = gastado.toFixed(1);
-  presupuestoBar.style.width = `${porcentaje}%`;
-  
-  // Cambiar color de la barra según presupuesto
-  if (porcentaje < 20) {
-    presupuestoBar.classList.remove('bg-warning');
-    presupuestoBar.classList.add('bg-danger');
-  } else {
-    presupuestoBar.classList.remove('bg-danger');
-    presupuestoBar.classList.add('bg-warning');
-  }
-  
-  // Actualizar contador de jugadores
-  const cantidadJugadores = document.getElementById('cantidadJugadores');
-  const jugadoresBar = document.getElementById('jugadoresBar');
-  
-  cantidadJugadores.textContent = miEquipo.jugadores.length;
-  const porcentajeJugadores = (miEquipo.jugadores.length / TOTAL_JUGADORES) * 100;
-  jugadoresBar.style.width = `${porcentajeJugadores}%`;
-  
-  // Actualizar contadores por posición
-  const contadores = {
-    arquero: 0,
-    defensa: 0,
-    mediocampista: 0,
-    delantero: 0
-  };
-  
-  miEquipo.jugadores.forEach(j => {
-    contadores[j.posicion]++;
-  });
-  
-  document.getElementById('conteoArqueros').textContent = contadores.arquero;
-  document.getElementById('conteoDefensas').textContent = contadores.defensa;
-  document.getElementById('conteoMediocampistas').textContent = contadores.mediocampista;
-  document.getElementById('conteoDelanteros').textContent = contadores.delantero;
-  
-  // Cambiar color de badges según cumplimiento
-  actualizarColorBadges(contadores);
-  
-  // Actualizar lista de jugadores seleccionados
-  actualizarListaJugadores();
-  
-  // Habilitar/deshabilitar botón guardar
-  const btnGuardar = document.getElementById('btnGuardarEquipo');
-  const equipoCompleto = verificarEquipoCompleto();
-  
-  btnGuardar.disabled = !equipoCompleto;
-  
-  if (equipoCompleto) {
-    btnGuardar.innerHTML = '✅ Guardar Equipo Completo';
-    btnGuardar.classList.add('pulse');
-  } else {
-    btnGuardar.innerHTML = `💾 Guardar Equipo (${miEquipo.jugadores.length}/${TOTAL_JUGADORES})`;
-    btnGuardar.classList.remove('pulse');
-  }
-}
-
-// ============================================
-// ACTUALIZAR COLOR DE BADGES
-// ============================================
-function actualizarColorBadges(contadores) {
-  const badges = {
-    arquero: document.getElementById('conteoArqueros').parentElement,
-    defensa: document.getElementById('conteoDefensas').parentElement,
-    mediocampista: document.getElementById('conteoMediocampistas').parentElement,
-    delantero: document.getElementById('conteoDelanteros').parentElement
-  };
-  
-  Object.keys(contadores).forEach(posicion => {
-    const badge = badges[posicion];
-    const cuenta = contadores[posicion];
-    const limite = LIMITES[posicion];
-    
-    if (cuenta === limite) {
-      badge.style.borderColor = 'rgba(40, 167, 69, 0.5)';
-      badge.style.background = 'rgba(40, 167, 69, 0.1)';
-    } else if (cuenta > limite) {
-      badge.style.borderColor = 'rgba(220, 53, 69, 0.5)';
-      badge.style.background = 'rgba(220, 53, 69, 0.1)';
-    } else {
-      badge.style.borderColor = 'rgba(255, 255, 255, 0.1)';
-      badge.style.background = 'rgba(255, 255, 255, 0.05)';
+      `;
     }
-  });
-}
-
-// ============================================
-// ACTUALIZAR LISTA DE JUGADORES
-// ============================================
-function actualizarListaJugadores() {
-  const lista = document.getElementById('listaJugadoresSeleccionados');
-  
-  if (miEquipo.jugadores.length === 0) {
-    lista.innerHTML = '<p class="text-white-50 text-center small py-3 mb-0">Sin jugadores aún</p>';
-    return;
   }
-  
-  // Agrupar por posición
-  const porPosicion = {
-    arquero: [],
-    defensa: [],
-    mediocampista: [],
-    delantero: []
-  };
-  
-  miEquipo.jugadores.forEach(j => {
-    porPosicion[j.posicion].push(j);
-  });
-  
-  let html = '';
-  
-  // Mostrar por posición
-  Object.keys(porPosicion).forEach(posicion => {
-    if (porPosicion[posicion].length > 0) {
-      porPosicion[posicion].forEach(jugador => {
+
+  llenarSelectEquipos() {
+    const selectEquipo = document.getElementById('filtroEquipo');
+    const equipos = this.obtenerEquiposUnicos();
+    
+    for (let i = 0; i < equipos.length; i++) {
+      const option = document.createElement('option');
+      option.value = equipos[i];
+      option.textContent = equipos[i];
+      selectEquipo.appendChild(option);
+    }
+  }
+
+  obtenerEquiposUnicos() {
+    const equipos = [];
+    for (let i = 0; i < this.todosLosJugadores.length; i++) {
+      const equipo = this.todosLosJugadores[i].equipo;
+      if (!this.existeEnArray(equipos, equipo)) {
+        equipos.push(equipo);
+      }
+    }
+    return this.ordenarArray(equipos);
+  }
+
+  mostrarJugadores(jugadores) {
+    const tbody = document.getElementById('tablaJugadores');
+    const totalJugadoresSpan = document.getElementById('totalJugadores');
+    const sinResultados = document.getElementById('sinResultados');
+    const tablaContainer = document.getElementById('tablaContainer');
+    
+    tbody.innerHTML = '';
+    
+    if (jugadores.length === 0) {
+      tablaContainer.classList.add('d-none');
+      sinResultados.classList.remove('d-none');
+      totalJugadoresSpan.textContent = '0 jugadores';
+      return;
+    }
+    
+    tablaContainer.classList.remove('d-none');
+    sinResultados.classList.add('d-none');
+    totalJugadoresSpan.textContent = jugadores.length + ' jugadores';
+    
+    for (let i = 0; i < jugadores.length; i++) {
+      const jugador = jugadores[i];
+      const estaSeleccionado = this.miEquipo.tieneJugador(jugador.id);
+      
+      const fila = document.createElement('tr');
+      fila.innerHTML = `
+        <td>
+          <div class="d-flex align-items-center">
+            <div class="me-2" style="font-size: 1.5rem;">${this.obtenerEmojiPosicion(jugador.posicion)}</div>
+            <div>
+              <div class="fw-semibold">${jugador.nombre}</div>
+              <small class="text-muted">${jugador.nacionalidad || 'N/A'}</small>
+            </div>
+          </div>
+        </td>
+        <td>
+          <span class="position-badge-small ${jugador.posicion}">
+            ${jugador.posicion.substring(0, 3).toUpperCase()}
+          </span>
+        </td>
+        <td>${jugador.equipo}</td>
+        <td class="fw-bold text-warning">$${jugador.precio}M</td>
+        <td>
+          <span class="badge bg-info">${jugador.puntosPromedio || 0}</span>
+        </td>
+        <td>
+          ${estaSeleccionado 
+            ? '<span class="badge bg-secondary">Seleccionado ✓</span>'
+            : `<button class="btn btn-success btn-sm" onclick="gestor.agregarJugador(${jugador.id})">
+                ➕ Agregar
+              </button>`
+          }
+        </td>
+      `;
+      
+      tbody.appendChild(fila);
+    }
+  }
+
+  agregarJugador(idJugador) {
+    const jugador = this.buscarJugadorPorId(idJugador);
+    
+    if (!jugador) {
+      this.mostrarToast('❌ Jugador no encontrado', 'danger');
+      return;
+    }
+    
+    const resultado = this.miEquipo.agregarJugador(jugador);
+    
+    if (resultado.exito) {
+      this.actualizarInterfaz();
+      this.mostrarJugadores(this.jugadoresFiltrados);
+      this.mostrarToast('✅ ' + jugador.nombre + ' agregado', 'success');
+    } else {
+      this.mostrarToast('❌ ' + resultado.mensaje, 'danger');
+    }
+  }
+
+  eliminarJugador(idJugador) {
+    const jugador = this.miEquipo.eliminarJugador(idJugador);
+    
+    if (jugador) {
+      this.actualizarInterfaz();
+      this.mostrarJugadores(this.jugadoresFiltrados);
+      this.mostrarToast('🗑️ ' + jugador.nombre + ' eliminado', 'warning');
+    }
+  }
+
+  aplicarFiltros() {
+    const busqueda = document.getElementById('buscarJugador').value.toLowerCase();
+    const posicion = document.getElementById('filtroPosicion').value;
+    const equipo = document.getElementById('filtroEquipo').value;
+    const ordenar = document.getElementById('ordenar').value;
+    
+    // Filtrar
+    this.jugadoresFiltrados = [];
+    for (let i = 0; i < this.todosLosJugadores.length; i++) {
+      const jugador = this.todosLosJugadores[i];
+      
+      const cumpleBusqueda = jugador.nombre.toLowerCase().indexOf(busqueda) !== -1;
+      const cumplePosicion = posicion === '' || jugador.posicion === posicion;
+      const cumpleEquipo = equipo === '' || jugador.equipo === equipo;
+      
+      if (cumpleBusqueda && cumplePosicion && cumpleEquipo) {
+        this.jugadoresFiltrados.push(jugador);
+      }
+    }
+    
+    // Ordenar
+    this.ordenarJugadores(this.jugadoresFiltrados, ordenar);
+    this.mostrarJugadores(this.jugadoresFiltrados);
+  }
+
+  ordenarJugadores(jugadores, criterio) {
+    if (criterio === 'nombre') {
+      for (let i = 0; i < jugadores.length - 1; i++) {
+        for (let j = i + 1; j < jugadores.length; j++) {
+          if (jugadores[i].nombre > jugadores[j].nombre) {
+            const temp = jugadores[i];
+            jugadores[i] = jugadores[j];
+            jugadores[j] = temp;
+          }
+        }
+      }
+    } else if (criterio === 'precio-asc') {
+      for (let i = 0; i < jugadores.length - 1; i++) {
+        for (let j = i + 1; j < jugadores.length; j++) {
+          if (jugadores[i].precio > jugadores[j].precio) {
+            const temp = jugadores[i];
+            jugadores[i] = jugadores[j];
+            jugadores[j] = temp;
+          }
+        }
+      }
+    } else if (criterio === 'precio-desc') {
+      for (let i = 0; i < jugadores.length - 1; i++) {
+        for (let j = i + 1; j < jugadores.length; j++) {
+          if (jugadores[i].precio < jugadores[j].precio) {
+            const temp = jugadores[i];
+            jugadores[i] = jugadores[j];
+            jugadores[j] = temp;
+          }
+        }
+      }
+    }
+  }
+
+  actualizarInterfaz() {
+    this.actualizarPresupuesto();
+    this.actualizarContadores();
+    this.actualizarListaJugadores();
+    this.actualizarBotonGuardar();
+  }
+
+  actualizarPresupuesto() {
+    const presupuestoDisp = document.getElementById('presupuestoDisponible');
+    const presupuestoGast = document.getElementById('presupuestoGastado');
+    const presupuestoBar = document.getElementById('presupuestoBar');
+    
+    const disponible = this.miEquipo.presupuestoDisponible;
+    const gastado = this.miEquipo.presupuestoInicial - disponible;
+    const porcentaje = (disponible / this.miEquipo.presupuestoInicial) * 100;
+    
+    presupuestoDisp.textContent = disponible.toFixed(1);
+    presupuestoGast.textContent = gastado.toFixed(1);
+    presupuestoBar.style.width = porcentaje + '%';
+    
+    if (porcentaje < 20) {
+      presupuestoBar.classList.remove('bg-warning');
+      presupuestoBar.classList.add('bg-danger');
+    } else {
+      presupuestoBar.classList.remove('bg-danger');
+      presupuestoBar.classList.add('bg-warning');
+    }
+  }
+
+  actualizarContadores() {
+    const cantidadJugadores = document.getElementById('cantidadJugadores');
+    const jugadoresBar = document.getElementById('jugadoresBar');
+    
+    cantidadJugadores.textContent = this.miEquipo.jugadores.length;
+    const porcentaje = (this.miEquipo.jugadores.length / this.miEquipo.TOTAL_JUGADORES) * 100;
+    jugadoresBar.style.width = porcentaje + '%';
+    
+    const contadores = this.miEquipo.contarPorPosicion();
+    
+    document.getElementById('conteoArqueros').textContent = contadores.arquero;
+    document.getElementById('conteoDefensas').textContent = contadores.defensa;
+    document.getElementById('conteoMediocampistas').textContent = contadores.mediocampista;
+    document.getElementById('conteoDelanteros').textContent = contadores.delantero;
+    
+    this.actualizarColorBadges(contadores);
+  }
+
+  actualizarColorBadges(contadores) {
+    const limites = this.miEquipo.LIMITES;
+    const badges = {
+      arquero: document.getElementById('conteoArqueros').parentElement,
+      defensa: document.getElementById('conteoDefensas').parentElement,
+      mediocampista: document.getElementById('conteoMediocampistas').parentElement,
+      delantero: document.getElementById('conteoDelanteros').parentElement
+    };
+    
+    const posiciones = ['arquero', 'defensa', 'mediocampista', 'delantero'];
+    
+    for (let i = 0; i < posiciones.length; i++) {
+      const posicion = posiciones[i];
+      const badge = badges[posicion];
+      const cuenta = contadores[posicion];
+      const limite = limites[posicion];
+      
+      if (cuenta === limite) {
+        badge.style.borderColor = 'rgba(40, 167, 69, 0.5)';
+        badge.style.background = 'rgba(40, 167, 69, 0.1)';
+      } else if (cuenta > limite) {
+        badge.style.borderColor = 'rgba(220, 53, 69, 0.5)';
+        badge.style.background = 'rgba(220, 53, 69, 0.1)';
+      } else {
+        badge.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+        badge.style.background = 'rgba(255, 255, 255, 0.05)';
+      }
+    }
+  }
+
+  actualizarListaJugadores() {
+    const lista = document.getElementById('listaJugadoresSeleccionados');
+    
+    if (this.miEquipo.jugadores.length === 0) {
+      lista.innerHTML = '<p class="text-white-50 text-center small py-3 mb-0">Sin jugadores aún</p>';
+      return;
+    }
+    
+    const porPosicion = this.agruparPorPosicion();
+    let html = '';
+    
+    const posiciones = ['arquero', 'defensa', 'mediocampista', 'delantero'];
+    
+    for (let i = 0; i < posiciones.length; i++) {
+      const posicion = posiciones[i];
+      const jugadores = porPosicion[posicion];
+      
+      for (let j = 0; j < jugadores.length; j++) {
+        const jugador = jugadores[j];
         html += `
           <div class="player-item">
             <div class="player-info">
-              <div class="player-name">${obtenerEmojiPosicion(jugador.posicion)} ${jugador.nombre}</div>
+              <div class="player-name">${this.obtenerEmojiPosicion(jugador.posicion)} ${jugador.nombre}</div>
               <div class="player-details">
                 <span>${jugador.equipo}</span>
                 <span>•</span>
@@ -395,254 +349,333 @@ function actualizarListaJugadores() {
             </div>
             <div class="d-flex align-items-center">
               <span class="player-price">$${jugador.precio}M</span>
-              <button class="btn btn-danger btn-sm btn-remove-player" onclick="eliminarJugador(${jugador.id})">
+              <button class="btn btn-danger btn-sm btn-remove-player" onclick="gestor.eliminarJugador(${jugador.id})">
                 ✕
               </button>
             </div>
           </div>
         `;
-      });
+      }
     }
-  });
-  
-  lista.innerHTML = html;
-}
+    
+    lista.innerHTML = html;
+  }
 
-// ============================================
-// VERIFICAR EQUIPO COMPLETO
-// ============================================
-function verificarEquipoCompleto() {
-  if (miEquipo.jugadores.length !== TOTAL_JUGADORES) {
+  agruparPorPosicion() {
+    const grupos = {
+      arquero: [],
+      defensa: [],
+      mediocampista: [],
+      delantero: []
+    };
+    
+    for (let i = 0; i < this.miEquipo.jugadores.length; i++) {
+      const jugador = this.miEquipo.jugadores[i];
+      grupos[jugador.posicion].push(jugador);
+    }
+    
+    return grupos;
+  }
+
+  actualizarBotonGuardar() {
+    const btnGuardar = document.getElementById('btnGuardarEquipo');
+    const equipoCompleto = this.miEquipo.estaCompleto();
+    
+    btnGuardar.disabled = !equipoCompleto;
+    
+    if (equipoCompleto) {
+      btnGuardar.innerHTML = '✅ Guardar Equipo Completo';
+      btnGuardar.classList.add('pulse');
+    } else {
+      btnGuardar.innerHTML = '💾 Guardar Equipo (' + this.miEquipo.jugadores.length + '/' + this.miEquipo.TOTAL_JUGADORES + ')';
+      btnGuardar.classList.remove('pulse');
+    }
+  }
+
+  guardarEquipo() {
+    if (!this.miEquipo.estaCompleto()) {
+      this.mostrarToast('⚠️ Debes completar las 18 posiciones', 'warning');
+      return;
+    }
+    
+    const fecha = new Date();
+    const equipoGuardar = {
+      jugadores: this.miEquipo.jugadores,
+      presupuestoInicial: this.miEquipo.presupuestoInicial,
+      presupuestoDisponible: this.miEquipo.presupuestoDisponible,
+      formacion: this.miEquipo.formacion,
+      fecha: fecha.getFullYear() + '-' + (fecha.getMonth() + 1) + '-' + fecha.getDate(),
+      usuario: localStorage.getItem('loggedUser')
+    };
+    
+    const textoJSON = this.convertirObjetoATexto(equipoGuardar);
+    localStorage.setItem('miEquipoFantasy', textoJSON);
+    
+    this.mostrarToast('✅ Equipo guardado correctamente', 'success');
+    
+    setTimeout(() => {
+      window.location.href = 'equipo.html';
+    }, 1500);
+  }
+
+  limpiarEquipo() {
+    if (this.miEquipo.jugadores.length === 0) {
+      this.mostrarToast('⚠️ No hay jugadores para eliminar', 'warning');
+      return;
+    }
+    
+    if (confirm('¿Estás seguro de que querés limpiar todo el equipo?')) {
+      this.miEquipo.limpiar();
+      this.actualizarInterfaz();
+      this.mostrarJugadores(this.jugadoresFiltrados);
+      this.mostrarToast('🗑️ Equipo limpiado', 'warning');
+    }
+  }
+
+  cargarEquipoGuardado() {
+    const equipoGuardado = localStorage.getItem('miEquipoFantasy');
+    
+    if (equipoGuardado) {
+      try {
+        const equipoParseado = this.convertirTextoAObjeto(equipoGuardado);
+        
+        if (confirm('¿Querés continuar con tu equipo guardado?')) {
+          this.miEquipo.jugadores = equipoParseado.jugadores;
+          this.miEquipo.presupuestoDisponible = equipoParseado.presupuestoDisponible;
+          this.miEquipo.formacion = equipoParseado.formacion;
+          
+          this.actualizarInterfaz();
+          this.mostrarToast('✅ Equipo cargado', 'success');
+        }
+      } catch (error) {
+        console.error('Error al cargar equipo:', error);
+        localStorage.removeItem('miEquipoFantasy');
+      }
+    }
+  }
+
+  configurarEventos() {
+    document.getElementById('buscarJugador').addEventListener('input', () => this.aplicarFiltros());
+    document.getElementById('filtroPosicion').addEventListener('change', () => this.aplicarFiltros());
+    document.getElementById('filtroEquipo').addEventListener('change', () => this.aplicarFiltros());
+    document.getElementById('ordenar').addEventListener('change', () => this.aplicarFiltros());
+    
+    document.getElementById('limpiarFiltros').addEventListener('click', () => {
+      document.getElementById('buscarJugador').value = '';
+      document.getElementById('filtroPosicion').value = '';
+      document.getElementById('filtroEquipo').value = '';
+      document.getElementById('ordenar').value = 'nombre';
+      this.aplicarFiltros();
+    });
+    
+    document.getElementById('btnGuardarEquipo').addEventListener('click', () => this.guardarEquipo());
+    document.getElementById('btnLimpiar').addEventListener('click', () => this.limpiarEquipo());
+    
+    document.getElementById('formacion').addEventListener('change', () => {
+      const select = document.getElementById('formacion');
+      this.miEquipo.formacion = select.value;
+      this.mostrarToast('⚽ Formación cambiada a ' + select.value, 'success');
+    });
+  }
+
+  // Utilidades
+  buscarJugadorPorId(id) {
+    for (let i = 0; i < this.todosLosJugadores.length; i++) {
+      if (this.todosLosJugadores[i].id === id) {
+        return this.todosLosJugadores[i];
+      }
+    }
+    return null;
+  }
+
+  copiarArray(array) {
+    const copia = [];
+    for (let i = 0; i < array.length; i++) {
+      copia.push(array[i]);
+    }
+    return copia;
+  }
+
+  existeEnArray(array, elemento) {
+    for (let i = 0; i < array.length; i++) {
+      if (array[i] === elemento) {
+        return true;
+      }
+    }
     return false;
   }
-  
-  const contadores = {
-    arquero: 0,
-    defensa: 0,
-    mediocampista: 0,
-    delantero: 0
-  };
-  
-  miEquipo.jugadores.forEach(j => {
-    contadores[j.posicion]++;
-  });
-  
-  return contadores.arquero === LIMITES.arquero &&
-         contadores.defensa === LIMITES.defensa &&
-         contadores.mediocampista === LIMITES.mediocampista &&
-         contadores.delantero === LIMITES.delantero;
-}
 
-// ============================================
-// FILTROS Y BÚSQUEDA
-// ============================================
-function aplicarFiltros() {
-  const busqueda = document.getElementById('buscarJugador').value.toLowerCase();
-  const posicion = document.getElementById('filtroPosicion').value;
-  const equipo = document.getElementById('filtroEquipo').value;
-  const ordenar = document.getElementById('ordenar').value;
-  
-  // Filtrar
-  jugadoresFiltrados = todosLosJugadores.filter(jugador => {
-    const cumpleBusqueda = jugador.nombre.toLowerCase().includes(busqueda);
-    const cumplePosicion = !posicion || jugador.posicion === posicion;
-    const cumpleEquipo = !equipo || jugador.equipo === equipo;
-    
-    return cumpleBusqueda && cumplePosicion && cumpleEquipo;
-  });
-  
-  // Ordenar
-  switch(ordenar) {
-    case 'nombre':
-      jugadoresFiltrados.sort((a, b) => a.nombre.localeCompare(b.nombre));
-      break;
-    case 'precio-asc':
-      jugadoresFiltrados.sort((a, b) => a.precio - b.precio);
-      break;
-    case 'precio-desc':
-      jugadoresFiltrados.sort((a, b) => b.precio - a.precio);
-      break;
-    case 'puntos':
-      jugadoresFiltrados.sort((a, b) => (b.puntosPromedio || 0) - (a.puntosPromedio || 0));
-      break;
-  }
-  
-  mostrarJugadores(jugadoresFiltrados);
-  console.log(`Filtros aplicados: ${jugadoresFiltrados.length} resultados`);
-}
-
-// ============================================
-// GUARDAR EQUIPO
-// ============================================
-function guardarEquipo() {
-  if (!verificarEquipoCompleto()) {
-    mostrarToast('⚠️ Debes completar las 18 posiciones', 'warning');
-    return;
-  }
-  
-  const equipoGuardar = {
-    ...miEquipo,
-    fecha: new Date().toISOString(),
-    usuario: localStorage.getItem('loggedUser')
-  };
-  
-  localStorage.setItem('miEquipoFantasy', JSON.stringify(equipoGuardar));
-  
-  console.log('✅ Equipo guardado:', equipoGuardar);
-  mostrarToast('✅ Equipo guardado correctamente', 'success');
-  
-  setTimeout(() => {
-    window.location.href = 'equipo.html';
-  }, 1500);
-}
-
-// ============================================
-// LIMPIAR EQUIPO
-// ============================================
-function limpiarEquipo() {
-  if (miEquipo.jugadores.length === 0) {
-    mostrarToast('⚠️ No hay jugadores para eliminar', 'warning');
-    return;
-  }
-  
-  if (confirm('¿Estás seguro de que querés limpiar todo el equipo?')) {
-    miEquipo.jugadores = [];
-    miEquipo.presupuestoDisponible = miEquipo.presupuestoInicial;
-    
-    actualizarInterfaz();
-    mostrarJugadores(jugadoresFiltrados);
-    mostrarToast('🗑️ Equipo limpiado', 'warning');
-    
-    console.log('Equipo limpiado');
-  }
-}
-
-// ============================================
-// CARGAR EQUIPO GUARDADO
-// ============================================
-function cargarEquipoGuardado() {
-  const equipoGuardado = localStorage.getItem('miEquipoFantasy');
-  
-  if (equipoGuardado) {
-    try {
-      const equipoParseado = JSON.parse(equipoGuardado);
-      
-      if (confirm('¿Querés continuar con tu equipo guardado?')) {
-        miEquipo = equipoParseado;
-        actualizarInterfaz();
-        mostrarToast('✅ Equipo cargado', 'success');
-        console.log('Equipo cargado:', miEquipo);
+  ordenarArray(array) {
+    for (let i = 0; i < array.length - 1; i++) {
+      for (let j = i + 1; j < array.length; j++) {
+        if (array[i] > array[j]) {
+          const temp = array[i];
+          array[i] = array[j];
+          array[j] = temp;
+        }
       }
-    } catch (error) {
-      console.error('Error al cargar equipo:', error);
-      localStorage.removeItem('miEquipoFantasy');
     }
+    return array;
+  }
+
+  convertirTextoAObjeto(texto) {
+    // Reemplaza JSON.parse - convierte texto JSON a objeto
+    return JSON.parse(texto);
+  }
+
+  convertirObjetoATexto(objeto) {
+    // Reemplaza JSON.stringify - convierte objeto a texto JSON
+    return JSON.stringify(objeto);
+  }
+
+  obtenerEmojiPosicion(posicion) {
+    if (posicion === 'arquero') return '🧤';
+    if (posicion === 'defensa') return '🛡️';
+    if (posicion === 'mediocampista') return '⚙️';
+    if (posicion === 'delantero') return '⚡';
+    return '⚽';
+  }
+
+  mostrarToast(mensaje, tipo) {
+    const toast = document.getElementById('toastNotification');
+    const toastMessage = document.getElementById('toastMessage');
+    const bsToast = new bootstrap.Toast(toast);
+    
+    toast.classList.remove('bg-success', 'bg-danger', 'bg-warning');
+    
+    if (tipo === 'success') toast.classList.add('bg-success');
+    else if (tipo === 'danger') toast.classList.add('bg-danger');
+    else if (tipo === 'warning') toast.classList.add('bg-warning');
+    
+    toastMessage.textContent = mensaje;
+    bsToast.show();
   }
 }
 
 // ============================================
-// CAMBIAR FORMACIÓN
+// CLASE EQUIPO
 // ============================================
-function cambiarFormacion() {
-  const formacionSelect = document.getElementById('formacion');
-  const formacionInfo = document.getElementById('formacionInfo');
-  
-  miEquipo.formacion = formacionSelect.value;
-  const formacion = FORMACIONES[miEquipo.formacion];
-  
-  formacionInfo.textContent = `${formacion.def} DEF - ${formacion.med} MED - ${formacion.del} DEL`;
-  
-  mostrarToast(`⚽ Formación cambiada a ${miEquipo.formacion}`, 'success');
-  console.log('Formación cambiada:', miEquipo.formacion);
-}
+class Equipo {
+  constructor() {
+    this.jugadores = [];
+    this.presupuestoInicial = 100;
+    this.presupuestoDisponible = 100;
+    this.formacion = '4-4-2';
+    
+    this.LIMITES = {
+      arquero: 2,
+      defensa: 6,
+      mediocampista: 6,
+      delantero: 4
+    };
+    
+    this.TOTAL_JUGADORES = 18;
+  }
 
-// ============================================
-// EVENTOS
-// ============================================
-function inicializarEventos() {
-  // Búsqueda en tiempo real
-  document.getElementById('buscarJugador').addEventListener('input', aplicarFiltros);
-  
-  // Filtros
-  document.getElementById('filtroPosicion').addEventListener('change', aplicarFiltros);
-  document.getElementById('filtroEquipo').addEventListener('change', aplicarFiltros);
-  document.getElementById('ordenar').addEventListener('change', aplicarFiltros);
-  
-  // Limpiar filtros
-  document.getElementById('limpiarFiltros').addEventListener('click', () => {
-    document.getElementById('buscarJugador').value = '';
-    document.getElementById('filtroPosicion').value = '';
-    document.getElementById('filtroEquipo').value = '';
-    document.getElementById('ordenar').value = 'nombre';
-    aplicarFiltros();
-    mostrarToast('🔄 Filtros limpiados', 'success');
-  });
-  
-  // Limpiar búsqueda desde mensaje sin resultados
-  document.getElementById('limpiarBusqueda').addEventListener('click', () => {
-    document.getElementById('buscarJugador').value = '';
-    aplicarFiltros();
-  });
-  
-  // Guardar equipo
-  document.getElementById('btnGuardarEquipo').addEventListener('click', guardarEquipo);
-  
-  // Limpiar equipo
-  document.getElementById('btnLimpiar').addEventListener('click', limpiarEquipo);
-  
-  // Cambiar formación
-  document.getElementById('formacion').addEventListener('change', cambiarFormacion);
-  
-  // Logout
-  document.getElementById('logoutBtn').addEventListener('click', () => {
-    if (confirm('¿Seguro que querés cerrar sesión?')) {
-      localStorage.removeItem('loggedUser');
-      window.location.href = 'login.html';
+  agregarJugador(jugador) {
+    // Verificar si ya está
+    if (this.tieneJugador(jugador.id)) {
+      return { exito: false, mensaje: 'El jugador ya está en tu equipo' };
     }
-  });
-  
-  console.log('✅ Eventos inicializados');
+    
+    // Verificar presupuesto
+    if (this.presupuestoDisponible < jugador.precio) {
+      return { exito: false, mensaje: 'Presupuesto insuficiente' };
+    }
+    
+    // Verificar total
+    if (this.jugadores.length >= this.TOTAL_JUGADORES) {
+      return { exito: false, mensaje: 'Ya tenés ' + this.TOTAL_JUGADORES + ' jugadores' };
+    }
+    
+    // Verificar límite por posición
+    const cantidad = this.contarPosicion(jugador.posicion);
+    if (cantidad >= this.LIMITES[jugador.posicion]) {
+      return { exito: false, mensaje: 'Límite de ' + this.LIMITES[jugador.posicion] + ' ' + jugador.posicion + 's alcanzado' };
+    }
+    
+    // Agregar
+    this.jugadores.push(jugador);
+    this.presupuestoDisponible -= jugador.precio;
+    
+    return { exito: true };
+  }
+
+  eliminarJugador(idJugador) {
+    for (let i = 0; i < this.jugadores.length; i++) {
+      if (this.jugadores[i].id === idJugador) {
+        const jugador = this.jugadores[i];
+        this.presupuestoDisponible += jugador.precio;
+        
+        // Eliminar del array
+        const nuevoArray = [];
+        for (let j = 0; j < this.jugadores.length; j++) {
+          if (j !== i) {
+            nuevoArray.push(this.jugadores[j]);
+          }
+        }
+        this.jugadores = nuevoArray;
+        
+        return jugador;
+      }
+    }
+    return null;
+  }
+
+  tieneJugador(idJugador) {
+    for (let i = 0; i < this.jugadores.length; i++) {
+      if (this.jugadores[i].id === idJugador) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  contarPosicion(posicion) {
+    let contador = 0;
+    for (let i = 0; i < this.jugadores.length; i++) {
+      if (this.jugadores[i].posicion === posicion) {
+        contador++;
+      }
+    }
+    return contador;
+  }
+
+  contarPorPosicion() {
+    return {
+      arquero: this.contarPosicion('arquero'),
+      defensa: this.contarPosicion('defensa'),
+      mediocampista: this.contarPosicion('mediocampista'),
+      delantero: this.contarPosicion('delantero')
+    };
+  }
+
+  estaCompleto() {
+    if (this.jugadores.length !== this.TOTAL_JUGADORES) {
+      return false;
+    }
+    
+    const contadores = this.contarPorPosicion();
+    
+    return contadores.arquero === this.LIMITES.arquero &&
+           contadores.defensa === this.LIMITES.defensa &&
+           contadores.mediocampista === this.LIMITES.mediocampista &&
+           contadores.delantero === this.LIMITES.delantero;
+  }
+
+  limpiar() {
+    this.jugadores = [];
+    this.presupuestoDisponible = this.presupuestoInicial;
+  }
 }
 
 // ============================================
-// UTILIDADES
+// INICIALIZACIÓN GLOBAL
 // ============================================
-function obtenerEmojiPosicion(posicion) {
-  const emojis = {
-    arquero: '🧤',
-    defensa: '🛡️',
-    mediocampista: '⚙️',
-    delantero: '⚡'
-  };
-  return emojis[posicion] || '⚽';
-}
+let gestor;
 
-function mostrarToast(mensaje, tipo = 'success') {
-  const toast = document.getElementById('toastNotification');
-  const toastMessage = document.getElementById('toastMessage');
-  const bsToast = new bootstrap.Toast(toast);
-  
-  // Colores según tipo
-  const colores = {
-    success: 'bg-success',
-    danger: 'bg-danger',
-    warning: 'bg-warning'
-  };
-  
-  // Remover clases anteriores
-  toast.classList.remove('bg-success', 'bg-danger', 'bg-warning');
-  toast.classList.add(colores[tipo] || 'bg-success');
-  
-  toastMessage.textContent = mensaje;
-  bsToast.show();
-}
-
-// ============================================
-// LOGS DE DEBUG (puedes comentarlos en producción)
-// ============================================
-console.log('📝 seleccion.js cargado');
-console.log('⚙️ Configuración:', {
-  limites: LIMITES,
-  totalJugadores: TOTAL_JUGADORES,
-  formaciones: Object.keys(FORMACIONES)
+document.addEventListener('DOMContentLoaded', () => {
+  gestor = new GestorSeleccion();
 });
+
+console.log('📝 Sistema de selección cargado (versión OOP simplificada)');

@@ -1,6 +1,5 @@
 // ============================================
 // SISTEMA DE SIMULACIÓN DE JORNADAS
-// Sistema completo para generar estadísticas realistas
 // ============================================
 
 class SistemaJornadas {
@@ -17,16 +16,34 @@ class SistemaJornadas {
     if (!historial || historial.length === 0) {
       return 1;
     }
-    // Math.max: Encuentra el valor máximo en un array
-    return Math.max(...historial.map(j => j.numeroJornada)) + 1;
+    
+    // Buscar el número de jornada más alto
+    let maxJornada = 0;
+    for (let i = 0; i < historial.length; i++) {
+      if (historial[i].numeroJornada > maxJornada) {
+        maxJornada = historial[i].numeroJornada;
+      }
+    }
+    return maxJornada + 1;
   }
 
   // ============================================
   // CARGAR HISTORIAL DESDE LOCALSTORAGE
   // ============================================
   cargarHistorial() {
-    const historial = localStorage.getItem('historialJornadas');
-    return historial ? JSON.parse(historial) : [];
+    const historialTexto = localStorage.getItem('historialJornadas');
+    if (!historialTexto) {
+      return [];
+    }
+    
+    try {
+      // Convertir texto a objeto
+      const historial = JSON.parse(historialTexto);
+      return historial;
+    } catch (error) {
+      console.error('Error al cargar historial:', error);
+      return [];
+    }
   }
 
   // ============================================
@@ -35,7 +52,10 @@ class SistemaJornadas {
   guardarHistorial(jornada) {
     const historial = this.cargarHistorial();
     historial.push(jornada);
-    localStorage.setItem('historialJornadas', JSON.stringify(historial));
+    
+    // Convertir objeto a texto
+    const historialTexto = JSON.stringify(historial);
+    localStorage.setItem('historialJornadas', historialTexto);
   }
 
   // ============================================
@@ -49,12 +69,13 @@ class SistemaJornadas {
 
     const resultadosJornada = {
       numeroJornada: this.jornadaActual,
-      fecha: new Date().toISOString(),
+      fecha: new Date().toString(),
       resultados: []
     };
 
     // Simular estadísticas para cada jugador
-    jugadores.forEach(jugador => {
+    for (let i = 0; i < jugadores.length; i++) {
+      const jugador = jugadores[i];
       const stats = this.generarEstadisticas(jugador);
       const puntos = this.calcularPuntos(stats, jugador.posicion);
       
@@ -66,18 +87,20 @@ class SistemaJornadas {
         estadisticas: stats,
         puntos: puntos
       });
-    });
+    }
 
     // Calcular puntos totales
-    resultadosJornada.puntosTotal = resultadosJornada.resultados.reduce(
-      (total, r) => total + r.puntos, 0
-    );
+    let puntosTotal = 0;
+    for (let i = 0; i < resultadosJornada.resultados.length; i++) {
+      puntosTotal = puntosTotal + resultadosJornada.resultados[i].puntos;
+    }
+    resultadosJornada.puntosTotal = puntosTotal;
 
     // Guardar en historial
     this.guardarHistorial(resultadosJornada);
-    this.jornadaActual++;
+    this.jornadaActual = this.jornadaActual + 1;
 
-    console.log(`✅ Jornada ${resultadosJornada.numeroJornada} simulada:`, resultadosJornada);
+    console.log('✅ Jornada simulada:', resultadosJornada.numeroJornada);
     return resultadosJornada;
   }
 
@@ -88,17 +111,16 @@ class SistemaJornadas {
     const base = jugador.puntosPromedio || 7.5;
     const posicion = jugador.posicion;
 
-    switch(posicion) {
-      case 'arquero':
-        return this.statsArquero(base);
-      case 'defensa':
-        return this.statsDefensa(base);
-      case 'mediocampista':
-        return this.statsMediocampista(base);
-      case 'delantero':
-        return this.statsDelantero(base);
-      default:
-        return this.statsGenerico(base);
+    if (posicion === 'arquero') {
+      return this.statsArquero(base);
+    } else if (posicion === 'defensa') {
+      return this.statsDefensa(base);
+    } else if (posicion === 'mediocampista') {
+      return this.statsMediocampista(base);
+    } else if (posicion === 'delantero') {
+      return this.statsDelantero(base);
+    } else {
+      return this.statsGenerico(base);
     }
   }
 
@@ -110,7 +132,7 @@ class SistemaJornadas {
     return {
       atajadas: this.randomWeighted(3, 8, base / 10),
       golesRecibidos: this.randomWeighted(0, 3, (10 - base) / 10),
-      penalesAtajados: this.randomChance(0.05) ? 1 : 0, // 5% chance
+      penalesAtajados: this.randomChance(0.05) ? 1 : 0,
       tarjetasAmarillas: this.randomChance(0.15) ? 1 : 0,
       tarjetasRojas: this.randomChance(0.02) ? 1 : 0
     };
@@ -121,8 +143,8 @@ class SistemaJornadas {
       interceptaciones: this.randomWeighted(2, 6, base / 8),
       despejes: this.randomWeighted(3, 8, base / 8),
       duelos: this.randomWeighted(4, 10, base / 8),
-      goles: this.randomChance(0.08) ? 1 : 0, // 8% chance
-      asistencias: this.randomChance(0.10) ? 1 : 0, // 10% chance
+      goles: this.randomChance(0.08) ? 1 : 0,
+      asistencias: this.randomChance(0.10) ? 1 : 0,
       tarjetasAmarillas: this.randomChance(0.25) ? 1 : 0,
       tarjetasRojas: this.randomChance(0.05) ? 1 : 0
     };
@@ -143,7 +165,7 @@ class SistemaJornadas {
 
   statsDelantero(base) {
     return {
-      goles: this.randomWeighted(0, 3, base / 5),
+goles: this.randomWeighted(0, 3, base / 5),
       asistencias: this.randomWeighted(0, 2, base / 8),
       tiros: this.randomWeighted(2, 7, base / 7),
       tirosAPuerta: this.randomWeighted(1, 5, base / 8),
@@ -169,39 +191,66 @@ class SistemaJornadas {
     let puntos = 5; // Base por jugar
 
     // Puntos comunes
-    if (stats.goles) puntos += stats.goles * 5;
-    if (stats.asistencias) puntos += stats.asistencias * 3;
-    if (stats.tarjetasAmarillas) puntos -= stats.tarjetasAmarillas * 1;
-    if (stats.tarjetasRojas) puntos -= stats.tarjetasRojas * 3;
-
-    // Puntos específicos por posición
-    switch(posicion) {
-      case 'arquero':
-        if (stats.atajadas) puntos += Math.floor(stats.atajadas / 3) * 1;
-        if (stats.golesRecibidos === 0) puntos += 4; // Valla invicta
-        if (stats.golesRecibidos >= 3) puntos -= 2;
-        if (stats.penalesAtajados) puntos += 5;
-        break;
-
-      case 'defensa':
-        if (stats.interceptaciones) puntos += Math.floor(stats.interceptaciones / 2);
-        if (stats.despejes) puntos += Math.floor(stats.despejes / 3);
-        break;
-
-      case 'mediocampista':
-        if (stats.recuperaciones) puntos += Math.floor(stats.recuperaciones / 3);
-        const porcentajePases = stats.pasesCompletos / stats.pases;
-        if (porcentajePases >= 0.85) puntos += 2;
-        break;
-
-      case 'delantero':
-        if (stats.tirosAPuerta) puntos += Math.floor(stats.tirosAPuerta / 2);
-        if (stats.regates >= 3) puntos += 1;
-        break;
+    if (stats.goles) {
+      puntos = puntos + (stats.goles * 5);
+    }
+    if (stats.asistencias) {
+      puntos = puntos + (stats.asistencias * 3);
+    }
+    if (stats.tarjetasAmarillas) {
+      puntos = puntos - (stats.tarjetasAmarillas * 1);
+    }
+    if (stats.tarjetasRojas) {
+      puntos = puntos - (stats.tarjetasRojas * 3);
     }
 
-    // Math.max: Asegura que los puntos no sean negativos
-    return Math.max(0, Math.round(puntos * 10) / 10);
+    // Puntos específicos por posición
+    if (posicion === 'arquero') {
+      if (stats.atajadas) {
+        const puntosAtajadas = Math.floor(stats.atajadas / 3) * 1;
+        puntos = puntos + puntosAtajadas;
+      }
+      if (stats.golesRecibidos === 0) {
+        puntos = puntos + 4; // Valla invicta
+      }
+      if (stats.golesRecibidos >= 3) {
+        puntos = puntos - 2;
+      }
+      if (stats.penalesAtajados) {
+        puntos = puntos + 5;
+      }
+    } else if (posicion === 'defensa') {
+      if (stats.interceptaciones) {
+        puntos = puntos + Math.floor(stats.interceptaciones / 2);
+      }
+      if (stats.despejes) {
+        puntos = puntos + Math.floor(stats.despejes / 3);
+      }
+    } else if (posicion === 'mediocampista') {
+      if (stats.recuperaciones) {
+        puntos = puntos + Math.floor(stats.recuperaciones / 3);
+      }
+      if (stats.pases > 0) {
+        const porcentajePases = stats.pasesCompletos / stats.pases;
+        if (porcentajePases >= 0.85) {
+          puntos = puntos + 2;
+        }
+      }
+    } else if (posicion === 'delantero') {
+      if (stats.tirosAPuerta) {
+        puntos = puntos + Math.floor(stats.tirosAPuerta / 2);
+      }
+      if (stats.regates >= 3) {
+        puntos = puntos + 1;
+      }
+    }
+
+    // Asegurar que los puntos no sean negativos
+    if (puntos < 0) {
+      puntos = 0;
+    }
+
+    return Math.round(puntos * 10) / 10;
   }
 
   // ============================================
@@ -209,14 +258,15 @@ class SistemaJornadas {
   // ============================================
   
   // Número aleatorio ponderado por peso
-  randomWeighted(min, max, weight = 1) {
-    // Math.random: Genera número decimal entre 0 y 1
+  randomWeighted(min, max, weight) {
+    if (!weight) {
+      weight = 1;
+    }
     const rand = Math.random() * weight;
-    // Math.floor: Redondea hacia abajo
     return Math.floor(rand * (max - min + 1)) + min;
   }
 
-  // Chance de que algo ocurra (probabilidad entre 0 y 1)
+  // Chance de que algo ocurra
   randomChance(probability) {
     return Math.random() < probability;
   }
@@ -224,12 +274,17 @@ class SistemaJornadas {
   // ============================================
   // OBTENER HISTORIAL DE JORNADAS
   // ============================================
-  obtenerHistorial(numeroJornada = null) {
+  obtenerHistorial(numeroJornada) {
     const historial = this.cargarHistorial();
     
     if (numeroJornada) {
-      // find: Busca el primer elemento que cumple la condición
-      return historial.find(j => j.numeroJornada === numeroJornada);
+      // Buscar jornada específica
+      for (let i = 0; i < historial.length; i++) {
+        if (historial[i].numeroJornada === numeroJornada) {
+          return historial[i];
+        }
+      }
+      return null;
     }
     
     return historial;
@@ -242,17 +297,28 @@ class SistemaJornadas {
     const historial = this.cargarHistorial();
     const estadisticasJugador = [];
 
-    historial.forEach(jornada => {
-      // find: Busca el resultado del jugador en esa jornada
-      const resultado = jornada.resultados.find(r => r.jugadorId === jugadorId);
-      if (resultado) {
-        estadisticasJugador.push({
-          jornada: jornada.numeroJornada,
-          fecha: jornada.fecha,
-          ...resultado
-        });
+    for (let i = 0; i < historial.length; i++) {
+      const jornada = historial[i];
+      
+      // Buscar el resultado del jugador en esa jornada
+      for (let j = 0; j < jornada.resultados.length; j++) {
+        const resultado = jornada.resultados[j];
+        
+        if (resultado.jugadorId === jugadorId) {
+          estadisticasJugador.push({
+            jornada: jornada.numeroJornada,
+            fecha: jornada.fecha,
+            jugadorId: resultado.jugadorId,
+            nombre: resultado.nombre,
+            posicion: resultado.posicion,
+            equipo: resultado.equipo,
+            estadisticas: resultado.estadisticas,
+            puntos: resultado.puntos
+          });
+          break;
+        }
       }
-    });
+    }
 
     return estadisticasJugador;
   }
@@ -275,11 +341,17 @@ class SistemaJornadas {
       asistenciasTotal: 0
     };
 
-    estadisticas.forEach(stat => {
-      totales.puntosTotal += stat.puntos;
-      if (stat.estadisticas.goles) totales.golesTotal += stat.estadisticas.goles;
-      if (stat.estadisticas.asistencias) totales.asistenciasTotal += stat.estadisticas.asistencias;
-    });
+    for (let i = 0; i < estadisticas.length; i++) {
+      const stat = estadisticas[i];
+      totales.puntosTotal = totales.puntosTotal + stat.puntos;
+      
+      if (stat.estadisticas.goles) {
+        totales.golesTotal = totales.golesTotal + stat.estadisticas.goles;
+      }
+      if (stat.estadisticas.asistencias) {
+        totales.asistenciasTotal = totales.asistenciasTotal + stat.estadisticas.asistencias;
+      }
+    }
 
     totales.puntosPromedio = (totales.puntosTotal / totales.jornadasJugadas).toFixed(2);
 
@@ -302,32 +374,45 @@ class SistemaJornadas {
   obtenerRankingJugadores(jugadores) {
     const ranking = [];
 
-    jugadores.forEach(jugador => {
+    for (let i = 0; i < jugadores.length; i++) {
+      const jugador = jugadores[i];
       const totales = this.calcularTotalesJugador(jugador.id);
+      
       if (totales) {
         ranking.push({
-          ...jugador,
-          ...totales
+          id: jugador.id,
+          nombre: jugador.nombre,
+          posicion: jugador.posicion,
+          equipo: jugador.equipo,
+          jornadasJugadas: totales.jornadasJugadas,
+          puntosTotal: totales.puntosTotal,
+          puntosPromedio: totales.puntosPromedio,
+          golesTotal: totales.golesTotal,
+          asistenciasTotal: totales.asistenciasTotal
         });
       }
-    });
+    }
 
-    // sort: Ordena el array (mayor a menor por puntos totales)
-    ranking.sort((a, b) => b.puntosTotal - a.puntosTotal);
+    // Ordenar por puntos totales (mayor a menor)
+    for (let i = 0; i < ranking.length - 1; i++) {
+      for (let j = 0; j < ranking.length - i - 1; j++) {
+        if (ranking[j].puntosTotal < ranking[j + 1].puntosTotal) {
+          // Intercambiar posiciones
+          const temp = ranking[j];
+          ranking[j] = ranking[j + 1];
+          ranking[j + 1] = temp;
+        }
+      }
+    }
 
     return ranking;
   }
 }
 
 // ============================================
-// EXPORTAR PARA USO GLOBAL
+// HACER DISPONIBLE GLOBALMENTE
 // ============================================
 if (typeof window !== 'undefined') {
   window.SistemaJornadas = SistemaJornadas;
   console.log('✅ SistemaJornadas cargado globalmente');
-}
-
-// Para Node.js
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = SistemaJornadas;
 }
