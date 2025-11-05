@@ -678,4 +678,4 @@ document.addEventListener('DOMContentLoaded', () => {
   gestor = new GestorSeleccion();
 });
 
-console.log('📝 Sistema de selección cargado (versión OOP simplificada)');
+console.log('📝 Sistema de selección cargado ');
