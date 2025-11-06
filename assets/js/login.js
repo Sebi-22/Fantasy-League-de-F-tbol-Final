@@ -1,277 +1,358 @@
-// Usuarios demo (en producción, esto vendría de una API/base de datos)
-const DEMO_USERS = [
-  {
-    email: 'demo@fantasyliga.com',
-    password: 'demo123',
-    name: 'Usuario Demo'
+// ============================================
+// CLASE PARA MANEJAR LOGIN
+// ============================================
+
+class SistemaLogin {
+  constructor() {
+    this.usuariosDemo = [
+      {
+        email: 'demo@fantasyliga.com',
+        password: 'demo123',
+        name: 'Usuario Demo'
+      }
+    ];
   }
-];
 
-// Función para obtener usuarios almacenados
-function getStoredUsers() {
-  const users = localStorage.getItem('fantasyUsers');
-  // JSON.parse: Convierte una cadena JSON en un objeto JS (array aquí)
-  return users ? JSON.parse(users) : DEMO_USERS;
-}
-
-// Función para guardar usuarios
-function saveUsers(users) {
-  // JSON.stringify: Convierte un objeto JS en una cadena JSON
-  localStorage.setItem('fantasyUsers', JSON.stringify(users));
-}
-
-// Función para validar email
-function isValidEmail(email) {
-  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  // test: Verifica si la cadena coincide con la regex, devuelve true/false
-  return regex.test(email);
-}
-
-// Función para mostrar error en campo
-function showFieldError(fieldId, message) {
-  const field = document.getElementById(fieldId);
-  const errorDiv = document.getElementById(`${fieldId}Error`);
-  
-  field.classList.add('is-invalid');
-  if (errorDiv) {
-    errorDiv.textContent = message;
+  // Obtener usuarios guardados
+  obtenerUsuariosGuardados() {
+    const usuariosTexto = localStorage.getItem('fantasyUsers');
+    if (usuariosTexto) {
+      // Convertir texto a array de objetos
+      const usuarios = JSON.parse(usuariosTexto);
+      return usuarios;
+    }
+    return this.usuariosDemo;
   }
-}
 
-// Función para limpiar errores
-function clearFieldError(fieldId) {
-  const field = document.getElementById(fieldId);
-  const errorDiv = document.getElementById(`${fieldId}Error`);
-  
-  field.classList.remove('is-invalid');
-  if (errorDiv) {
-    errorDiv.textContent = '';
+  // Guardar usuarios
+  guardarUsuarios(usuarios) {
+    // Convertir array a texto
+    const usuariosTexto = JSON.stringify(usuarios);
+    localStorage.setItem('fantasyUsers', usuariosTexto);
   }
-}
 
-// Función para mostrar alerta
-function showAlert(message, type = 'danger') {
-  const alert = document.getElementById('loginAlert');
-  alert.className = `alert alert-${type}`;
-  alert.textContent = message;
-  alert.classList.remove('d-none');
-  
-  // Auto-ocultar después de 5 segundos
-  setTimeout(() => {
-    alert.classList.add('d-none');
-  }, 5000);
-}
-
-// Función para toggle de contraseña
-function setupPasswordToggle() {
-  const toggleBtn = document.getElementById('togglePassword');
-  const passwordInput = document.getElementById('password');
-  
-  if (toggleBtn && passwordInput) {
-    toggleBtn.addEventListener('click', () => {
-      const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-      passwordInput.setAttribute('type', type);
-      toggleBtn.textContent = type === 'password' ? '👁️' : '🙈';
-    });
-  }
-}
-
-// Función para manejar el login
-function handleLogin(e) {
-  e.preventDefault();
-  
-  // Limpiar errores previos
-  clearFieldError('email');
-  clearFieldError('password');
-  document.getElementById('loginAlert').classList.add('d-none');
-  
-  // Obtener valores
-  // trim: Elimina espacios al inicio y final de la cadena
-  const email = document.getElementById('email').value.trim();
-  const password = document.getElementById('password').value;
-  const rememberMe = document.getElementById('rememberMe').checked;
-  
-  // Validaciones
-  let hasError = false;
-  
-  if (!email) {
-    showFieldError('email', 'Por favor ingresa tu correo electrónico');
-    hasError = true;
-  } else if (!isValidEmail(email)) {
-    showFieldError('email', 'Por favor ingresa un correo electrónico válido');
-    hasError = true;
-  }
-  
-  if (!password) {
-    showFieldError('password', 'Por favor ingresa tu contraseña');
-    hasError = true;
-  }
-  
-  if (hasError) return;
-  
-  // Mostrar loading
-  const loginBtn = document.getElementById('loginBtn');
-  const loginBtnText = document.getElementById('loginBtnText');
-  const loginBtnSpinner = document.getElementById('loginBtnSpinner');
-  
-  loginBtn.disabled = true;
-  loginBtnText.classList.add('d-none');
-  loginBtnSpinner.classList.remove('d-none');
-  
-  // Simular llamada a API
-  setTimeout(() => {
-    const users = getStoredUsers();
-    // find: Busca el primer elemento del array que cumple la condición
-    const user = users.find(u => u.email === email && u.password === password);
+  // Validar email
+  validarEmail(email) {
+    // Verificar si tiene @ y punto
+    if (email.indexOf('@') === -1) return false;
+    if (email.indexOf('.') === -1) return false;
     
-    if (user) {
-      // Login exitoso
-      const sessionData = {
-        email: user.email,
-        name: user.name || user.username,
-        loggedIn: true,
-        loginTime: new Date().toISOString(),
-        username: user.username
-      };
+    const partes = email.split('@');
+    const antesArroba = partes[0];
+    const despuesArroba = partes[1];
+    
+    if (antesArroba.length === 0) return false;
+    if (!despuesArroba || despuesArroba.length === 0) return false;
+    
+    return true;
+  }
+
+  // Quitar espacios del inicio y final de un texto
+  quitarEspacios(texto) {
+    let inicio = 0;
+    let fin = texto.length - 1;
+    
+    // Buscar primer carácter no espacio
+    while (inicio < texto.length && texto[inicio] === ' ') {
+      inicio = inicio + 1;
+    }
+    
+    // Buscar último carácter no espacio
+    while (fin >= 0 && texto[fin] === ' ') {
+      fin = fin - 1;
+    }
+    
+    // Extraer substring sin espacios
+    let resultado = '';
+    for (let i = inicio; i <= fin; i++) {
+      resultado = resultado + texto[i];
+    }
+    
+    return resultado;
+  }
+
+  // Mostrar error en campo
+  mostrarErrorCampo(campoId, mensaje) {
+    const campo = document.getElementById(campoId);
+    const errorDiv = document.getElementById(campoId + 'Error');
+    
+    campo.classList.add('is-invalid');
+    if (errorDiv) {
+      errorDiv.textContent = mensaje;
+    }
+  }
+
+  // Limpiar error de campo
+  limpiarErrorCampo(campoId) {
+    const campo = document.getElementById(campoId);
+    const errorDiv = document.getElementById(campoId + 'Error');
+    
+    campo.classList.remove('is-invalid');
+    if (errorDiv) {
+      errorDiv.textContent = '';
+    }
+  }
+
+  // Mostrar alerta
+  mostrarAlerta(mensaje, tipo = 'danger') {
+    const alerta = document.getElementById('loginAlert');
+    alerta.className = 'alert alert-' + tipo;
+    alerta.textContent = mensaje;
+    alerta.classList.remove('d-none');
+    
+    const self = this;
+    setTimeout(function() {
+      alerta.classList.add('d-none');
+    }, 5000);
+  }
+
+  // Configurar botón para ver/ocultar contraseña
+  configurarTogglePassword() {
+    const botonToggle = document.getElementById('togglePassword');
+    const inputPassword = document.getElementById('password');
+    
+    if (botonToggle && inputPassword) {
+      botonToggle.addEventListener('click', function() {
+        const tipoActual = inputPassword.getAttribute('type');
+        const nuevoTipo = tipoActual === 'password' ? 'text' : 'password';
+        inputPassword.setAttribute('type', nuevoTipo);
+        botonToggle.textContent = nuevoTipo === 'password' ? '👁️' : '🙈';
+      });
+    }
+  }
+
+  // Manejar el login
+  procesarLogin(evento) {
+    evento.preventDefault();
+    
+    // Limpiar errores previos
+    this.limpiarErrorCampo('email');
+    this.limpiarErrorCampo('password');
+    document.getElementById('loginAlert').classList.add('d-none');
+    
+    // Obtener valores
+    const emailSinLimpiar = document.getElementById('email').value;
+    const email = this.quitarEspacios(emailSinLimpiar);
+    const password = document.getElementById('password').value;
+    const recordarme = document.getElementById('rememberMe').checked;
+    
+    // Validaciones
+    let hayError = false;
+    
+    if (!email || email.length === 0) {
+      this.mostrarErrorCampo('email', 'Por favor ingresa tu correo electrónico');
+      hayError = true;
+    } else if (!this.validarEmail(email)) {
+      this.mostrarErrorCampo('email', 'Por favor ingresa un correo electrónico válido');
+      hayError = true;
+    }
+    
+    if (!password || password.length === 0) {
+      this.mostrarErrorCampo('password', 'Por favor ingresa tu contraseña');
+      hayError = true;
+    }
+    
+    if (hayError) return;
+    
+    // Mostrar loading
+    const botonLogin = document.getElementById('loginBtn');
+    const textoBoton = document.getElementById('loginBtnText');
+    const spinnerBoton = document.getElementById('loginBtnSpinner');
+    
+    botonLogin.disabled = true;
+    textoBoton.classList.add('d-none');
+    spinnerBoton.classList.remove('d-none');
+    
+    // Simular llamada a servidor (asíncrono)
+    const self = this;
+    setTimeout(function() {
+      const usuarios = self.obtenerUsuariosGuardados();
       
-      // Guardar sesión usando el mismo formato que session.js espera
-      if (rememberMe) {
-        // JSON.stringify: Convierte un objeto JS en una cadena JSON
-        localStorage.setItem('fantasySession', JSON.stringify(sessionData));
+      // Buscar usuario que coincida
+      let usuarioEncontrado = null;
+      for (let i = 0; i < usuarios.length; i++) {
+        if (usuarios[i].email === email && usuarios[i].password === password) {
+          usuarioEncontrado = usuarios[i];
+          break;
+        }
+      }
+      
+      if (usuarioEncontrado) {
+        // Login exitoso
+        const fechaActual = new Date();
+        const datosSesion = {
+          email: usuarioEncontrado.email,
+          name: usuarioEncontrado.name || usuarioEncontrado.username,
+          loggedIn: true,
+          loginTime: fechaActual.toString(),
+          username: usuarioEncontrado.username
+        };
+        
+        // Convertir objeto a texto
+        const textoSesion = JSON.stringify(datosSesion);
+        
+        if (recordarme) {
+          localStorage.setItem('fantasySession', textoSesion);
+        } else {
+          sessionStorage.setItem('fantasySession', textoSesion);
+        }
+        
+        // Guardar también el usuario logueado
+        localStorage.setItem('loggedUser', email);
+        
+        self.mostrarAlerta('¡Inicio de sesión exitoso! Redirigiendo...', 'success');
+        
+        setTimeout(function() {
+          window.location.href = 'game.html';
+        }, 1000);
+        
       } else {
-        sessionStorage.setItem('fantasySession', JSON.stringify(sessionData));
+        // Login fallido
+        botonLogin.disabled = false;
+        textoBoton.classList.remove('d-none');
+        spinnerBoton.classList.add('d-none');
+        
+        self.mostrarAlerta('Correo electrónico o contraseña incorrectos. Intenta con: demo@fantasyliga.com / demo123');
       }
-      
-      // Redirigir al dashboard
-      showAlert('¡Inicio de sesión exitoso! Redirigiendo...', 'success');
-      
-      setTimeout(() => {
-        window.location.href = 'game.html';
-      }, 1000);
-      
-    } else {
-      // Login fallido
-      loginBtn.disabled = false;
-      loginBtnText.classList.remove('d-none');
-      loginBtnSpinner.classList.add('d-none');
-      
-      showAlert('Correo electrónico o contraseña incorrectos. Intenta con: demo@fantasyliga.com / demo123');
-    }
-  }, 1500);
-}
-
-// Función para recuperar contraseña
-function handlePasswordRecovery() {
-  // trim: Elimina espacios al inicio y final de la cadena
-  const recoverEmail = document.getElementById('recoverEmail').value.trim();
-  const recoverBtn = document.getElementById('recoverBtn');
-  
-  if (!recoverEmail || !isValidEmail(recoverEmail)) {
-    alert('Por favor ingresa un correo electrónico válido');
-    return;
+    }, 1500);
   }
-  
-  // Simular envío de email
-  recoverBtn.disabled = true;
-  recoverBtn.textContent = 'Enviando...';
-  
-  setTimeout(() => {
-    alert(`Se ha enviado un enlace de recuperación a ${recoverEmail}\n\n(Esta es una versión demo - no se envió un email real)`);
-    recoverBtn.disabled = false;
-    recoverBtn.textContent = 'Enviar enlace';
+
+  // Recuperar contraseña
+  procesarRecuperacion() {
+    const emailRecuperarSinLimpiar = document.getElementById('recoverEmail').value;
+    const emailRecuperar = this.quitarEspacios(emailRecuperarSinLimpiar);
+    const botonRecuperar = document.getElementById('recoverBtn');
     
-    // Cerrar modal
-    // getInstance: Obtiene la instancia del modal de Bootstrap
-    const modal = bootstrap.Modal.getInstance(document.getElementById('forgotPasswordModal'));
-    if (modal) {
-      // hide: Oculta el modal de Bootstrap
-      modal.hide();
+    if (!emailRecuperar || emailRecuperar.length === 0 || !this.validarEmail(emailRecuperar)) {
+      alert('Por favor ingresa un correo electrónico válido');
+      return;
     }
     
-    document.getElementById('recoverEmail').value = '';
-  }, 1500);
-}
-
-// Función para verificar si hay sesión activa
-function checkExistingSession() {
-  const sessionStorage_data = sessionStorage.getItem('fantasySession');
-  const localStorage_data = localStorage.getItem('fantasySession');
-  
-  const session = sessionStorage_data || localStorage_data;
-  
-  if (session) {
-    try {
-      // JSON.parse: Convierte una cadena JSON en un objeto JS
-      const sessionData = JSON.parse(session);
-      if (sessionData.loggedIn) {
-        // Ya hay una sesión activa, redirigir
-        window.location.href = '../game.html';
+    botonRecuperar.disabled = true;
+    botonRecuperar.textContent = 'Enviando...';
+    
+    setTimeout(function() {
+      alert('Se ha enviado un enlace de recuperación a ' + emailRecuperar + '\n\n(Esta es una versión demo - no se envió un email real)');
+      botonRecuperar.disabled = false;
+      botonRecuperar.textContent = 'Enviar enlace';
+      
+      const modalElement = document.getElementById('forgotPasswordModal');
+      const modal = bootstrap.Modal.getInstance(modalElement);
+      if (modal) {
+        modal.hide();
       }
-    } catch (e) {
-      console.error('Error al verificar sesión:', e);
+      
+      document.getElementById('recoverEmail').value = '';
+    }, 1500);
+  }
+
+  // Verificar si ya hay sesión activa
+  verificarSesionExistente() {
+    const sesionStorage = sessionStorage.getItem('fantasySession');
+    const sesionLocal = localStorage.getItem('fantasySession');
+    
+    const sesion = sesionStorage || sesionLocal;
+    
+    if (sesion) {
+      try {
+        const datosSesion = JSON.parse(sesion);
+        if (datosSesion.loggedIn) {
+          window.location.href = 'game.html';
+        }
+      } catch (error) {
+        console.error('Error al verificar sesión:', error);
+      }
+    }
+  }
+
+  // Manejar parámetros de la URL
+  manejarParametrosURL() {
+    const url = window.location.search;
+    if (!url) return;
+    
+    // Extraer parámetros manualmente
+    const parametros = {};
+    const textoSinInterrogacion = url.substring(1);
+    const partes = textoSinInterrogacion.split('&');
+    
+    for (let i = 0; i < partes.length; i++) {
+      const par = partes[i].split('=');
+      if (par.length === 2) {
+        parametros[par[0]] = decodeURIComponent(par[1]);
+      }
+    }
+    
+    if (parametros.email) {
+      const emailInput = document.getElementById('email');
+      if (emailInput) {
+        emailInput.value = parametros.email;
+      }
+    }
+    
+    if (parametros.registered === 'true') {
+      this.mostrarAlerta('¡Registro exitoso! Ahora inicia sesión con tu nueva cuenta', 'success');
+    }
+  }
+
+  // Inicializar sistema
+  inicializar() {
+    // Verificar sesión existente
+    this.verificarSesionExistente();
+    
+    // Manejar parámetros de URL
+    this.manejarParametrosURL();
+    
+    // Setup del formulario
+    const formularioLogin = document.getElementById('loginForm');
+    if (formularioLogin) {
+      const self = this;
+      formularioLogin.addEventListener('submit', function(e) {
+        self.procesarLogin(e);
+      });
+    }
+    
+    // Setup de toggle de contraseña
+    this.configurarTogglePassword();
+    
+    // Setup de recuperación de contraseña
+    const botonRecuperar = document.getElementById('recoverBtn');
+    if (botonRecuperar) {
+      const self = this;
+      botonRecuperar.addEventListener('click', function() {
+        self.procesarRecuperacion();
+      });
+    }
+    
+    // Limpiar errores al escribir
+    const inputEmail = document.getElementById('email');
+    const inputPassword = document.getElementById('password');
+    
+    const self = this;
+    if (inputEmail) {
+      inputEmail.addEventListener('input', function() {
+        self.limpiarErrorCampo('email');
+      });
+    }
+    
+    if (inputPassword) {
+      inputPassword.addEventListener('input', function() {
+        self.limpiarErrorCampo('password');
+      });
+    }
+    
+    // Inicializar usuarios demo si no existen
+    const usuarios = localStorage.getItem('fantasyUsers');
+    if (!usuarios) {
+      this.guardarUsuarios(this.usuariosDemo);
     }
   }
 }
 
-// Función para manejar parámetros de URL
-function handleURLParams() {
-  const urlParams = new URLSearchParams(window.location.search);
-  // get: Obtiene el valor de un parámetro de la URL
-  const email = urlParams.get('email');
-  const registered = urlParams.get('registered');
-  
-  // Si viene desde el registro, pre-llenar el email y mostrar mensaje
-  if (email) {
-    const emailInput = document.getElementById('email');
-    if (emailInput) {
-      emailInput.value = decodeURIComponent(email);
-    }
-  }
-  
-  // Mostrar mensaje de bienvenida si acaba de registrarse
-  if (registered === 'true') {
-    showAlert('¡Registro exitoso! Ahora inicia sesión con tu nueva cuenta', 'success');
-  }
-}
+// ============================================
+// INICIALIZAR CUANDO CARGUE LA PÁGINA
+// ============================================
+const sistemaLogin = new SistemaLogin();
 
-// Inicializar cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', () => {
-  // Verificar sesión existente
-  checkExistingSession();
-  
-  // Manejar parámetros de URL
-  handleURLParams();
-  
-  // Setup del formulario
-  const loginForm = document.getElementById('loginForm');
-  if (loginForm) {
-    loginForm.addEventListener('submit', handleLogin);
-  }
-  
-  // Setup de toggle de contraseña
-  setupPasswordToggle();
-  
-  // Setup de recuperación de contraseña
-  const recoverBtn = document.getElementById('recoverBtn');
-  if (recoverBtn) {
-    recoverBtn.addEventListener('click', handlePasswordRecovery);
-  }
-  
-  // Limpiar errores al escribir
-  const emailInput = document.getElementById('email');
-  const passwordInput = document.getElementById('password');
-  
-  if (emailInput) {
-    emailInput.addEventListener('input', () => clearFieldError('email'));
-  }
-  
-  if (passwordInput) {
-    passwordInput.addEventListener('input', () => clearFieldError('password'));
-  }
-  
-  // Inicializar usuarios demo si no existen
-  const users = localStorage.getItem('fantasyUsers');
-  if (!users) {
-    saveUsers(DEMO_USERS);
-  }
+document.addEventListener('DOMContentLoaded', function() {
+  sistemaLogin.inicializar();
 });
