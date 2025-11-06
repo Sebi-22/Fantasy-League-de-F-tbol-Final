@@ -20,7 +20,7 @@
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   overflow-x: hidden;
   background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
   position: relative;
@@ -74,10 +74,8 @@ html {
   border-radius: 50%;
   background: linear-gradient(45deg, #28a745, #20c997);
   animation: bounce-rotate 1.5s infinite ease-in-out;
-  box-shadow: 
-    0 10px 30px rgba(40, 167, 69, 0.5),
-    0 0 60px rgba(40, 167, 69, 0.3),
-    inset 0 -10px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 10px 30px rgba(40, 167, 69, 0.5),
+    0 0 60px rgba(40, 167, 69, 0.3), inset 0 -10px 20px rgba(0, 0, 0, 0.3);
   position: relative;
 }
 
@@ -91,14 +89,15 @@ html {
 }
 
 @keyframes bounce-rotate {
-  0%, 100% { 
-    transform: translateY(0) scale(1) rotate(0deg); 
+  0%,
+  100% {
+    transform: translateY(0) scale(1) rotate(0deg);
   }
   25% {
     transform: translateY(-40px) scale(0.9) rotate(90deg);
   }
-  50% { 
-    transform: translateY(0) scale(1.1) rotate(180deg); 
+  50% {
+    transform: translateY(0) scale(1.1) rotate(180deg);
   }
   75% {
     transform: translateY(-20px) scale(0.95) rotate(270deg);
@@ -106,8 +105,12 @@ html {
 }
 
 @keyframes spin {
-  from { transform: translate(-50%, -50%) rotate(0deg); }
-  to { transform: translate(-50%, -50%) rotate(360deg); }
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
 }
 
 /* ============================================
@@ -151,13 +154,19 @@ html {
 }
 
 .nav-link::before {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 50%;
   width: 0;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #28a745, #20c997, transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #28a745,
+    #20c997,
+    transparent
+  );
   transition: width 0.4s ease, left 0.4s ease;
   box-shadow: 0 0 10px rgba(40, 167, 69, 0.5);
 }
@@ -200,14 +209,22 @@ html {
 }
 
 .dropdown-item:hover {
-  background: linear-gradient(90deg, rgba(40, 167, 69, 0.2), rgba(32, 201, 151, 0.2)) !important;
+  background: linear-gradient(
+    90deg,
+    rgba(40, 167, 69, 0.2),
+    rgba(32, 201, 151, 0.2)
+  ) !important;
   color: #28a745 !important;
   padding-left: 2rem;
   transform: translateX(5px);
 }
 
 .dropdown-item.active {
-  background: linear-gradient(90deg, rgba(40, 167, 69, 0.3), rgba(32, 201, 151, 0.3)) !important;
+  background: linear-gradient(
+    90deg,
+    rgba(40, 167, 69, 0.3),
+    rgba(32, 201, 151, 0.3)
+  ) !important;
 }
 
 /* ============================================
@@ -221,13 +238,13 @@ html {
 }
 
 .hero-section::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: url('../imagenes/fondo-campo-futbol-gradiente.jpg') center/cover;
+  background: url("../imagenes/fondo-campo-futbol-gradiente.jpg") center/cover;
   opacity: 0.12;
   z-index: 0;
   animation: parallaxZoom 30s ease-in-out infinite alternate;
@@ -235,14 +252,14 @@ html {
 }
 
 @keyframes parallaxZoom {
-  0% { 
-    transform: scale(1) translateX(0); 
+  0% {
+    transform: scale(1) translateX(0);
   }
   50% {
     transform: scale(1.1) translateX(-20px);
   }
-  100% { 
-    transform: scale(1.15) translateX(20px); 
+  100% {
+    transform: scale(1.15) translateX(20px);
   }
 }
 
@@ -252,10 +269,21 @@ html {
   left: 0;
   right: 0;
   bottom: 0;
-  background: 
-    radial-gradient(circle at 30% 50%, rgba(40, 167, 69, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 70% 50%, rgba(32, 201, 151, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at center, transparent 0%, rgba(10, 14, 39, 0.9) 100%);
+  background: radial-gradient(
+      circle at 30% 50%,
+      rgba(40, 167, 69, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 70% 50%,
+      rgba(32, 201, 151, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at center,
+      transparent 0%,
+      rgba(10, 14, 39, 0.9) 100%
+    );
   z-index: 1;
 }
 
@@ -282,11 +310,12 @@ html {
 }
 
 @keyframes badgePulse {
-  0%, 100% { 
+  0%,
+  100% {
     transform: scale(1);
     box-shadow: 0 0 20px rgba(40, 167, 69, 0.4);
   }
-  50% { 
+  50% {
     transform: scale(1.05);
     box-shadow: 0 0 30px rgba(40, 167, 69, 0.6);
   }
@@ -304,8 +333,12 @@ html {
 }
 
 @keyframes gradientFlow {
-  0% { background-position: 0% center; }
-  100% { background-position: 300% center; }
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 300% center;
+  }
 }
 
 /* Botones con efecto ripple y hover 3D */
@@ -319,7 +352,7 @@ html {
 }
 
 .btn::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
@@ -338,9 +371,7 @@ html {
 
 .btn:hover {
   transform: translateY(-4px) scale(1.02);
-  box-shadow: 
-    0 15px 40px rgba(40, 167, 69, 0.4),
-    0 5px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 15px 40px rgba(40, 167, 69, 0.4), 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .btn:active {
@@ -374,13 +405,17 @@ html {
 }
 
 .stat-card::before {
-  content: '';
+  content: "";
   position: absolute;
   top: -50%;
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle, rgba(40, 167, 69, 0.1) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(40, 167, 69, 0.1) 0%,
+    transparent 70%
+  );
   opacity: 0;
   transition: opacity 0.5s ease;
 }
@@ -391,14 +426,28 @@ html {
 }
 
 @keyframes rippleEffect {
-  0% { transform: scale(0); opacity: 1; }
-  100% { transform: scale(1); opacity: 0; }
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
 }
 
-.stat-card:nth-child(1) { animation-delay: 0.1s; }
-.stat-card:nth-child(2) { animation-delay: 0.2s; }
-.stat-card:nth-child(3) { animation-delay: 0.3s; }
-.stat-card:nth-child(4) { animation-delay: 0.4s; }
+.stat-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.stat-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.stat-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.stat-card:nth-child(4) {
+  animation-delay: 0.4s;
+}
 
 @keyframes statFadeIn {
   from {
@@ -415,8 +464,7 @@ html {
   background: rgba(40, 167, 69, 0.08);
   border-color: #28a745;
   transform: translateY(-8px) scale(1.05);
-  box-shadow: 
-    0 20px 40px rgba(40, 167, 69, 0.3),
+  box-shadow: 0 20px 40px rgba(40, 167, 69, 0.3),
     0 0 60px rgba(40, 167, 69, 0.2);
 }
 
@@ -427,8 +475,13 @@ html {
 }
 
 @keyframes numberGlow {
-  0%, 100% { text-shadow: 0 0 20px rgba(40, 167, 69, 0.6); }
-  50% { text-shadow: 0 0 30px rgba(40, 167, 69, 0.9); }
+  0%,
+  100% {
+    text-shadow: 0 0 20px rgba(40, 167, 69, 0.6);
+  }
+  50% {
+    text-shadow: 0 0 30px rgba(40, 167, 69, 0.9);
+  }
 }
 
 /* Scroll indicator animado */
@@ -452,8 +505,13 @@ html {
 }
 
 @keyframes scrollBounce {
-  0%, 100% { transform: translate(-50%, 0); }
-  50% { transform: translate(-50%, -20px); }
+  0%,
+  100% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, -20px);
+  }
 }
 
 /* ============================================
@@ -464,13 +522,13 @@ html {
 }
 
 @keyframes fadeInUp {
-  from { 
-    opacity: 0; 
-    transform: translateY(40px); 
+  from {
+    opacity: 0;
+    transform: translateY(40px);
   }
-  to { 
-    opacity: 1; 
-    transform: translateY(0); 
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -490,9 +548,15 @@ html {
   animation: cardFadeIn 0.8s ease-out backwards;
 }
 
-.feature-card:nth-child(1) { animation-delay: 0.1s; }
-.feature-card:nth-child(2) { animation-delay: 0.2s; }
-.feature-card:nth-child(3) { animation-delay: 0.3s; }
+.feature-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.feature-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.feature-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
 
 @keyframes cardFadeIn {
   from {
@@ -507,13 +571,20 @@ html {
 
 /* Borde superior animado */
 .feature-card::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, transparent, #28a745, #20c997, #28a745, transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #28a745,
+    #20c997,
+    #28a745,
+    transparent
+  );
   transform: scaleX(0);
   transition: transform 0.5s ease;
 }
@@ -524,18 +595,21 @@ html {
 }
 
 @keyframes borderGlow {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
 }
 
 .feature-card:hover {
   background: rgba(40, 167, 69, 0.04);
   border-color: rgba(40, 167, 69, 0.3);
   transform: translateY(-12px) scale(1.02);
-  box-shadow: 
-    0 25px 50px rgba(40, 167, 69, 0.25),
-    0 10px 20px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  box-shadow: 0 25px 50px rgba(40, 167, 69, 0.25),
+    0 10px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 /* Card destacada */
@@ -571,8 +645,13 @@ html {
 }
 
 @keyframes iconFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
 }
 
 /* Número de fondo */
@@ -609,7 +688,7 @@ html {
 }
 
 .feature-list li::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   top: 50%;
@@ -667,8 +746,13 @@ html {
 }
 
 @keyframes iconBounce {
-  0%, 100% { transform: scale(1.3) rotate(15deg); }
-  50% { transform: scale(1.5) rotate(-15deg); }
+  0%,
+  100% {
+    transform: scale(1.3) rotate(15deg);
+  }
+  50% {
+    transform: scale(1.5) rotate(-15deg);
+  }
 }
 
 /* ============================================
@@ -685,35 +769,9 @@ html {
   right: 25px;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, #28a745, #20c997);
   border-radius: 24px;
   opacity: 0.15;
   z-index: 1;
-  animation: floatBackground 4s ease-in-out infinite;
-}
-
-@keyframes floatBackground {
-  0%, 100% { 
-    transform: translateY(0) rotate(0deg); 
-  }
-  50% { 
-    transform: translateY(-25px) rotate(2deg); 
-  }
-}
-
-.feature-image-container img {
-  position: relative;
-  z-index: 2;
-  transition: var(--transition-smooth);
-  border: 2px solid rgba(40, 167, 69, 0.2);
-}
-
-.feature-image-container:hover img {
-  transform: scale(1.03) rotate(-1deg);
-  border-color: rgba(40, 167, 69, 0.5);
-  box-shadow: 
-    0 25px 60px rgba(0, 0, 0, 0.4),
-    0 0 50px rgba(40, 167, 69, 0.2);
 }
 
 /* ============================================
@@ -732,25 +790,33 @@ html {
 }
 
 .cta-box::before {
-  content: '';
+  content: "";
   position: absolute;
   top: -50%;
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle, rgba(40, 167, 69, 0.1) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(40, 167, 69, 0.1) 0%,
+    transparent 70%
+  );
   animation: ctaGlow 8s ease-in-out infinite;
 }
 
 @keyframes ctaGlow {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(20%, 20%); }
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(20%, 20%);
+  }
 }
 
 .cta-box:hover {
   border-color: rgba(40, 167, 69, 0.5);
-  box-shadow: 
-    0 30px 70px rgba(40, 167, 69, 0.25),
+  box-shadow: 0 30px 70px rgba(40, 167, 69, 0.25),
     inset 0 0 100px rgba(40, 167, 69, 0.05);
   transform: scale(1.02);
 }
@@ -761,7 +827,15 @@ html {
 footer {
   background: linear-gradient(180deg, #0f0f0f 0%, #000 100%) !important;
   border-top: 3px solid transparent;
-  border-image: linear-gradient(90deg, transparent, #28a745, #20c997, #28a745, transparent) 1;
+  border-image: linear-gradient(
+      90deg,
+      transparent,
+      #28a745,
+      #20c997,
+      #28a745,
+      transparent
+    )
+    1;
   margin: 0;
   padding: 2.5rem 0;
   position: relative;
@@ -769,19 +843,29 @@ footer {
 }
 
 footer::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: -100%;
   width: 200%;
   height: 3px;
-  background: linear-gradient(90deg, transparent, rgba(40, 167, 69, 0.8), rgba(32, 201, 151, 0.8), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(40, 167, 69, 0.8),
+    rgba(32, 201, 151, 0.8),
+    transparent
+  );
   animation: footerShimmer 4s linear infinite;
 }
 
 @keyframes footerShimmer {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(50%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(50%);
+  }
 }
 
 footer p {
@@ -825,9 +909,7 @@ footer p:hover {
 
 .card:hover {
   transform: translateY(-8px) scale(1.02);
-  box-shadow: 
-    0 20px 40px rgba(40, 167, 69, 0.25),
-    0 5px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 20px 40px rgba(40, 167, 69, 0.25), 0 5px 15px rgba(0, 0, 0, 0.3);
   border-color: rgba(40, 167, 69, 0.3);
 }
 
@@ -853,7 +935,7 @@ footer p:hover {
   .hero-section h1 {
     font-size: 2.5rem;
   }
-  
+
   .hero-section .lead {
     font-size: 1rem;
   }
@@ -920,7 +1002,7 @@ footer p:hover {
 }
 
 .loading::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
@@ -949,8 +1031,12 @@ footer p:hover {
 }
 
 @keyframes skeletonLoading {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }
 
 /* ============================================
@@ -1079,15 +1165,51 @@ footer p:hover {
   }
 }
 
-.particle:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 12s; }
-.particle:nth-child(2) { left: 20%; animation-delay: 2s; animation-duration: 15s; }
-.particle:nth-child(3) { left: 30%; animation-delay: 4s; animation-duration: 18s; }
-.particle:nth-child(4) { left: 40%; animation-delay: 1s; animation-duration: 14s; }
-.particle:nth-child(5) { left: 50%; animation-delay: 3s; animation-duration: 16s; }
-.particle:nth-child(6) { left: 60%; animation-delay: 5s; animation-duration: 13s; }
-.particle:nth-child(7) { left: 70%; animation-delay: 2s; animation-duration: 17s; }
-.particle:nth-child(8) { left: 80%; animation-delay: 4s; animation-duration: 15s; }
-.particle:nth-child(9) { left: 90%; animation-delay: 1s; animation-duration: 19s; }
+.particle:nth-child(1) {
+  left: 10%;
+  animation-delay: 0s;
+  animation-duration: 12s;
+}
+.particle:nth-child(2) {
+  left: 20%;
+  animation-delay: 2s;
+  animation-duration: 15s;
+}
+.particle:nth-child(3) {
+  left: 30%;
+  animation-delay: 4s;
+  animation-duration: 18s;
+}
+.particle:nth-child(4) {
+  left: 40%;
+  animation-delay: 1s;
+  animation-duration: 14s;
+}
+.particle:nth-child(5) {
+  left: 50%;
+  animation-delay: 3s;
+  animation-duration: 16s;
+}
+.particle:nth-child(6) {
+  left: 60%;
+  animation-delay: 5s;
+  animation-duration: 13s;
+}
+.particle:nth-child(7) {
+  left: 70%;
+  animation-delay: 2s;
+  animation-duration: 17s;
+}
+.particle:nth-child(8) {
+  left: 80%;
+  animation-delay: 4s;
+  animation-duration: 15s;
+}
+.particle:nth-child(9) {
+  left: 90%;
+  animation-delay: 1s;
+  animation-duration: 19s;
+}
 
 /* ============================================
    EFECTOS DE HOVER EN IMÁGENES
@@ -1145,25 +1267,20 @@ footer p:hover {
    EFECTOS DE TEXTO
    ============================================ */
 .text-glow {
-  text-shadow: 
-    0 0 10px rgba(40, 167, 69, 0.5),
-    0 0 20px rgba(40, 167, 69, 0.3),
+  text-shadow: 0 0 10px rgba(40, 167, 69, 0.5), 0 0 20px rgba(40, 167, 69, 0.3),
     0 0 30px rgba(40, 167, 69, 0.2);
   animation: textGlowPulse 3s ease-in-out infinite;
 }
 
 @keyframes textGlowPulse {
-  0%, 100% {
-    text-shadow: 
-      0 0 10px rgba(40, 167, 69, 0.5),
-      0 0 20px rgba(40, 167, 69, 0.3),
-      0 0 30px rgba(40, 167, 69, 0.2);
+  0%,
+  100% {
+    text-shadow: 0 0 10px rgba(40, 167, 69, 0.5),
+      0 0 20px rgba(40, 167, 69, 0.3), 0 0 30px rgba(40, 167, 69, 0.2);
   }
   50% {
-    text-shadow: 
-      0 0 20px rgba(40, 167, 69, 0.8),
-      0 0 30px rgba(40, 167, 69, 0.5),
-      0 0 40px rgba(40, 167, 69, 0.3);
+    text-shadow: 0 0 20px rgba(40, 167, 69, 0.8),
+      0 0 30px rgba(40, 167, 69, 0.5), 0 0 40px rgba(40, 167, 69, 0.3);
   }
 }
 
@@ -1175,13 +1292,22 @@ footer p:hover {
 }
 
 @keyframes typing {
-  from { width: 0; }
-  to { width: 100%; }
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
 }
 
 @keyframes blink {
-  from, to { border-color: transparent; }
-  50% { border-color: #28a745; }
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: #28a745;
+  }
 }
 
 /* ============================================
@@ -1194,7 +1320,7 @@ footer p:hover {
 }
 
 .border-glow::before {
-  content: '';
+  content: "";
   position: absolute;
   top: -2px;
   left: -2px;
@@ -1213,8 +1339,13 @@ footer p:hover {
 }
 
 @keyframes borderGlowAnimation {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 /* ============================================
@@ -1224,8 +1355,7 @@ footer p:hover {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.3),
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
@@ -1233,8 +1363,7 @@ footer p:hover {
   background: rgba(40, 167, 69, 0.08);
   backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid rgba(40, 167, 69, 0.2);
-  box-shadow: 
-    0 8px 32px rgba(40, 167, 69, 0.2),
+  box-shadow: 0 8px 32px rgba(40, 167, 69, 0.2),
     inset 0 1px 0 rgba(40, 167, 69, 0.2);
 }
 
@@ -1243,31 +1372,27 @@ footer p:hover {
    ============================================ */
 .neon-text {
   color: #28a745;
-  text-shadow:
-    0 0 5px #28a745,
-    0 0 10px #28a745,
-    0 0 20px #28a745,
-    0 0 40px #20c997,
-    0 0 80px #20c997,
-    0 0 90px #20c997,
-    0 0 100px #20c997,
+  text-shadow: 0 0 5px #28a745, 0 0 10px #28a745, 0 0 20px #28a745,
+    0 0 40px #20c997, 0 0 80px #20c997, 0 0 90px #20c997, 0 0 100px #20c997,
     0 0 150px #20c997;
   animation: neonFlicker 1.5s infinite alternate;
 }
 
 @keyframes neonFlicker {
-  0%, 18%, 22%, 25%, 53%, 57%, 100% {
-    text-shadow:
-      0 0 5px #28a745,
-      0 0 10px #28a745,
-      0 0 20px #28a745,
-      0 0 40px #20c997,
-      0 0 80px #20c997,
-      0 0 90px #20c997,
-      0 0 100px #20c997,
+  0%,
+  18%,
+  22%,
+  25%,
+  53%,
+  57%,
+  100% {
+    text-shadow: 0 0 5px #28a745, 0 0 10px #28a745, 0 0 20px #28a745,
+      0 0 40px #20c997, 0 0 80px #20c997, 0 0 90px #20c997, 0 0 100px #20c997,
       0 0 150px #20c997;
   }
-  20%, 24%, 55% {
+  20%,
+  24%,
+  55% {
     text-shadow: none;
   }
 }
@@ -1298,7 +1423,8 @@ footer p:hover {
 }
 
 @keyframes pulseEffect {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
     transform: scale(1);
   }
@@ -1314,7 +1440,7 @@ footer p:hover {
 
 .pulse-ring::before,
 .pulse-ring::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
@@ -1351,16 +1477,21 @@ footer p:hover {
 }
 
 @keyframes shake {
-  10%, 90% {
+  10%,
+  90% {
     transform: translate3d(-1px, 0, 0);
   }
-  20%, 80% {
+  20%,
+  80% {
     transform: translate3d(2px, 0, 0);
   }
-  30%, 50%, 70% {
+  30%,
+  50%,
+  70% {
     transform: translate3d(-4px, 0, 0);
   }
-  40%, 60% {
+  40%,
+  60% {
     transform: translate3d(4px, 0, 0);
   }
 }
@@ -1425,28 +1556,62 @@ footer p:hover {
 /* ============================================
    UTILIDADES DE ANIMACIÓN
    ============================================ */
-.animate-delay-1 { animation-delay: 0.1s; }
-.animate-delay-2 { animation-delay: 0.2s; }
-.animate-delay-3 { animation-delay: 0.3s; }
-.animate-delay-4 { animation-delay: 0.4s; }
-.animate-delay-5 { animation-delay: 0.5s; }
+.animate-delay-1 {
+  animation-delay: 0.1s;
+}
+.animate-delay-2 {
+  animation-delay: 0.2s;
+}
+.animate-delay-3 {
+  animation-delay: 0.3s;
+}
+.animate-delay-4 {
+  animation-delay: 0.4s;
+}
+.animate-delay-5 {
+  animation-delay: 0.5s;
+}
 
-.animate-duration-fast { animation-duration: 0.3s; }
-.animate-duration-normal { animation-duration: 0.6s; }
-.animate-duration-slow { animation-duration: 1s; }
+.animate-duration-fast {
+  animation-duration: 0.3s;
+}
+.animate-duration-normal {
+  animation-duration: 0.6s;
+}
+.animate-duration-slow {
+  animation-duration: 1s;
+}
 
 /* ============================================
    Z-INDEX LAYERS
    ============================================ */
-.z-background { z-index: 0; }
-.z-base { z-index: 1; }
-.z-content { z-index: 10; }
-.z-dropdown { z-index: 100; }
-.z-sticky { z-index: 500; }
-.z-modal { z-index: 1000; }
-.z-tooltip { z-index: 1500; }
-.z-notification { z-index: 2000; }
-.z-max { z-index: 9999; }
+.z-background {
+  z-index: 0;
+}
+.z-base {
+  z-index: 1;
+}
+.z-content {
+  z-index: 10;
+}
+.z-dropdown {
+  z-index: 100;
+}
+.z-sticky {
+  z-index: 500;
+}
+.z-modal {
+  z-index: 1000;
+}
+.z-tooltip {
+  z-index: 1500;
+}
+.z-notification {
+  z-index: 2000;
+}
+.z-max {
+  z-index: 9999;
+}
 
 /* ============================================
    ESTILOS PARA LOGIN Y SIGNUP
@@ -1469,20 +1634,24 @@ footer p:hover {
 }
 
 .auth-background::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: url('../imagenes/fondo-campo-futbol-gradiente.jpg') center/cover;
+  background: url("../imagenes/fondo-campo-futbol-gradiente.jpg") center/cover;
   opacity: 0.08;
   animation: authZoom 20s ease-in-out infinite alternate;
 }
 
 @keyframes authZoom {
-  0% { transform: scale(1); }
-  100% { transform: scale(1.1); }
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.1);
+  }
 }
 
 .auth-overlay {
@@ -1491,7 +1660,11 @@ footer p:hover {
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(circle at center, transparent 0%, rgba(10, 14, 39, 0.9) 100%);
+  background: radial-gradient(
+    circle at center,
+    transparent 0%,
+    rgba(10, 14, 39, 0.9) 100%
+  );
 }
 
 /* Contenedor */
@@ -1508,8 +1681,7 @@ footer p:hover {
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 30px;
   padding: 3rem;
-  box-shadow: 
-    0 20px 60px rgba(0, 0, 0, 0.5),
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
   animation: authCardFadeIn 0.8s ease-out;
 }
@@ -1633,7 +1805,7 @@ footer p:hover {
 }
 
 .auth-link::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -2px;
   left: 0;
@@ -1664,7 +1836,7 @@ footer p:hover {
 }
 
 .auth-card .btn-success::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
@@ -1715,7 +1887,7 @@ footer p:hover {
 
 .auth-divider::before,
 .auth-divider::after {
-  content: '';
+  content: "";
   flex: 1;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -1949,7 +2121,7 @@ footer p:hover {
 }
 
 .btn-add-player::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
@@ -2214,7 +2386,7 @@ footer p:hover {
 }
 
 #btnGuardarEquipo::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
@@ -2246,11 +2418,21 @@ footer p:hover {
   animation: fadeInUp 0.3s ease backwards;
 }
 
-.table tbody tr:nth-child(1) { animation-delay: 0.05s; }
-.table tbody tr:nth-child(2) { animation-delay: 0.1s; }
-.table tbody tr:nth-child(3) { animation-delay: 0.15s; }
-.table tbody tr:nth-child(4) { animation-delay: 0.2s; }
-.table tbody tr:nth-child(5) { animation-delay: 0.25s; }
+.table tbody tr:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.table tbody tr:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.table tbody tr:nth-child(3) {
+  animation-delay: 0.15s;
+}
+.table tbody tr:nth-child(4) {
+  animation-delay: 0.2s;
+}
+.table tbody tr:nth-child(5) {
+  animation-delay: 0.25s;
+}
 
 /* Mensaje sin resultados */
 #sinResultados {
@@ -2293,8 +2475,12 @@ footer p:hover {
 
 /* Efectos adicionales */
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes fadeInUp {
@@ -2324,7 +2510,7 @@ footer p:hover {
 }
 
 .btn-loading::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 16px;
   height: 16px;
@@ -2339,7 +2525,9 @@ footer p:hover {
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Efecto de brillo en badges */
@@ -2349,13 +2537,18 @@ footer p:hover {
 }
 
 .badge::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
   transition: left 0.5s ease;
 }
 

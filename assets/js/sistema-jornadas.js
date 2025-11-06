@@ -130,7 +130,7 @@ class SistemaJornadas {
   
   statsArquero(base) {
     return {
-      atajadas: this.randomWeighted(3, 8, base / 10),
+      atajadas: this.randomWeighted(1, 10, base / 10),
       golesRecibidos: this.randomWeighted(0, 3, (10 - base) / 10),
       penalesAtajados: this.randomChance(0.05) ? 1 : 0,
       tarjetasAmarillas: this.randomChance(0.15) ? 1 : 0,

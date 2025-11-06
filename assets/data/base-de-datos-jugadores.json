@@ -5,7 +5,7 @@
       "nombre": "Emiliano Martínez",
       "equipo": "Aston Villa",
       "posicion": "arquero",
-      "precio": 8,
+      "precio": 6.4,
       "puntosPromedio": 7.5,
       "nacionalidad": "Argentina",
       "foto": "assets/imagenes/dibu-martinez.jpg"
@@ -15,7 +15,7 @@
       "nombre": "Thibaut Courtois",
       "equipo": "Real Madrid",
       "posicion": "arquero",
-      "precio": 9,
+      "precio": 6.7,
       "puntosPromedio": 8.2,
       "nacionalidad": "Bélgica",
       "foto": "assets/imagenes/Courtoi.jpg"
@@ -25,7 +25,7 @@
       "nombre": "Alisson Becker",
       "equipo": "Liverpool",
       "posicion": "arquero",
-      "precio": 9,
+      "precio": 5,
       "puntosPromedio": 8.0,
       "nacionalidad": "Brasil",
       "foto": "assets/imagenes/Alisson.jpeg"
@@ -35,7 +35,7 @@
       "nombre": "Marc-André ter Stegen",
       "equipo": "Barcelona",
       "posicion": "arquero",
-      "precio": 8,
+      "precio": 3,
       "puntosPromedio": 7.8,
       "nacionalidad": "Alemania",
       "foto": "assets/imagenes/tER Stegen.jpg"
@@ -45,7 +45,7 @@
       "nombre": "Gianluigi Donnarumma",
       "equipo": "Manchester City",
       "posicion": "arquero",
-      "precio": 7,
+      "precio": 6.7,
       "puntosPromedio": 7.3,
       "nacionalidad": "Italia",
       "foto": "assets/imagenes/Donorruma.jpeg"
@@ -55,500 +55,500 @@
       "nombre": "Virgil van Dijk",
       "equipo": "Liverpool",
       "posicion": "defensa",
-      "precio": 12,
+      "precio": 6,
       "puntosPromedio": 8.5,
       "nacionalidad": "Holanda",
-      "foto": "/assets/imagenes/jugadores/vandijk.jpg"
+      "foto": "assets/imagenes/Virgil Van DIGK.jpg"
     },
     {
       "id": 7,
       "nombre": "Rúben Dias",
       "equipo": "Manchester City",
       "posicion": "defensa",
-      "precio": 11,
+      "precio": 4,
       "puntosPromedio": 8.3,
       "nacionalidad": "Portugal",
-      "foto": "/assets/imagenes/jugadores/dias.jpg"
+      "foto": "assets/imagenes/Ruben Diaz.jpg"
     },
     {
       "id": 8,
       "nombre": "Antonio Rüdiger",
       "equipo": "Real Madrid",
       "posicion": "defensa",
-      "precio": 10,
+      "precio": 4,
       "puntosPromedio": 8.0,
       "nacionalidad": "Alemania",
-      "foto": "/assets/imagenes/jugadores/rudiger.jpg"
+      "foto": "assets/imagenes/Rudieger.jpg"
     },
     {
       "id": 9,
       "nombre": "Cristian Romero",
       "equipo": "Tottenham",
       "posicion": "defensa",
-      "precio": 9,
+      "precio": 3,
       "puntosPromedio": 7.8,
       "nacionalidad": "Argentina",
-      "foto": "/assets/imagenes/jugadores/romero.jpg"
+      "foto": "assets/imagenes/Cuti Romero.jpg"
     },
     {
       "id": 10,
       "nombre": "Marquinhos",
       "equipo": "PSG",
       "posicion": "defensa",
-      "precio": 10,
+      "precio": 3,
       "puntosPromedio": 7.9,
       "nacionalidad": "Brasil",
-      "foto": "/assets/imagenes/jugadores/marquinhos.jpg"
+      "foto": "assets/imagenes/Marquihnos.jpeg"
     },
     {
       "id": 11,
       "nombre": "Kyle Walker",
-      "equipo": "Manchester City",
+      "equipo": "Burnley",
       "posicion": "defensa",
-      "precio": 8,
+      "precio": 2,
       "puntosPromedio": 7.5,
       "nacionalidad": "Inglaterra",
-      "foto": "/assets/imagenes/jugadores/walker.jpg"
+      "foto": "assets/imagenes/Kyle Walker.jpeg"
     },
     {
       "id": 12,
       "nombre": "Theo Hernández",
-      "equipo": "AC Milan",
+      "equipo": "Al-Hilal",
       "posicion": "defensa",
-      "precio": 9,
+      "precio": 3,
       "puntosPromedio": 7.7,
       "nacionalidad": "Francia",
-      "foto": "/assets/imagenes/jugadores/theo.jpg"
+      "foto": "assets/imagenes/Theo.jpg"
     },
     {
       "id": 13,
       "nombre": "João Cancelo",
-      "equipo": "Barcelona",
+      "equipo": "Al-Hilal",
       "posicion": "defensa",
-      "precio": 9,
+      "precio": 2.5,
       "puntosPromedio": 7.6,
       "nacionalidad": "Portugal",
-      "foto": "/assets/imagenes/jugadores/cancelo.jpg"
+      "foto": "assets/imagenes/Joao Cancelo.png"
     },
     {
       "id": 14,
       "nombre": "Alphonso Davies",
       "equipo": "Bayern München",
       "posicion": "defensa",
-      "precio": 8,
+      "precio": 3.5,
       "puntosPromedio": 7.4,
       "nacionalidad": "Canadá",
-      "foto": "/assets/imagenes/jugadores/davies.jpg"
+      "foto": "assets/imagenes/Davies.jpeg"
     },
     {
       "id": 15,
       "nombre": "Eder Militão",
       "equipo": "Real Madrid",
       "posicion": "defensa",
-      "precio": 9,
+      "precio": 2.4,
       "puntosPromedio": 7.7,
       "nacionalidad": "Brasil",
-      "foto": "/assets/imagenes/jugadores/militao.jpg"
+      "foto": "assets/imagenes/Militao.png"
     },
     {
       "id": 16,
       "nombre": "Lisandro Martínez",
       "equipo": "Manchester United",
       "posicion": "defensa",
-      "precio": 8,
+      "precio": 1.5,
       "puntosPromedio": 7.5,
       "nacionalidad": "Argentina",
-      "foto": "/assets/imagenes/jugadores/licha.jpg"
+      "foto": "assets/imagenes/Lisandro Martinez.png"
     },
     {
       "id": 17,
       "nombre": "William Saliba",
       "equipo": "Arsenal",
       "posicion": "defensa",
-      "precio": 8,
+      "precio": 3.2,
       "puntosPromedio": 7.6,
       "nacionalidad": "Francia",
-      "foto": "/assets/imagenes/jugadores/saliba.jpg"
+      "foto": "assets/imagenes/Saliba.jpeg"
     },
     {
       "id": 18,
       "nombre": "Ronald Araújo",
       "equipo": "Barcelona",
       "posicion": "defensa",
-      "precio": 8,
+      "precio": 3,
       "puntosPromedio": 7.4,
       "nacionalidad": "Uruguay",
-      "foto": "/assets/imagenes/jugadores/araujo.jpg"
+      "foto": "assets/imagenes/Araujo.jpg"
     },
     {
       "id": 19,
       "nombre": "Jules Koundé",
       "equipo": "Barcelona",
       "posicion": "defensa",
-      "precio": 8,
+      "precio": 3.5,
       "puntosPromedio": 7.5,
       "nacionalidad": "Francia",
-      "foto": "/assets/imagenes/jugadores/kounde.jpg"
+      "foto": "assets/imagenes/Kounde.jpg"
     },
     {
       "id": 20,
       "nombre": "Kevin De Bruyne",
-      "equipo": "Manchester City",
+      "equipo": "Napoli",
       "posicion": "mediocampista",
-      "precio": 15,
+      "precio": 5,
       "puntosPromedio": 9.2,
       "nacionalidad": "Bélgica",
-      "foto": "/assets/imagenes/jugadores/debruyne.jpg"
+      "foto": "assets/imagenes/De bruyne.png"
     },
     {
       "id": 21,
       "nombre": "Jude Bellingham",
       "equipo": "Real Madrid",
       "posicion": "mediocampista",
-      "precio": 14,
+      "precio": 6.5,
       "puntosPromedio": 8.9,
       "nacionalidad": "Inglaterra",
-      "foto": "/assets/imagenes/jugadores/bellingham.jpg"
+      "foto": "assets/imagenes/Jude.jpg"
     },
     {
       "id": 22,
       "nombre": "Bruno Fernandes",
       "equipo": "Manchester United",
       "posicion": "mediocampista",
-      "precio": 12,
+      "precio": 4.8,
       "puntosPromedio": 8.4,
       "nacionalidad": "Portugal",
-      "foto": "/assets/imagenes/jugadores/bruno.jpg"
+      "foto": "assets/imagenes/Bruno.png"
     },
     {
       "id": 23,
       "nombre": "Luka Modrić",
-      "equipo": "Real Madrid",
+      "equipo": "AC Milan",
       "posicion": "mediocampista",
-      "precio": 10,
+      "precio": 3.5,
       "puntosPromedio": 8.0,
       "nacionalidad": "Croacia",
-      "foto": "/assets/imagenes/jugadores/modric.jpg"
+      "foto": "assets/imagenes/Luka.jpg"
     },
     {
       "id": 24,
       "nombre": "Rodri",
       "equipo": "Manchester City",
       "posicion": "mediocampista",
-      "precio": 11,
+      "precio": 4.5,
       "puntosPromedio": 8.3,
       "nacionalidad": "España",
-      "foto": "/assets/imagenes/jugadores/rodri.jpg"
+      "foto": "assets/imagenes/Rodri.jpg"
     },
     {
       "id": 25,
       "nombre": "Federico Valverde",
       "equipo": "Real Madrid",
       "posicion": "mediocampista",
-      "precio": 11,
+      "precio": 5,
       "puntosPromedio": 8.1,
       "nacionalidad": "Uruguay",
-      "foto": "/assets/imagenes/jugadores/valverde.jpg"
+      "foto": "assets/imagenes/Valverde.jpg"
     },
     {
       "id": 26,
       "nombre": "Martin Ødegaard",
       "equipo": "Arsenal",
       "posicion": "mediocampista",
-      "precio": 10,
+      "precio": 3.2,
       "puntosPromedio": 8.0,
       "nacionalidad": "Noruega",
-      "foto": "/assets/imagenes/jugadores/odegaard.jpg"
+      "foto": "assets/imagenes/Martin.jpeg"
     },
     {
       "id": 27,
       "nombre": "Joshua Kimmich",
       "equipo": "Bayern München",
       "posicion": "mediocampista",
-      "precio": 10,
+      "precio": 4,
       "puntosPromedio": 7.9,
       "nacionalidad": "Alemania",
-      "foto": "/assets/imagenes/jugadores/kimmich.jpg"
+      "foto": "assets/imagenes/Kimich.jpg"
     },
     {
       "id": 28,
       "nombre": "Frenkie de Jong",
       "equipo": "Barcelona",
       "posicion": "mediocampista",
-      "precio": 10,
+      "precio": 3.3,
       "puntosPromedio": 7.8,
       "nacionalidad": "Holanda",
-      "foto": "/assets/imagenes/jugadores/dejong.jpg"
+      "foto": "assets/imagenes/De jong.jpg"
     },
     {
       "id": 29,
       "nombre": "Alexis Mac Allister",
       "equipo": "Liverpool",
       "posicion": "mediocampista",
-      "precio": 9,
+      "precio": 3.5,
       "puntosPromedio": 7.6,
       "nacionalidad": "Argentina",
-      "foto": "/assets/imagenes/jugadores/macallister.jpg"
+      "foto": "assets/imagenes/Alexis.jpg"
     },
     {
       "id": 30,
       "nombre": "Bernardo Silva",
       "equipo": "Manchester City",
       "posicion": "mediocampista",
-      "precio": 11,
+      "precio": 2.5,
       "puntosPromedio": 8.2,
       "nacionalidad": "Portugal",
-      "foto": "/assets/imagenes/jugadores/bernardo.jpg"
+      "foto": "assets/imagenes/Bernardo.png"
     },
     {
       "id": 31,
       "nombre": "Declan Rice",
       "equipo": "Arsenal",
       "posicion": "mediocampista",
-      "precio": 10,
+      "precio": 4,
       "puntosPromedio": 7.7,
       "nacionalidad": "Inglaterra",
-      "foto": "/assets/imagenes/jugadores/rice.jpg"
+      "foto": "assets/imagenes/Declan.jpg"
     },
     {
       "id": 32,
       "nombre": "Enzo Fernández",
       "equipo": "Chelsea",
       "posicion": "mediocampista",
-      "precio": 10,
+      "precio": 3.5,
       "puntosPromedio": 7.5,
       "nacionalidad": "Argentina",
-      "foto": "/assets/imagenes/jugadores/enzo.jpg"
+      "foto": "assets/imagenes/enzo-fernandes.jpg"
     },
     {
       "id": 33,
       "nombre": "Aurélien Tchouaméni",
       "equipo": "Real Madrid",
       "posicion": "mediocampista",
-      "precio": 9,
+      "precio": 2.7,
       "puntosPromedio": 7.4,
       "nacionalidad": "Francia",
-      "foto": "/assets/imagenes/jugadores/tchouameni.jpg"
+      "foto": "assets/imagenes/Tchouamnei.jpg"
     },
     {
       "id": 34,
       "nombre": "Casemiro",
       "equipo": "Manchester United",
       "posicion": "mediocampista",
-      "precio": 9,
+      "precio": 1.5,
       "puntosPromedio": 7.6,
       "nacionalidad": "Brasil",
-      "foto": "/assets/imagenes/jugadores/casemiro.jpg"
+      "foto": "assets/imagenes/Casemiro.jpg"
     },
     {
       "id": 35,
       "nombre": "Jamal Musiala",
       "equipo": "Bayern München",
       "posicion": "mediocampista",
-      "precio": 10,
+      "precio": 4,
       "puntosPromedio": 8.1,
       "nacionalidad": "Alemania",
-      "foto": "/assets/imagenes/jugadores/musiala.jpg"
+      "foto": "assets/imagenes/Musiala.jpeg"
     },
     {
       "id": 36,
       "nombre": "Pedri",
       "equipo": "Barcelona",
       "posicion": "mediocampista",
-      "precio": 10,
+      "precio": 7,
       "puntosPromedio": 7.9,
       "nacionalidad": "España",
-      "foto": "/assets/imagenes/jugadores/pedri.jpg"
+      "foto": "assets/imagenes/Pedri.jpeg"
     },
     {
       "id": 37,
       "nombre": "Gavi",
       "equipo": "Barcelona",
       "posicion": "mediocampista",
-      "precio": 9,
+      "precio": 3,
       "puntosPromedio": 7.6,
       "nacionalidad": "España",
-      "foto": "/assets/imagenes/jugadores/gavi.jpg"
+      "foto": "assets/imagenes/Gavi.jpg"
     },
     {
       "id": 38,
       "nombre": "Erling Haaland",
       "equipo": "Manchester City",
       "posicion": "delantero",
-      "precio": 18,
+      "precio": 7,
       "puntosPromedio": 9.8,
       "nacionalidad": "Noruega",
-      "foto": "/assets/imagenes/jugadores/haaland.jpg"
+      "foto": "assets/imagenes/Haaland.jpeg"
     },
     {
       "id": 39,
       "nombre": "Kylian Mbappé",
       "equipo": "Real Madrid",
       "posicion": "delantero",
-      "precio": 18,
+      "precio": 7.2,
       "puntosPromedio": 9.7,
       "nacionalidad": "Francia",
-      "foto": "/assets/imagenes/jugadores/mbappe.jpg"
+      "foto": "assets/imagenes/Mbappe.jpg"
     },
     {
       "id": 40,
       "nombre": "Harry Kane",
       "equipo": "Bayern München",
       "posicion": "delantero",
-      "precio": 16,
+      "precio": 6,
       "puntosPromedio": 9.3,
       "nacionalidad": "Inglaterra",
-      "foto": "/assets/imagenes/jugadores/kane.jpg"
+      "foto": "assets/imagenes/Harry-Kane.jpg"
     },
     {
       "id": 41,
       "nombre": "Robert Lewandowski",
       "equipo": "Barcelona",
       "posicion": "delantero",
-      "precio": 14,
+      "precio": 4.5,
       "puntosPromedio": 8.9,
       "nacionalidad": "Polonia",
-      "foto": "/assets/imagenes/jugadores/lewandowski.jpg"
+      "foto": "assets/imagenes/Lewandowski.png"
     },
     {
       "id": 42,
       "nombre": "Mohamed Salah",
       "equipo": "Liverpool",
       "posicion": "delantero",
-      "precio": 15,
+      "precio": 4,
       "puntosPromedio": 9.1,
       "nacionalidad": "Egipto",
-      "foto": "/assets/imagenes/jugadores/salah.jpg"
+      "foto": "assets/imagenes/Salah.jpg"
     },
     {
       "id": 43,
       "nombre": "Vinícius Jr.",
       "equipo": "Real Madrid",
       "posicion": "delantero",
-      "precio": 16,
+      "precio": 3.5,
       "puntosPromedio": 9.2,
       "nacionalidad": "Brasil",
-      "foto": "/assets/imagenes/jugadores/vinicius.jpg"
+      "foto": "assets/imagenes/Vini.jpeg"
     },
     {
       "id": 44,
       "nombre": "Lautaro Martínez",
       "equipo": "Inter Milan",
       "posicion": "delantero",
-      "precio": 13,
+      "precio": 2.5,
       "puntosPromedio": 8.6,
       "nacionalidad": "Argentina",
-      "foto": "/assets/imagenes/jugadores/lautaro.jpg"
+      "foto": "assets/imagenes/Lautaro.jpeg"
     },
     {
       "id": 45,
       "nombre": "Victor Osimhen",
-      "equipo": "Napoli",
+      "equipo": "Galatasaray",
       "posicion": "delantero",
-      "precio": 14,
+      "precio": 1.8,
       "puntosPromedio": 8.8,
       "nacionalidad": "Nigeria",
-      "foto": "/assets/imagenes/jugadores/osimhen.jpg"
+      "foto": "assets/imagenes/osimhen.jpg"
     },
     {
       "id": 46,
       "nombre": "Bukayo Saka",
       "equipo": "Arsenal",
       "posicion": "delantero",
-      "precio": 12,
+      "precio": 1.9,
       "puntosPromedio": 8.4,
       "nacionalidad": "Inglaterra",
-      "foto": "/assets/imagenes/jugadores/saka.jpg"
+      "foto": "assets/imagenes/Saka.jpeg"
     },
     {
       "id": 47,
       "nombre": "Rafael Leão",
       "equipo": "AC Milan",
       "posicion": "delantero",
-      "precio": 12,
+      "precio": 2.5,
       "puntosPromedio": 8.3,
       "nacionalidad": "Portugal",
-      "foto": "/assets/imagenes/jugadores/leao.jpg"
+      "foto": "assets/imagenes/Leao.jpg"
     },
     {
       "id": 48,
       "nombre": "Phil Foden",
       "equipo": "Manchester City",
       "posicion": "delantero",
-      "precio": 12,
+      "precio": 1,
       "puntosPromedio": 8.5,
       "nacionalidad": "Inglaterra",
-      "foto": "/assets/imagenes/jugadores/foden.jpg"
+      "foto": "assets/imagenes/Foden.jpg"
     },
     {
       "id": 49,
       "nombre": "Julián Álvarez",
       "equipo": "Atlético Madrid",
       "posicion": "delantero",
-      "precio": 11,
+      "precio": 3,
       "puntosPromedio": 8.0,
       "nacionalidad": "Argentina",
-      "foto": "/assets/imagenes/jugadores/julian.jpg"
+      "foto": "assets/imagenes/Julian.jpeg"
     },
     {
       "id": 50,
       "nombre": "Son Heung-min",
-      "equipo": "Tottenham",
+      "equipo": "Los Angeles FC",
       "posicion": "delantero",
-      "precio": 13,
+      "precio": 1.8,
       "puntosPromedio": 8.6,
       "nacionalidad": "Corea del Sur",
-      "foto": "/assets/imagenes/jugadores/son.jpg"
+      "foto": "assets/imagenes/Son.jpeg"
     },
     {
       "id": 51,
       "nombre": "Dusan Vlahović",
       "equipo": "Juventus",
       "posicion": "delantero",
-      "precio": 11,
+      "precio": 1.2,
       "puntosPromedio": 8.1,
       "nacionalidad": "Serbia",
-      "foto": "/assets/imagenes/jugadores/vlahovic.jpg"
+      "foto": "assets/imagenes/Dusan.jpg"
     },
     {
       "id": 52,
       "nombre": "Khvicha Kvaratskhelia",
-      "equipo": "Napoli",
+      "equipo": "PSG",
       "posicion": "delantero",
-      "precio": 11,
+      "precio": 1.5,
       "puntosPromedio": 8.2,
       "nacionalidad": "Georgia",
-      "foto": "/assets/imagenes/jugadores/kvara.jpg"
+      "foto": "assets/imagenes/Kvicha.jpg"
     },
     {
       "id": 53,
       "nombre": "Marcus Rashford",
-      "equipo": "Manchester United",
+      "equipo": "Barcelona",
       "posicion": "delantero",
-      "precio": 11,
+      "precio": 1.1,
       "puntosPromedio": 7.9,
       "nacionalidad": "Inglaterra",
-      "foto": "/assets/imagenes/jugadores/rashford.jpg"
+      "foto": "assets/imagenes/Rashford.jpeg"
     },
     {
       "id": 54,
       "nombre": "Darwin Núñez",
-      "equipo": "Liverpool",
+      "equipo": "Al-Hilal",
       "posicion": "delantero",
-      "precio": 11,
+      "precio": 1,
       "puntosPromedio": 7.8,
       "nacionalidad": "Uruguay",
-      "foto": "/assets/imagenes/jugadores/nunez.jpg"
+      "foto": "assets/imagenes/Darwin.jpg"
     },
     {
       "id": 55,
       "nombre": "Ederson",
-      "equipo": "Manchester City",
+      "equipo": "Fenerbahçe",
       "posicion": "arquero",
-      "precio": 8,
+      "precio": 3,
       "puntosPromedio": 7.7,
       "nacionalidad": "Brasil",
-      "foto": "/assets/imagenes/jugadores/ederson.jpg"
+      "foto": "assets/imagenes/Ederson.jpeg"
     }
   ]
 } 
