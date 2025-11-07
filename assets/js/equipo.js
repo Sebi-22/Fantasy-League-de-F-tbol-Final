@@ -84,7 +84,7 @@ function mostrarMensajeSinEquipo() {
 }
 
 // ============================================
-// MOSTRAR EQUIPO EN LA INTERFAZ
+// MOSTRAR EQUIPO EN LA INTERFAZ (CON FOTOS)
 // ============================================
 function mostrarEquipo() {
   const container = document.getElementById('equipoContainer');
@@ -123,15 +123,30 @@ function mostrarEquipo() {
           <div class="col-md-6 col-lg-4">
             <div class="card bg-dark border-${obtenerColorPosicion(posicion)} h-100">
               <div class="card-body">
+                <!-- FOTO DEL JUGADOR -->
+                <div class="text-center mb-3">
+                  <img 
+                    src="../${jugador.foto}" 
+                    alt="${jugador.nombre}" 
+                    class="img-fluid rounded-circle border border-${obtenerColorPosicion(posicion)} border-3"
+                    style="width: 100px; height: 100px; object-fit: cover;"
+                    onerror="this.src='../assets/imagenes/default-player.png'"
+                  >
+                </div>
+                
                 <div class="d-flex justify-content-between align-items-start mb-2">
                   <h6 class="card-title mb-0">${jugador.nombre}</h6>
                   <span class="badge bg-${obtenerColorPosicion(posicion)}">
                     ${jugador.posicion.substring(0, 3).toUpperCase()}
                   </span>
                 </div>
-                <p class="text-white-50 small mb-2">${jugador.equipo}</p>
+                
+                <p class="text-white-50 small mb-2">
+                  <span class="badge bg-secondary">${jugador.equipo}</span>
+                </p>
+                
                 <div class="d-flex justify-content-between align-items-center">
-                  <span class="text-warning fw-bold">$${jugador.precio}M</span>
+                  <span class="text-warning fw-bold">💰 $${jugador.precio}M</span>
                   ${totales ? `
                     <span class="badge bg-success">
                       ${totales.puntosTotal} pts (${totales.jornadasJugadas}J)
@@ -231,14 +246,30 @@ function mostrarResultadosJornada(resultado) {
   html += '<h6 class="text-success mb-3">⭐ Top 3 Jugadores</h6>';
   ordenados.slice(0, 3).forEach((r, index) => {
     const medalla = ['🥇', '🥈', '🥉'][index];
+    const colorBorde = ['success', 'secondary', 'warning'][index];
+    const jugadorData = miEquipo.jugadores.find(j => j.id === r.jugadorId);
+    
     html += `
-      <div class="card bg-dark border-success mb-2">
+      <div class="card bg-dark border-${colorBorde} mb-2">
         <div class="card-body py-2">
-          <div class="d-flex justify-content-between align-items-center">
-            <span>${medalla} ${r.nombre}</span>
-            <span class="badge bg-success">${r.puntos} pts</span>
+          <div class="d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center gap-2">
+              ${jugadorData && jugadorData.foto ? `
+                <img 
+                  src="../${jugadorData.foto}" 
+                  alt="${r.nombre}" 
+                  class="rounded-circle border border-${colorBorde} border-2"
+                  style="width: 50px; height: 50px; object-fit: cover;"
+                  onerror="this.style.display='none'"
+                >
+              ` : ''}
+              <div>
+                <div class="fw-bold">${medalla} ${r.nombre}</div>
+                <small class="text-white-50">${formatearEstadisticas(r.estadisticas)}</small>
+              </div>
+            </div>
+            <span class="badge bg-${colorBorde} fs-6">${r.puntos} pts</span>
           </div>
-          <small class="text-white-50">${formatearEstadisticas(r.estadisticas)}</small>
         </div>
       </div>
     `;

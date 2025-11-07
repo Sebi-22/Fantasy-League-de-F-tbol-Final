@@ -2438,7 +2438,108 @@ footer p:hover {
 #sinResultados {
   animation: fadeIn 0.5s ease;
 }
+/* ============================================
+   ESTILOS PARA SELECTS OSCUROS
+   ============================================ */
 
+/* Select con fondo oscuro y opciones oscuras */
+.form-select.bg-dark {
+  background-color: #212529 !important;
+  color: #fff !important;
+  border-color: #198754 !important;
+}
+
+.form-select.bg-dark:focus {
+  background-color: #212529 !important;
+  color: #fff !important;
+  border-color: #198754 !important;
+  box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
+}
+
+/* Opciones del select con fondo oscuro */
+.form-select.bg-dark option {
+  background-color: #212529 !important;
+  color: #fff !important;
+}
+
+.form-select.bg-dark option:hover {
+  background-color: #198754 !important;
+  color: #fff !important;
+}
+
+/* ============================================
+   ESTILOS PARA FILAS DE JUGADORES SELECCIONADOS
+   ============================================ */
+
+/* Fila de jugador seleccionado */
+.jugador-seleccionado {
+  background-color: rgba(25, 135, 84, 0.2) !important;
+  border-left: 4px solid #198754 !important;
+  transition: all 0.3s ease;
+}
+
+/* Animación al seleccionar */
+@keyframes seleccionPulse {
+  0% {
+    background-color: rgba(25, 135, 84, 0.1);
+  }
+  50% {
+    background-color: rgba(25, 135, 84, 0.4);
+  }
+  100% {
+    background-color: rgba(25, 135, 84, 0.2);
+  }
+}
+
+.jugador-seleccionado-animado {
+  animation: seleccionPulse 0.6s ease;
+}
+
+/* Hover en filas de tabla */
+.table-hover tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  cursor: pointer;
+}
+
+/* Hover en fila seleccionada */
+.table-hover tbody tr.jugador-seleccionado:hover {
+  background-color: rgba(25, 135, 84, 0.3) !important;
+}
+
+/* Badge de seleccionado */
+.badge.bg-secondary {
+  background-color: #198754 !important;
+  font-weight: 600;
+}
+
+/* ============================================
+   ESTILOS ADICIONALES PARA INPUTS
+   ============================================ */
+
+/* Input de búsqueda */
+.form-control.bg-dark {
+  background-color: #212529 !important;
+  color: #fff !important;
+  border-color: #198754 !important;
+}
+
+.form-control.bg-dark:focus {
+  background-color: #212529 !important;
+  color: #fff !important;
+  border-color: #198754 !important;
+  box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
+}
+
+.form-control.bg-dark::placeholder {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Input group */
+.input-group-text.bg-dark {
+  background-color: #212529 !important;
+  color: #198754 !important;
+  border-color: #198754 !important;
+}
 /* Responsive */
 @media (max-width: 992px) {
   .sticky-top {

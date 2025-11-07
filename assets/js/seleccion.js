@@ -119,6 +119,15 @@ class GestorSeleccion {
       const estaSeleccionado = this.miEquipo.tieneJugador(jugador.id);
       
       const fila = document.createElement('tr');
+      
+      // AGREGAR CLASE SI ESTÁ SELECCIONADO
+      if (estaSeleccionado) {
+        fila.classList.add('jugador-seleccionado');
+      }
+      
+      // Agregar atributo data para identificar la fila
+      fila.setAttribute('data-jugador-id', jugador.id);
+      
       fila.innerHTML = `
         <td>
           <div class="d-flex align-items-center">
@@ -141,7 +150,7 @@ class GestorSeleccion {
         </td>
         <td>
           ${estaSeleccionado 
-            ? '<span class="badge bg-secondary">Seleccionado ✓</span>'
+            ? '<span class="badge badge-seleccionado">Seleccionado ✓</span>'
             : `<button class="btn btn-success btn-sm" onclick="gestor.agregarJugador(${jugador.id})">
                 ➕ Agregar
               </button>`
@@ -164,6 +173,15 @@ class GestorSeleccion {
     const resultado = this.miEquipo.agregarJugador(jugador);
     
     if (resultado.exito) {
+      // Aplicar animación a la fila
+      const fila = document.querySelector(`tr[data-jugador-id="${idJugador}"]`);
+      if (fila) {
+        fila.classList.add('jugador-seleccionado-animado');
+        setTimeout(() => {
+          fila.classList.remove('jugador-seleccionado-animado');
+        }, 600);
+      }
+      
       this.actualizarInterfaz();
       this.mostrarJugadores(this.jugadoresFiltrados);
       this.mostrarToast('✅ ' + jugador.nombre + ' agregado', 'success');
