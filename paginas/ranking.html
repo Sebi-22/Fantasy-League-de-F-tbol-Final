@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ranking | Fantasy League</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body class="bg-dark text-light">
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-black fixed-top shadow-sm">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center fw-bold text-success" href="../index.html">
+        <img src="../assets/imagenes/Logo del juego de Fantasy League.png" alt="Logo" class="logo-img me-2">
+        Fantasy League
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="../index.html">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="seleccion.html">Seleccionar jugadores</a></li>
+          <li class="nav-item"><a class="nav-link" href="equipo.html">Mi equipo</a></li>
+          <li class="nav-item"><a class="nav-link active" href="ranking.html">Ranking</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Más</a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="admin.html">Admin</a></li>
+              <li id="navSession"></li>
+              <li><a class="dropdown-item" href="about.html">Sobre el proyecto</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="container mt-5 pt-5">
+    
+    <!-- Header -->
+    <div class="row mb-4">
+      <div class="col-12">
+        <div class="text-center">
+          <h1 class="text-success fw-bold mb-2">
+            <span class="emoji">🏆</span> Ranking Global
+          </h1>
+          <p class="text-white-50">Tabla de posiciones de todos los equipos</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filtros -->
+    <div class="row mb-4">
+      <div class="col-lg-8 mx-auto">
+        <div class="card bg-dark border-success">
+          <div class="card-body">
+            <div class="row g-3 align-items-end">
+              <div class="col-md-4">
+                <label class="form-label text-white small">Filtrar por usuario:</label>
+                <input 
+                  type="text" 
+                  id="filtroUsuario" 
+                  class="form-control bg-dark text-light border-success" 
+                  placeholder="Buscar usuario..."
+                >
+              </div>
+              <div class="col-md-3">
+                <label class="form-label text-white small">Ordenar por:</label>
+                <select id="ordenarPor" class="form-select bg-dark text-light border-success">
+                  <option value="puntos-desc">Mayor puntuación</option>
+                  <option value="puntos-asc">Menor puntuación</option>
+                  <option value="jornadas-desc">Más jornadas</option>
+                  <option value="nombre">Nombre (A-Z)</option>
+                </select>
+              </div>
+              <div class="col-md-3">
+                <label class="form-label text-white small">Mostrar:</label>
+                <select id="cantidadMostrar" class="form-select bg-dark text-light border-success">
+                  <option value="10">Top 10</option>
+                  <option value="20">Top 20</option>
+                  <option value="50">Top 50</option>
+                  <option value="todos">Todos</option>
+                </select>
+              </div>
+              <div class="col-md-2">
+                <button class="btn btn-outline-warning w-100" id="btnActualizar">
+                  🔄 Actualizar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Estadísticas generales -->
+    <div class="row mb-4">
+      <div class="col-lg-8 mx-auto">
+        <div class="row g-3">
+          <div class="col-md-4">
+            <div class="card bg-dark border-warning text-center">
+              <div class="card-body">
+                <h6 class="text-white-50 small mb-2">Total de Equipos</h6>
+                <h2 class="text-warning fw-bold mb-0" id="totalEquipos">0</h2>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card bg-dark border-info text-center">
+              <div class="card-body">
+                <h6 class="text-white-50 small mb-2">Jornadas Simuladas</h6>
+                <h2 class="text-info fw-bold mb-0" id="totalJornadas">0</h2>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card bg-dark border-success text-center">
+              <div class="card-body">
+                <h6 class="text-white-50 small mb-2">Puntos Totales</h6>
+                <h2 class="text-success fw-bold mb-0" id="puntosTotales">0</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Podio (Top 3) -->
+    <div class="row mb-4" id="podioContainer">
+      <div class="col-lg-8 mx-auto">
+        <div class="card bg-dark border-warning">
+          <div class="card-header bg-warning text-dark fw-bold text-center">
+            🏆 Podio de Campeones
+          </div>
+          <div class="card-body">
+            <div class="row g-3 text-center" id="podio">
+              <!-- Se llena con JS -->
+              <div class="col-12 py-5">
+                <div class="spinner-border text-warning" role="status">
+                  <span class="visually-hidden">Cargando...</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabla de ranking -->
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <div class="card bg-dark border-success">
+          <div class="card-header bg-success text-dark fw-bold d-flex justify-content-between align-items-center">
+            <span>📊 Clasificación General</span>
+            <span class="badge bg-dark" id="cantidadMostrada">0 equipos</span>
+          </div>
+          <div class="card-body p-0">
+            
+            <!-- Loading -->
+            <div id="loadingRanking" class="text-center py-5">
+              <div class="spinner-border text-success" role="status">
+                <span class="visually-hidden">Cargando...</span>
+              </div>
+              <p class="text-white-50 mt-2">Cargando ranking...</p>
+            </div>
+
+            <!-- Tabla -->
+            <div class="table-responsive d-none" id="tablaContainer">
+              <table class="table table-dark table-hover mb-0">
+                <thead class="table-success">
+                  <tr>
+                    <th width="60">Pos.</th>
+                    <th>Usuario</th>
+                    <th class="text-center">Jornadas</th>
+                    <th class="text-end">Puntos</th>
+                    <th class="text-end">Promedio</th>
+                  </tr>
+                </thead>
+                <tbody id="tablaRanking">
+                  <!-- Se llena con JS -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Sin datos -->
+            <div id="sinDatos" class="text-center py-5 d-none">
+              <div class="text-white-50 mb-3" style="font-size: 3rem;">📊</div>
+              <p class="text-white-50">Aún no hay equipos con jornadas simuladas</p>
+              <a href="equipo.html" class="btn btn-success mt-3">
+                🎲 Simular mi primera jornada
+              </a>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Info adicional -->
+        <div class="alert alert-info mt-3">
+          <strong>💡 Cómo funciona:</strong> Los puntos se acumulan cada vez que simulás jornadas. 
+          Cuantas más jornadas juegues y mejores sean tus jugadores, ¡más alto subirás en el ranking!
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="text-center py-4 bg-black mt-5">
+    <p class="text-light mb-0">© 2025 Fantasy League. Todos los derechos reservados ⚽</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/session.js"></script>
+  <script src="../assets/js/ranking.js"></script>
+</body>
+</html>

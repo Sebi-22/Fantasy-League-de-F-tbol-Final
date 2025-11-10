@@ -141,8 +141,12 @@ function mostrarEquipo() {
                   </span>
                 </div>
                 
-                <p class="text-white-50 small mb-2">
+                <div class="text-center mb-2">
                   <span class="badge bg-secondary">${jugador.equipo}</span>
+                </div>
+                
+                <p class="text-center text-white-50 small mb-2 fw-semibold">
+                  ${jugador.nombre}
                 </p>
                 
                 <div class="d-flex justify-content-between align-items-center">
