@@ -32,7 +32,14 @@ function verificarSesion() {
 // CARGAR EQUIPO GUARDADO
 // ============================================
 function cargarEquipo() {
-  const equipoGuardado = localStorage.getItem('miEquipoFantasy');
+  const usuario = localStorage.getItem('loggedUser');
+  const equipoKey = `miEquipoFantasy_${usuario}`;
+  let equipoGuardado = localStorage.getItem(equipoKey);
+  
+  // Si no existe con clave de usuario, intentar con clave global
+  if (!equipoGuardado) {
+    equipoGuardado = localStorage.getItem('miEquipoFantasy');
+  }
   
   if (!equipoGuardado) {
     mostrarMensajeSinEquipo();

@@ -1,11 +1,23 @@
 // ============================================
-// SISTEMA DE SIMULACIÓN DE JORNADAS
+// SISTEMA DE SIMULACIÓN DE JORNADAS (MULTIUSUARIO)
 // ============================================
 
 class SistemaJornadas {
   constructor() {
+    this.usuario = localStorage.getItem('loggedUser');
+    if (!this.usuario) {
+      console.error('No hay usuario logueado');
+      return;
+    }
     this.jornadaActual = this.obtenerJornadaActual();
     this.historialJornadas = this.cargarHistorial();
+  }
+
+  // ============================================
+  // OBTENER CLAVE DE HISTORIAL POR USUARIO
+  // ============================================
+  obtenerClaveHistorial() {
+    return `jornadas_historial_${this.usuario}`;
   }
 
   // ============================================
@@ -28,16 +40,16 @@ class SistemaJornadas {
   }
 
   // ============================================
-  // CARGAR HISTORIAL DESDE LOCALSTORAGE
+  // CARGAR HISTORIAL DESDE LOCALSTORAGE (POR USUARIO)
   // ============================================
   cargarHistorial() {
-    const historialTexto = localStorage.getItem('historialJornadas');
+    const clave = this.obtenerClaveHistorial();
+    const historialTexto = localStorage.getItem(clave);
     if (!historialTexto) {
       return [];
     }
     
     try {
-      // Convertir texto a objeto
       const historial = JSON.parse(historialTexto);
       return historial;
     } catch (error) {
@@ -47,15 +59,15 @@ class SistemaJornadas {
   }
 
   // ============================================
-  // GUARDAR HISTORIAL EN LOCALSTORAGE
+  // GUARDAR HISTORIAL EN LOCALSTORAGE (POR USUARIO)
   // ============================================
   guardarHistorial(jornada) {
     const historial = this.cargarHistorial();
     historial.push(jornada);
     
-    // Convertir objeto a texto
+    const clave = this.obtenerClaveHistorial();
     const historialTexto = JSON.stringify(historial);
-    localStorage.setItem('historialJornadas', historialTexto);
+    localStorage.setItem(clave, historialTexto);
   }
 
   // ============================================
@@ -69,7 +81,8 @@ class SistemaJornadas {
 
     const resultadosJornada = {
       numeroJornada: this.jornadaActual,
-      fecha: new Date().toString(),
+      fecha: new Date().toISOString(),
+      usuario: this.usuario,
       resultados: []
     };
 
@@ -100,7 +113,7 @@ class SistemaJornadas {
     this.guardarHistorial(resultadosJornada);
     this.jornadaActual = this.jornadaActual + 1;
 
-    console.log('✅ Jornada simulada:', resultadosJornada.numeroJornada);
+    console.log(`✅ Jornada ${resultadosJornada.numeroJornada} simulada para ${this.usuario}`);
     return resultadosJornada;
   }
 
@@ -165,7 +178,7 @@ class SistemaJornadas {
 
   statsDelantero(base) {
     return {
-goles: this.randomWeighted(0, 3, base / 5),
+      goles: this.randomWeighted(0, 3, base / 5),
       asistencias: this.randomWeighted(0, 2, base / 8),
       tiros: this.randomWeighted(2, 7, base / 7),
       tirosAPuerta: this.randomWeighted(1, 5, base / 8),
@@ -257,7 +270,6 @@ goles: this.randomWeighted(0, 3, base / 5),
   // UTILIDADES DE ALEATORIEDAD
   // ============================================
   
-  // Número aleatorio ponderado por peso
   randomWeighted(min, max, weight) {
     if (!weight) {
       weight = 1;
@@ -266,7 +278,6 @@ goles: this.randomWeighted(0, 3, base / 5),
     return Math.floor(rand * (max - min + 1)) + min;
   }
 
-  // Chance de que algo ocurra
   randomChance(probability) {
     return Math.random() < probability;
   }
@@ -278,7 +289,6 @@ goles: this.randomWeighted(0, 3, base / 5),
     const historial = this.cargarHistorial();
     
     if (numeroJornada) {
-      // Buscar jornada específica
       for (let i = 0; i < historial.length; i++) {
         if (historial[i].numeroJornada === numeroJornada) {
           return historial[i];
@@ -300,7 +310,6 @@ goles: this.randomWeighted(0, 3, base / 5),
     for (let i = 0; i < historial.length; i++) {
       const jornada = historial[i];
       
-      // Buscar el resultado del jugador en esa jornada
       for (let j = 0; j < jornada.resultados.length; j++) {
         const resultado = jornada.resultados[j];
         
@@ -362,10 +371,11 @@ goles: this.randomWeighted(0, 3, base / 5),
   // RESETEAR HISTORIAL (para testing)
   // ============================================
   resetearHistorial() {
-    localStorage.removeItem('historialJornadas');
+    const clave = this.obtenerClaveHistorial();
+    localStorage.removeItem(clave);
     this.historialJornadas = [];
     this.jornadaActual = 1;
-    console.log('✅ Historial reseteado');
+    console.log('✅ Historial reseteado para', this.usuario);
   }
 
   // ============================================
@@ -397,7 +407,6 @@ goles: this.randomWeighted(0, 3, base / 5),
     for (let i = 0; i < ranking.length - 1; i++) {
       for (let j = 0; j < ranking.length - i - 1; j++) {
         if (ranking[j].puntosTotal < ranking[j + 1].puntosTotal) {
-          // Intercambiar posiciones
           const temp = ranking[j];
           ranking[j] = ranking[j + 1];
           ranking[j + 1] = temp;
@@ -414,5 +423,5 @@ goles: this.randomWeighted(0, 3, base / 5),
 // ============================================
 if (typeof window !== 'undefined') {
   window.SistemaJornadas = SistemaJornadas;
-  console.log('✅ SistemaJornadas cargado globalmente');
+  console.log('✅ SistemaJornadas multiusuario cargado');
 }

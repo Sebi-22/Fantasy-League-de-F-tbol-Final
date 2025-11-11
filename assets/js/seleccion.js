@@ -416,17 +416,21 @@ class GestorSeleccion {
       return;
     }
     
+    const usuario = localStorage.getItem('loggedUser');
     const fecha = new Date();
     const equipoGuardar = {
       jugadores: this.miEquipo.jugadores,
       presupuestoInicial: this.miEquipo.presupuestoInicial,
       presupuestoDisponible: this.miEquipo.presupuestoDisponible,
       formacion: this.miEquipo.formacion,
-      fecha: fecha.getFullYear() + '-' + (fecha.getMonth() + 1) + '-' + fecha.getDate(),
-      usuario: localStorage.getItem('loggedUser')
+      fecha: fecha.toISOString(),
+      usuario: usuario
     };
     
     const textoJSON = this.convertirObjetoATexto(equipoGuardar);
+    // Guardar con clave específica del usuario
+    localStorage.setItem(`miEquipoFantasy_${usuario}`, textoJSON);
+    // También guardar en clave global para compatibilidad
     localStorage.setItem('miEquipoFantasy', textoJSON);
     
     this.mostrarToast('✅ Equipo guardado correctamente', 'success');
@@ -451,7 +455,14 @@ class GestorSeleccion {
   }
 
   cargarEquipoGuardado() {
-    const equipoGuardado = localStorage.getItem('miEquipoFantasy');
+    const usuario = localStorage.getItem('loggedUser');
+    const equipoKey = `miEquipoFantasy_${usuario}`;
+    let equipoGuardado = localStorage.getItem(equipoKey);
+    
+    // Si no existe con clave de usuario, intentar con clave global
+    if (!equipoGuardado) {
+      equipoGuardado = localStorage.getItem('miEquipoFantasy');
+    }
     
     if (equipoGuardado) {
       try {
@@ -467,6 +478,7 @@ class GestorSeleccion {
         }
       } catch (error) {
         console.error('Error al cargar equipo:', error);
+        localStorage.removeItem(equipoKey);
         localStorage.removeItem('miEquipoFantasy');
       }
     }
