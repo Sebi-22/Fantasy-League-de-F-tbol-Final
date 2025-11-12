@@ -184,12 +184,14 @@ html {
 }
 
 /* Dropdown mejorado */
+/* Dropdown mejorado - SIN MOVIMIENTO */
 .dropdown-menu {
   background: rgba(0, 0, 0, 0.95);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(40, 167, 69, 0.2);
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
   animation: dropdownFadeIn 0.3s ease;
+  min-width: 200px; /* Ancho mínimo fijo */
 }
 
 @keyframes dropdownFadeIn {
@@ -206,8 +208,11 @@ html {
 .dropdown-item {
   transition: var(--transition-smooth);
   color: #e0e0e0;
+  position: relative; /* Para el efecto de pseudo-elemento */
+  padding-left: 1rem; /* Padding fijo */
 }
 
+/* Efecto hover SIN cambiar el padding */
 .dropdown-item:hover {
   background: linear-gradient(
     90deg,
@@ -215,8 +220,24 @@ html {
     rgba(32, 201, 151, 0.2)
   ) !important;
   color: #28a745 !important;
-  padding-left: 2rem;
-  transform: translateX(5px);
+  transform: none; /* Elimina el translateX que causa movimiento */
+}
+
+/* Indicador visual en hover (opcional - línea izquierda) */
+.dropdown-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 0;
+  background: #28a745;
+  transition: height 0.3s ease;
+}
+
+.dropdown-item:hover::before {
+  height: 60%;
 }
 
 .dropdown-item.active {
