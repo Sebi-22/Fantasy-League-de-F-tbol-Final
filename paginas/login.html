@@ -18,22 +18,22 @@
   <div class="auth-container">
     <div class="container">
       <div class="row justify-content-center align-items-center min-vh-100">
-        <div class="col-12 col-md-10 col-lg-8 col-xl-6">
+        <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
           
           <!-- Card de login -->
           <div class="auth-card glass fade-in">
             
             <!-- Logo y título -->
             <div class="text-center mb-4">
-              <a href="../index.html" class="auth-logo-link">
-                <img src="../assets/imagenes/Logo del juego de Fantasy League.png" alt="Logo" class="auth-logo mb-3">
+              <a href="../index.html" class="auth-logo-link d-inline-block">
+                <img src="../assets/imagenes/Logo del juego de Fantasy League.png" alt="Logo Fantasy League" class="auth-logo mb-3">
               </a>
-              <h2 class="auth-title text-white fw-bold mb-2">Bienvenido de nuevo</h2>
-              <p class="auth-subtitle text-white-50">Iniciá sesión para continuar con tu equipo</p>
+              <h1 class="auth-title text-white fw-bold mb-2 h2">Bienvenido de nuevo</h1>
+              <p class="auth-subtitle text-white-50 mb-0">Iniciá sesión para continuar con tu equipo</p>
             </div>
 
             <!-- Formulario -->
-            <form id="loginForm" class="auth-form">
+            <form id="loginForm" class="auth-form" novalidate>
               
               <!-- Email -->
               <div class="mb-3">
@@ -49,6 +49,7 @@
                     placeholder="tu@email.com"
                     required
                     autocomplete="email"
+                    aria-describedby="emailError"
                   >
                 </div>
                 <div class="invalid-feedback" id="emailError"></div>
@@ -68,8 +69,9 @@
                     placeholder="••••••••"
                     required
                     autocomplete="current-password"
+                    aria-describedby="passwordError"
                   >
-                  <button class="btn btn-outline-success" type="button" id="togglePassword">
+                  <button class="btn btn-outline-success" type="button" id="togglePassword" aria-label="Mostrar contraseña">
                     👁️
                   </button>
                 </div>
@@ -84,16 +86,16 @@
                     Recordarme
                   </label>
                 </div>
-                <a href="#" class="auth-link small" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal">
+                <button type="button" class="btn btn-link auth-link small p-0 border-0 bg-transparent" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal">
                   ¿Olvidaste tu contraseña?
-                </a>
+                </button>
               </div>
 
               <!-- Botón submit -->
               <button type="submit" class="btn btn-success w-100 py-3 fw-semibold mb-3" id="loginBtn">
                 <span id="loginBtnText">Iniciar sesión</span>
                 <span id="loginBtnSpinner" class="d-none">
-                  <span class="spinner-border spinner-border-sm me-2"></span>
+                  <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
                   Iniciando...
                 </span>
               </button>
@@ -108,27 +110,25 @@
               <span class="text-white-50 small">o continuar con</span>
             </div>
 
-            <!-- Botones sociales (opcional) -->
-            <div class="d-grid gap-2 mb-4">
-              <button class="btn btn-outline-light" type="button" disabled>
+            <!-- Botones sociales -->
+            <div class="d-grid mb-4">
+              <button class="btn btn-outline-light" type="button" disabled aria-label="Iniciar sesión con Google (próximamente)">
                 <span class="me-2">🔵</span> Google (Próximamente)
               </button>
             </div>
 
             <!-- Link a registro -->
-            <div class="text-center">
-              <p class="text-white-50 small mb-0">
-                ¿No tenés cuenta? 
-                <a href="signup.html" class="auth-link fw-semibold">Registrate gratis</a>
-              </p>
-            </div>
+            <p class="text-center text-white-50 small mb-3">
+              ¿No tenés cuenta? 
+              <a href="signup.html" class="auth-link fw-semibold">Registrate gratis</a>
+            </p>
 
             <!-- Volver al inicio -->
-            <div class="text-center mt-3">
+            <p class="text-center mb-0">
               <a href="../index.html" class="auth-link small">
                 ← Volver al inicio
               </a>
-            </div>
+            </p>
 
           </div>
 

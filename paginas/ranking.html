@@ -10,23 +10,33 @@
 <body class="bg-dark text-light">
 
   <!-- NAVBAR -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-black fixed-top shadow-sm">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow">
     <div class="container">
       <a class="navbar-brand d-flex align-items-center fw-bold text-success" href="../index.html">
         <img src="../assets/imagenes/Logo del juego de Fantasy League.png" alt="Logo" class="logo-img me-2">
         Fantasy League
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="../index.html">Inicio</a></li>
-          <li class="nav-item"><a class="nav-link" href="seleccion.html">Seleccionar jugadores</a></li>
-          <li class="nav-item"><a class="nav-link" href="equipo.html">Mi equipo</a></li>
-          <li class="nav-item"><a class="nav-link active" href="ranking.html">Ranking</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="../index.html">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="seleccion.html">Seleccionar jugadores</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="equipo.html">Mi equipo</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="ranking.html">Ranking</a>
+          </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Más</a>
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Más
+            </a>
             <ul class="dropdown-menu dropdown-menu-end">
               <li><a class="dropdown-item" href="admin.html">Admin</a></li>
               <li id="navSession"></li>
@@ -42,34 +52,31 @@
   <main class="container mt-5 pt-5">
     
     <!-- Header -->
-    <div class="row mb-4">
-      <div class="col-12">
-        <div class="text-center">
-          <h1 class="text-success fw-bold mb-2">
-            <span class="emoji">🏆</span> Ranking Global
-          </h1>
-          <p class="text-white-50">Tabla de posiciones de todos los equipos</p>
-        </div>
-      </div>
+    <div class="text-center mb-4">
+      <h1 class="text-success fw-bold mb-2">
+        <span class="emoji">🏆</span> Ranking Global
+      </h1>
+      <p class="text-white-50 mb-0">Tabla de posiciones de todos los equipos</p>
     </div>
 
     <!-- Filtros -->
     <div class="row mb-4">
-      <div class="col-lg-8 mx-auto">
+      <div class="col-12 col-lg-10 col-xl-8 mx-auto">
         <div class="card bg-dark border-success">
           <div class="card-body">
             <div class="row g-3 align-items-end">
-              <div class="col-md-4">
-                <label class="form-label text-white small">Filtrar por usuario:</label>
+              <div class="col-12 col-sm-6 col-md-4">
+                <label for="filtroUsuario" class="form-label text-white-50 small">Filtrar por usuario:</label>
                 <input 
-                  type="text" 
+                  type="search" 
                   id="filtroUsuario" 
                   class="form-control bg-dark text-light border-success" 
                   placeholder="Buscar usuario..."
+                  aria-label="Buscar usuario"
                 >
               </div>
-              <div class="col-md-3">
-                <label class="form-label text-white small">Ordenar por:</label>
+              <div class="col-6 col-sm-6 col-md-3">
+                <label for="ordenarPor" class="form-label text-white-50 small">Ordenar por:</label>
                 <select id="ordenarPor" class="form-select bg-dark text-light border-success">
                   <option value="puntos-desc">Mayor puntuación</option>
                   <option value="puntos-asc">Menor puntuación</option>
@@ -77,8 +84,8 @@
                   <option value="nombre">Nombre (A-Z)</option>
                 </select>
               </div>
-              <div class="col-md-3">
-                <label class="form-label text-white small">Mostrar:</label>
+              <div class="col-6 col-sm-6 col-md-3">
+                <label for="cantidadMostrar" class="form-label text-white-50 small">Mostrar:</label>
                 <select id="cantidadMostrar" class="form-select bg-dark text-light border-success">
                   <option value="10">Top 10</option>
                   <option value="20">Top 20</option>
@@ -86,8 +93,8 @@
                   <option value="todos">Todos</option>
                 </select>
               </div>
-              <div class="col-md-2">
-                <button class="btn btn-outline-warning w-100" id="btnActualizar">
+              <div class="col-12 col-sm-6 col-md-2">
+                <button class="btn btn-outline-warning w-100" id="btnActualizar" type="button">
                   🔄 Actualizar
                 </button>
               </div>
@@ -99,29 +106,29 @@
 
     <!-- Estadísticas generales -->
     <div class="row mb-4">
-      <div class="col-lg-8 mx-auto">
-        <div class="row g-3">
-          <div class="col-md-4">
-            <div class="card bg-dark border-warning text-center">
-              <div class="card-body">
-                <h6 class="text-white-50 small mb-2">Total de Equipos</h6>
-                <h2 class="text-warning fw-bold mb-0" id="totalEquipos">0</h2>
+      <div class="col-12 col-lg-10 col-xl-8 mx-auto">
+        <div class="row row-cols-1 row-cols-sm-3 g-3">
+          <div class="col">
+            <div class="card bg-dark border-warning h-100">
+              <div class="card-body text-center">
+                <h2 class="text-white-50 small mb-2">Total de Equipos</h2>
+                <p class="text-warning fw-bold mb-0 display-6" id="totalEquipos">0</p>
               </div>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="card bg-dark border-info text-center">
-              <div class="card-body">
-                <h6 class="text-white-50 small mb-2">Jornadas Simuladas</h6>
-                <h2 class="text-info fw-bold mb-0" id="totalJornadas">0</h2>
+          <div class="col">
+            <div class="card bg-dark border-info h-100">
+              <div class="card-body text-center">
+                <h2 class="text-white-50 small mb-2">Jornadas Simuladas</h2>
+                <p class="text-info fw-bold mb-0 display-6" id="totalJornadas">0</p>
               </div>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="card bg-dark border-success text-center">
-              <div class="card-body">
-                <h6 class="text-white-50 small mb-2">Puntos Totales</h6>
-                <h2 class="text-success fw-bold mb-0" id="puntosTotales">0</h2>
+          <div class="col">
+            <div class="card bg-dark border-success h-100">
+              <div class="card-body text-center">
+                <h2 class="text-white-50 small mb-2">Puntos Totales</h2>
+                <p class="text-success fw-bold mb-0 display-6" id="puntosTotales">0</p>
               </div>
             </div>
           </div>
@@ -131,14 +138,14 @@
 
     <!-- Podio (Top 3) -->
     <div class="row mb-4" id="podioContainer">
-      <div class="col-lg-8 mx-auto">
+      <div class="col-12 col-lg-10 col-xl-8 mx-auto">
         <div class="card bg-dark border-warning">
           <div class="card-header bg-warning text-dark fw-bold text-center">
             🏆 Podio de Campeones
           </div>
           <div class="card-body">
             <div class="row g-3 text-center" id="podio">
-              <!-- Se llena con JS -->
+              <!-- Loading inicial -->
               <div class="col-12 py-5">
                 <div class="spinner-border text-warning" role="status">
                   <span class="visually-hidden">Cargando...</span>
@@ -152,7 +159,7 @@
 
     <!-- Tabla de ranking -->
     <div class="row">
-      <div class="col-lg-8 mx-auto">
+      <div class="col-12 col-lg-10 col-xl-8 mx-auto">
         <div class="card bg-dark border-success">
           <div class="card-header bg-success text-dark fw-bold d-flex justify-content-between align-items-center">
             <span>📊 Clasificación General</span>
@@ -165,7 +172,7 @@
               <div class="spinner-border text-success" role="status">
                 <span class="visually-hidden">Cargando...</span>
               </div>
-              <p class="text-white-50 mt-2">Cargando ranking...</p>
+              <p class="text-white-50 mt-2 mb-0">Cargando ranking...</p>
             </div>
 
             <!-- Tabla -->
@@ -173,11 +180,11 @@
               <table class="table table-dark table-hover mb-0">
                 <thead class="table-success">
                   <tr>
-                    <th width="60">Pos.</th>
-                    <th>Usuario</th>
-                    <th class="text-center">Jornadas</th>
-                    <th class="text-end">Puntos</th>
-                    <th class="text-end">Promedio</th>
+                    <th scope="col" style="width: 60px">Pos.</th>
+                    <th scope="col">Usuario</th>
+                    <th scope="col" class="text-center">Jornadas</th>
+                    <th scope="col" class="text-end">Puntos</th>
+                    <th scope="col" class="text-end">Promedio</th>
                   </tr>
                 </thead>
                 <tbody id="tablaRanking">
@@ -188,9 +195,9 @@
 
             <!-- Sin datos -->
             <div id="sinDatos" class="text-center py-5 d-none">
-              <div class="text-white-50 mb-3" style="font-size: 3rem;">📊</div>
-              <p class="text-white-50">Aún no hay equipos con jornadas simuladas</p>
-              <a href="equipo.html" class="btn btn-success mt-3">
+              <div class="fs-1 text-white-50 mb-3">📊</div>
+              <p class="text-white-50 mb-3">Aún no hay equipos con jornadas simuladas</p>
+              <a href="equipo.html" class="btn btn-success">
                 🎲 Simular mi primera jornada
               </a>
             </div>
@@ -199,7 +206,7 @@
         </div>
 
         <!-- Info adicional -->
-        <div class="alert alert-info mt-3">
+        <div class="alert alert-info mt-3 mb-0">
           <strong>💡 Cómo funciona:</strong> Los puntos se acumulan cada vez que simulás jornadas. 
           Cuantas más jornadas juegues y mejores sean tus jugadores, ¡más alto subirás en el ranking!
         </div>
@@ -209,8 +216,10 @@
   </main>
 
   <!-- FOOTER -->
-  <footer class="text-center py-4 bg-black mt-5">
-    <p class="text-light mb-0">© 2025 Fantasy League. Todos los derechos reservados ⚽</p>
+  <footer class="text-center py-4 bg-dark border-top border-success border-opacity-25 mt-5">
+    <div class="container">
+      <p class="text-light mb-0">© 2025 Fantasy League. Todos los derechos reservados ⚽</p>
+    </div>
   </footer>
 
   <!-- Scripts -->

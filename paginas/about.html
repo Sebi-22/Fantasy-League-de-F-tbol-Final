@@ -10,27 +10,37 @@
 <body class="bg-dark text-light">
 
   <!-- NAVBAR -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-black fixed-top shadow-sm">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow">
     <div class="container">
       <a class="navbar-brand d-flex align-items-center fw-bold text-success" href="../index.html">
         <img src="../assets/imagenes/Logo del juego de Fantasy League.png" alt="Logo" class="logo-img me-2">
         Fantasy League
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="../index.html">Inicio</a></li>
-          <li class="nav-item"><a class="nav-link" href="seleccion.html">Seleccionar jugadores</a></li>
-          <li class="nav-item"><a class="nav-link" href="equipo.html">Mi equipo</a></li>
-          <li class="nav-item"><a class="nav-link" href="ranking.html">Ranking</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="../index.html">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="seleccion.html">Seleccionar jugadores</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="equipo.html">Mi equipo</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="ranking.html">Ranking</a>
+          </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Más</a>
+            <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Más
+            </a>
             <ul class="dropdown-menu dropdown-menu-end">
               <li><a class="dropdown-item" href="admin.html">Admin</a></li>
               <li id="navSession"></li>
-              <li><a class="dropdown-item active" href="about.html">Sobre el proyecto</a></li>
+              <li><a class="dropdown-item active" aria-current="page" href="about.html">Sobre el proyecto</a></li>
             </ul>
           </li>
         </ul>
@@ -43,11 +53,11 @@
     
     <!-- Header -->
     <div class="row mb-5">
-      <div class="col-lg-8 mx-auto text-center">
+      <div class="col-12 col-lg-8 mx-auto text-center">
         <h1 class="text-success fw-bold mb-3">
           <span class="emoji">⚽</span> Fantasy League
         </h1>
-        <p class="lead text-white-50">
+        <p class="lead text-white-50 mb-0">
           Tu juego de fantasy fútbol donde armás tu equipo soñado y competís contra otros managers
         </p>
       </div>
@@ -55,7 +65,7 @@
 
     <!-- Descripción del proyecto -->
     <div class="row mb-4">
-      <div class="col-lg-8 mx-auto">
+      <div class="col-12 col-lg-8 mx-auto">
         <div class="card bg-dark border-success">
           <div class="card-header bg-success text-dark fw-bold">
             📖 Sobre el Proyecto
@@ -77,18 +87,18 @@
 
     <!-- Características -->
     <div class="row mb-4">
-      <div class="col-lg-8 mx-auto">
+      <div class="col-12 col-lg-8 mx-auto">
         <div class="card bg-dark border-info">
           <div class="card-header bg-info text-dark fw-bold">
             ✨ Características Principales
           </div>
           <div class="card-body">
-            <div class="row g-3">
-              <div class="col-md-6">
-                <div class="d-flex align-items-start">
-                  <div class="emoji me-3 fs-3">🎮</div>
-                  <div>
-                    <h6 class="text-info fw-bold mb-1">Sistema de Selección</h6>
+            <div class="row row-cols-1 row-cols-md-2 g-3">
+              <div class="col">
+                <div class="d-flex align-items-start gap-3">
+                  <div class="emoji fs-3">🎮</div>
+                  <div class="flex-grow-1">
+                    <h2 class="text-info fw-bold mb-1 h6">Sistema de Selección</h2>
                     <p class="text-white-50 small mb-0">
                       Elige 18 jugadores (2 arqueros, 6 defensas, 6 mediocampistas, 4 delanteros) 
                       con un presupuesto de $100M
@@ -96,55 +106,55 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-6">
-                <div class="d-flex align-items-start">
-                  <div class="emoji me-3 fs-3">🎲</div>
-                  <div>
-                    <h6 class="text-info fw-bold mb-1">Simulación de Jornadas</h6>
+              <div class="col">
+                <div class="d-flex align-items-start gap-3">
+                  <div class="emoji fs-3">🎲</div>
+                  <div class="flex-grow-1">
+                    <h2 class="text-info fw-bold mb-1 h6">Simulación de Jornadas</h2>
                     <p class="text-white-50 small mb-0">
                       Simula partidos y obtén puntos según el rendimiento aleatorio de tus jugadores
                     </p>
                   </div>
                 </div>
               </div>
-              <div class="col-md-6">
-                <div class="d-flex align-items-start">
-                  <div class="emoji me-3 fs-3">🏆</div>
-                  <div>
-                    <h6 class="text-info fw-bold mb-1">Ranking Global</h6>
+              <div class="col">
+                <div class="d-flex align-items-start gap-3">
+                  <div class="emoji fs-3">🏆</div>
+                  <div class="flex-grow-1">
+                    <h2 class="text-info fw-bold mb-1 h6">Ranking Global</h2>
                     <p class="text-white-50 small mb-0">
                       Compite contra otros usuarios y sube en la tabla de posiciones
                     </p>
                   </div>
                 </div>
               </div>
-              <div class="col-md-6">
-                <div class="d-flex align-items-start">
-                  <div class="emoji me-3 fs-3">📊</div>
-                  <div>
-                    <h6 class="text-info fw-bold mb-1">Estadísticas Detalladas</h6>
+              <div class="col">
+                <div class="d-flex align-items-start gap-3">
+                  <div class="emoji fs-3">📊</div>
+                  <div class="flex-grow-1">
+                    <h2 class="text-info fw-bold mb-1 h6">Estadísticas Detalladas</h2>
                     <p class="text-white-50 small mb-0">
                       Visualiza goles, asistencias, tarjetas y más de cada jugador
                     </p>
                   </div>
                 </div>
               </div>
-              <div class="col-md-6">
-                <div class="d-flex align-items-start">
-                  <div class="emoji me-3 fs-3">🔍</div>
-                  <div>
-                    <h6 class="text-info fw-bold mb-1">Filtros Avanzados</h6>
+              <div class="col">
+                <div class="d-flex align-items-start gap-3">
+                  <div class="emoji fs-3">🔍</div>
+                  <div class="flex-grow-1">
+                    <h2 class="text-info fw-bold mb-1 h6">Filtros Avanzados</h2>
                     <p class="text-white-50 small mb-0">
                       Busca jugadores por nombre, equipo, posición y precio
                     </p>
                   </div>
                 </div>
               </div>
-              <div class="col-md-6">
-                <div class="d-flex align-items-start">
-                  <div class="emoji me-3 fs-3">💾</div>
-                  <div>
-                    <h6 class="text-info fw-bold mb-1">Sistema de Guardado</h6>
+              <div class="col">
+                <div class="d-flex align-items-start gap-3">
+                  <div class="emoji fs-3">💾</div>
+                  <div class="flex-grow-1">
+                    <h2 class="text-info fw-bold mb-1 h6">Sistema de Guardado</h2>
                     <p class="text-white-50 small mb-0">
                       Guarda tu equipo y progreso en el navegador con localStorage
                     </p>
@@ -159,43 +169,43 @@
 
     <!-- Tecnologías -->
     <div class="row mb-4">
-      <div class="col-lg-8 mx-auto">
+      <div class="col-12 col-lg-8 mx-auto">
         <div class="card bg-dark border-warning">
           <div class="card-header bg-warning text-dark fw-bold">
             🛠️ Tecnologías Utilizadas
           </div>
           <div class="card-body">
-            <div class="row g-3 text-center">
-              <div class="col-6 col-md-3">
+            <div class="row row-cols-2 row-cols-md-4 g-3 text-center">
+              <div class="col">
                 <div class="tech-badge">
                   <div class="emoji fs-2 mb-2">📄</div>
-                  <h6 class="text-warning mb-1">HTML5</h6>
+                  <h2 class="text-warning mb-1 h6">HTML5</h2>
                   <small class="text-white-50">Estructura</small>
                 </div>
               </div>
-              <div class="col-6 col-md-3">
+              <div class="col">
                 <div class="tech-badge">
                   <div class="emoji fs-2 mb-2">🎨</div>
-                  <h6 class="text-warning mb-1">CSS3</h6>
+                  <h2 class="text-warning mb-1 h6">CSS3</h2>
                   <small class="text-white-50">Estilos</small>
                 </div>
               </div>
-              <div class="col-6 col-md-3">
+              <div class="col">
                 <div class="tech-badge">
                   <div class="emoji fs-2 mb-2">⚡</div>
-                  <h6 class="text-warning mb-1">JavaScript</h6>
+                  <h2 class="text-warning mb-1 h6">JavaScript</h2>
                   <small class="text-white-50">Lógica</small>
                 </div>
               </div>
-              <div class="col-6 col-md-3">
+              <div class="col">
                 <div class="tech-badge">
                   <div class="emoji fs-2 mb-2">🅱️</div>
-                  <h6 class="text-warning mb-1">Bootstrap 5</h6>
+                  <h2 class="text-warning mb-1 h6">Bootstrap 5</h2>
                   <small class="text-white-50">Framework</small>
                 </div>
               </div>
             </div>
-            <hr class="border-warning my-4">
+            <hr class="border-warning border-opacity-25 my-4">
             <div class="text-center">
               <p class="text-white-50 small mb-2">
                 <strong>Almacenamiento:</strong> localStorage para guardar equipos, usuarios y jornadas
@@ -211,13 +221,13 @@
 
     <!-- Cómo jugar -->
     <div class="row mb-4">
-      <div class="col-lg-8 mx-auto">
+      <div class="col-12 col-lg-8 mx-auto">
         <div class="card bg-dark border-success">
           <div class="card-header bg-success text-dark fw-bold">
             🎯 Cómo Jugar
           </div>
           <div class="card-body">
-            <ol class="text-light ps-4">
+            <ol class="text-light ps-4 mb-0">
               <li class="mb-3">
                 <strong>Regístrate o inicia sesión</strong> con tu usuario
               </li>
@@ -244,18 +254,18 @@
 
     <!-- Sistema de puntos -->
     <div class="row mb-4">
-      <div class="col-lg-8 mx-auto">
+      <div class="col-12 col-lg-8 mx-auto">
         <div class="card bg-dark border-danger">
           <div class="card-header bg-danger text-dark fw-bold">
             ⚽ Sistema de Puntuación
           </div>
           <div class="card-body">
             <div class="table-responsive">
-              <table class="table table-dark table-sm">
+              <table class="table table-dark table-sm mb-0">
                 <thead>
                   <tr>
-                    <th>Acción</th>
-                    <th class="text-end">Puntos</th>
+                    <th scope="col">Acción</th>
+                    <th scope="col" class="text-end">Puntos</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -305,20 +315,20 @@
 
     <!-- Créditos -->
     <div class="row mb-4">
-      <div class="col-lg-8 mx-auto">
+      <div class="col-12 col-lg-8 mx-auto">
         <div class="card bg-dark border-secondary">
           <div class="card-header bg-secondary text-dark fw-bold">
             👨‍💻 Créditos
           </div>
           <div class="card-body text-center">
             <p class="text-light mb-3">
-              Proyecto desarrollado para el curso de <strong>Programación de Segundo </strong>
+              Proyecto desarrollado para el curso de <strong>Programación de Segundo</strong>
             </p>
             <p class="text-white-50 small mb-3">
               Incluye sistema de autenticación, gestión de equipos, simulación de jornadas, 
               ranking global y panel de administración.
             </p>
-            <div class="d-flex justify-content-center gap-3 flex-wrap">
+            <div class="d-flex flex-column flex-sm-row justify-content-center gap-3">
               <a href="../index.html" class="btn btn-success">
                 🏠 Volver al inicio
               </a>
@@ -334,8 +344,10 @@
   </main>
 
   <!-- FOOTER -->
-  <footer class="text-center py-4 bg-black mt-5">
-    <p class="text-light mb-0">© 2025 Fantasy League. Todos los derechos reservados ⚽</p>
+  <footer class="text-center py-4 bg-dark border-top border-success border-opacity-25 mt-5">
+    <div class="container">
+      <p class="text-light mb-0">© 2025 Fantasy League. Todos los derechos reservados ⚽</p>
+    </div>
   </footer>
 
   <!-- Scripts -->

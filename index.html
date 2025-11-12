@@ -17,27 +17,37 @@
   </div>
 
   <!-- NAVBAR -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-black fixed-top shadow-sm">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow">
     <div class="container">
       <a class="navbar-brand d-flex align-items-center fw-bold text-success" href="index.html">
         <img src="assets/imagenes/Logo del juego de Fantasy League.png" alt="Logo" class="logo-img me-2">
         Fantasy League
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link active" href="index.html">Inicio</a></li>
-          <li class="nav-item"><a class="nav-link" href="/paginas/seleccion.html">Seleccionar jugadores</a></li>
-          <li class="nav-item"><a class="nav-link" href="/paginas/equipo.html">Mi equipo</a></li>
-          <li class="nav-item"><a class="nav-link" href="/paginas/ranking.html">Ranking</a></li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="index.html">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="paginas/seleccion.html">Seleccionar jugadores</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="paginas/equipo.html">Mi equipo</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="paginas/ranking.html">Ranking</a>
+          </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Más</a>
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Más
+            </a>
             <ul class="dropdown-menu dropdown-menu-end">  
-              <li><a class="dropdown-item" href="/paginas/admin.html">Admin</a></li>
+              <li><a class="dropdown-item" href="paginas/admin.html">Admin</a></li>
               <li id="navSession"></li>
-              <li><a class="dropdown-item" href="/paginas/about.html">Sobre el proyecto</a></li>
+              <li><a class="dropdown-item" href="paginas/about.html">Sobre el proyecto</a></li>
             </ul>
           </li>
         </ul>
@@ -49,17 +59,18 @@
   <section class="hero-section d-flex align-items-center min-vh-100 position-relative">
     <div class="hero-overlay"></div>
     
-    <div class="container position-relative" style="z-index: 2; padding-top: 80px;">
+    <div class="container position-relative z-2 pt-5">
       <div class="row justify-content-center">
         <div class="col-12 col-lg-10 col-xl-9">
           <div class="text-center fade-in">
+            
             <!-- Badge -->
             <div class="mb-4">
-              <span class="badge bg-success fs-6 px-4 py-2">🏆 Temporada 2025</span>
+              <span class="badge bg-success fs-6 px-4 py-2 rounded-pill">🏆 Temporada 2025</span>
             </div>
 
             <!-- Título -->
-            <h1 class="display-3 display-md-2 fw-bold text-white mb-3">
+            <h1 class="display-2 display-md-1 fw-bold text-white mb-3">
               Fantasy League
               <span class="text-gradient d-block">de Fútbol</span>
             </h1>
@@ -67,7 +78,7 @@
             <!-- Descripción -->
             <div class="row justify-content-center mb-4">
               <div class="col-12 col-md-10 col-lg-8">
-                <p class="lead text-white-50 mb-0">
+                <p class="lead text-white-50 mb-0 lh-lg">
                   Armá tu equipo soñado con los mejores jugadores del mundo. 
                   Competí con amigos y convertite en el campeón.
                 </p>
@@ -75,139 +86,135 @@
             </div>
 
             <!-- Botones -->
-            <div class="row justify-content-center mb-5">
-              <div class="col-12 col-sm-auto mb-3 mb-sm-0">
-                <a href="paginas/login.html" class="btn btn-success btn-lg px-5 py-3 fw-semibold shadow-lg w-100">
-                  ⚽ Comenzar a jugar
-                </a>
-              </div>
-              <div class="col-12 col-sm-auto">
-                <a href="#como-funciona" class="btn btn-outline-light btn-lg px-5 py-3 w-100">
-                  Ver cómo funciona
-                </a>
-              </div>
+            <div class="d-flex flex-column flex-sm-row justify-content-center gap-3 mb-5">
+              <a href="paginas/login.html" class="btn btn-success btn-lg px-5 py-3 fw-semibold shadow-lg">
+                ⚽ Comenzar a jugar
+              </a>
+              <a href="#como-funciona" class="btn btn-outline-light btn-lg px-5 py-3">
+                Ver cómo funciona
+              </a>
             </div>
 
-            <!-- Estadísticas en grilla -->
-            <div class="row g-3 g-md-4 mt-4">
-              <div class="col-6 col-lg-3">
+            <!-- Estadísticas -->
+            <div class="row row-cols-2 row-cols-lg-4 g-3 g-md-4 mt-4">
+              <div class="col">
                 <div class="stat-card">
-                  <h3 class="text-success fw-bold mb-1">55+</h3>
+                  <h3 class="text-success fw-bold mb-1 display-6">55+</h3>
                   <p class="text-white-50 small mb-0">Jugadores</p>
                 </div>
               </div>
-              <div class="col-6 col-lg-3">
+              <div class="col">
                 <div class="stat-card">
-                  <h3 class="text-success fw-bold mb-1">$100M</h3>
+                  <h3 class="text-success fw-bold mb-1 display-6">$100M</h3>
                   <p class="text-white-50 small mb-0">Presupuesto</p>
                 </div>
               </div>
-              <div class="col-6 col-lg-3">
+              <div class="col">
                 <div class="stat-card">
-                  <h3 class="text-success fw-bold mb-1">11</h3>
+                  <h3 class="text-success fw-bold mb-1 display-6">11</h3>
                   <p class="text-white-50 small mb-0">Titulares</p>
                 </div>
               </div>
-              <div class="col-6 col-lg-3">
+              <div class="col">
                 <div class="stat-card">
-                  <h3 class="text-success fw-bold mb-1">Elección</h3>
+                  <h3 class="text-success fw-bold mb-1 display-6">Libre</h3>
                   <p class="text-white-50 small mb-0">Formación</p>
                 </div>
               </div>
             </div>
+
           </div>
         </div>
       </div>
     </div>
-
- 
   </section>
 
   <!-- CÓMO FUNCIONA -->
   <section id="como-funciona" class="py-5 py-lg-6">
     <div class="container">
+      
       <!-- Encabezado -->
       <div class="row justify-content-center mb-5">
         <div class="col-12 col-lg-8 text-center">
-          <span class="badge bg-success-subtle text-success mb-3 px-4 py-2">Instrucciones</span>
-          <h2 class="display-5 display-md-4 fw-bold text-white mb-3">¿Cómo funciona?</h2>
-          <p class="text-white-50 mb-0">
+          <span class="badge bg-success-subtle text-success mb-3 px-4 py-2 rounded-pill">Instrucciones</span>
+          <h2 class="display-4 fw-bold text-white mb-3">¿Cómo funciona?</h2>
+          <p class="text-white-50 lead mb-0">
             Tres simples pasos para armar tu equipo ganador
           </p>
         </div>
       </div>
 
       <!-- Cards de pasos -->
-      <div class="row g-4">
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        
         <!-- PASO 1 -->
-        <div class="col-12 col-md-6 col-lg-4">
+        <div class="col">
           <div class="feature-card h-100">
             <div class="feature-icon">
-        <span class="fs-1 text-success fw-bold">1</span>
-        </div>
+              <span class="fs-1 text-success fw-bold">1</span>
+            </div>
             <div class="feature-number">01</div>
             <h4 class="text-white mb-3 fw-bold">Elegí tus jugadores</h4>
             <p class="text-white-50 mb-4">
               Explorá una base de datos con más de 55 jugadores de todo el mundo. 
               Filtrá por posición, equipo y precio.
             </p>
-            <ul class="feature-list text-white-50 small">
-              <li>✓ Presupuesto de $100M</li>
-              <li>✓ Máximo 11 jugadores</li>
-              <li>✓ Formación táctica</li>
+            <ul class="list-unstyled text-white-50 small">
+              <li class="mb-2">✓ Presupuesto de $100M</li>
+              <li class="mb-2">✓ Máximo 11 jugadores</li>
+              <li class="mb-0">✓ Formación táctica</li>
             </ul>
           </div>
         </div>
 
         <!-- PASO 2 -->
-        <div class="col-12 col-md-6 col-lg-4">
+        <div class="col">
           <div class="feature-card h-100 featured">
-           <div class="feature-icon">
-           <span class="fs-1 text-success fw-bold">2</span>
-          </div>
+            <div class="feature-icon">
+              <span class="fs-1 text-success fw-bold">2</span>
+            </div>
             <div class="feature-number">02</div>
             <h4 class="text-white mb-3 fw-bold">Armá tu estrategia</h4>
             <p class="text-white-50 mb-4">
               Distribuí inteligentemente tu presupuesto. Combiná estrellas con 
               promesas para maximizar puntos.
             </p>
-            <ul class="feature-list text-white-50 small">
-              <li>✓ Sistema de puntuación realista</li>
-              <li>✓ Estadísticas detalladas</li>
-              <li>✓ Análisis de rendimiento</li>
+            <ul class="list-unstyled text-white-50 small">
+              <li class="mb-2">✓ Sistema de puntuación realista</li>
+              <li class="mb-2">✓ Estadísticas detalladas</li>
+              <li class="mb-0">✓ Análisis de rendimiento</li>
             </ul>
           </div>
         </div>
 
         <!-- PASO 3 -->
-        <div class="col-12 col-md-6 col-lg-4">
+        <div class="col">
           <div class="feature-card h-100">
             <div class="feature-icon">
-             <span class="fs-1 text-success fw-bold">3</span>
-              </div>
+              <span class="fs-1 text-success fw-bold">3</span>
+            </div>
             <div class="feature-number">03</div>
             <h4 class="text-white mb-3 fw-bold">Competí y ganá</h4>
             <p class="text-white-50 mb-4">
               Sumá puntos según el rendimiento real de tus jugadores. 
               Escalá posiciones en el ranking global.
             </p>
-            <ul class="feature-list text-white-50 small">
-              <li>✓ Ranking en tiempo real</li>
-              <li>✓ Tablas de posiciones</li>
-              <li>✓ Sistema de ligas</li>
+            <ul class="list-unstyled text-white-50 small">
+              <li class="mb-2">✓ Ranking en tiempo real</li>
+              <li class="mb-2">✓ Tablas de posiciones</li>
+              <li class="mb-0">✓ Sistema de ligas</li>
             </ul>
           </div>
         </div>
       </div>
 
       <!-- Botón CTA -->
-      <div class="row justify-content-center mt-5">
-        <div class="col-12 col-sm-auto text-center">
-          <a href="paginas/login.html" class="btn btn-success btn-lg px-5 py-3">
-            ¡Empezar ahora gratis!
-          </a>
-        </div>
+      <div class="text-center mt-5">
+        <a href="paginas/login.html" class="btn btn-success btn-lg px-5 py-3">
+          ¡Empezar ahora gratis!
+        </a>
       </div>
+
     </div>
   </section>
 
@@ -215,41 +222,42 @@
   <section class="py-5 py-lg-6 bg-dark bg-opacity-50">
     <div class="container">
       <div class="row align-items-center g-5">
+        
         <!-- Contenido izquierdo -->
         <div class="col-12 col-lg-6 order-2 order-lg-1">
-          <span class="badge bg-success mb-3 px-4 py-2">Características</span>
-          <h2 class="display-5 display-md-4 fw-bold text-white mb-4">
+          <span class="badge bg-success mb-3 px-4 py-2 rounded-pill">Características</span>
+          <h2 class="display-4 fw-bold text-white mb-4">
             La mejor experiencia de fantasy
           </h2>
-          <p class="text-white-50 mb-4">
+          <p class="text-white-50 lead mb-4">
             Diseñado para ofrecerte la experiencia más completa y realista. 
             Desde la selección hasta la gestión de tu equipo.
           </p>
           
-          <!-- Mini features en grilla -->
-          <div class="row g-3">
-            <div class="col-6">
+          <!-- Mini features -->
+          <div class="row row-cols-2 g-3">
+            <div class="col">
               <div class="mini-feature">
                 <div class="mini-icon">📊</div>
                 <h6 class="text-white mb-1">Estadísticas</h6>
                 <small class="text-white-50">Datos en tiempo real</small>
               </div>
             </div>
-            <div class="col-6">
+            <div class="col">
               <div class="mini-feature">
                 <div class="mini-icon">🏆</div>
                 <h6 class="text-white mb-1">Competitivo</h6>
                 <small class="text-white-50">Rankings globales</small>
               </div>
             </div>
-            <div class="col-6">
+            <div class="col">
               <div class="mini-feature">
                 <div class="mini-icon">⚡</div>
                 <h6 class="text-white mb-1">Rápido</h6>
                 <small class="text-white-50">Actualizaciones instantáneas</small>
               </div>
             </div>
-            <div class="col-6">
+            <div class="col">
               <div class="mini-feature">
                 <div class="mini-icon">🎮</div>
                 <h6 class="text-white mb-1">Intuitivo</h6>
@@ -265,10 +273,10 @@
             <div class="feature-image-bg"></div>
             <img src="assets/imagenes/premium_photo-1723874571151-052a8894a37d.avif" 
                  alt="Campo de fútbol" 
-                 class="img-fluid rounded-4 shadow-lg w-100" 
-                 style="position: relative; z-index: 2;">
+                 class="img-fluid rounded-4 shadow-lg w-100 position-relative z-2">
           </div>
         </div>
+
       </div>
     </div>
   </section>
@@ -279,18 +287,16 @@
       <div class="row justify-content-center">
         <div class="col-12 col-lg-10 col-xl-8">
           <div class="cta-box text-center">
-            <h2 class="display-5 display-md-4 fw-bold text-white mb-3">
+            <h2 class="display-4 fw-bold text-white mb-3">
               ¿Listo para ser el campeón?
             </h2>
-            <p class="text-white-50 mb-4">
+            <p class="text-white-50 lead mb-4">
               Unite a miles de jugadores y demostrá que sos el mejor DT
             </p>
-            <div class="row justify-content-center">
-              <div class="col-12 col-sm-auto mb-3">
-                <a href="paginas/login.html" class="btn btn-success btn-lg px-5 py-3 w-100">
-                  Crear mi equipo ahora
-                </a>
-              </div>
+            <div class="d-inline-block">
+              <a href="paginas/login.html" class="btn btn-success btn-lg px-5 py-3 mb-3">
+                Crear mi equipo ahora
+              </a>
             </div>
             <p class="small text-white-50 mb-0">
               No requiere tarjeta de crédito • Registro en 30 segundos
@@ -302,13 +308,9 @@
   </section>
 
   <!-- FOOTER -->
-  <footer class="text-center py-4 py-md-5 bg-black">
+  <footer class="text-center py-4 py-md-5 bg-dark border-top border-success border-opacity-25">
     <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-12">
-          <p class="text-light mb-0">© 2025 Fantasy League. Todos los derechos reservados ⚽</p>
-        </div>
-      </div>
+      <p class="text-light mb-0">© 2025 Fantasy League. Todos los derechos reservados ⚽</p>
     </div>
   </footer>
 

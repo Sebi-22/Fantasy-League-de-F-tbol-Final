@@ -10,25 +10,35 @@
 <body class="bg-dark text-light">
 
   <!-- NAVBAR -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-black fixed-top shadow-sm">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow">
     <div class="container">
       <a class="navbar-brand d-flex align-items-center fw-bold text-success" href="../index.html">
         <img src="../assets/imagenes/Logo del juego de Fantasy League.png" alt="Logo" class="logo-img me-2">
         Fantasy League
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="../index.html">Inicio</a></li>
-          <li class="nav-item"><a class="nav-link" href="seleccion.html">Seleccionar jugadores</a></li>
-          <li class="nav-item"><a class="nav-link" href="equipo.html">Mi equipo</a></li>
-          <li class="nav-item"><a class="nav-link" href="ranking.html">Ranking</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="../index.html">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="seleccion.html">Seleccionar jugadores</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="equipo.html">Mi equipo</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="ranking.html">Ranking</a>
+          </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle active" href="#" data-bs-toggle="dropdown">Más</a>
+            <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Más
+            </a>
             <ul class="dropdown-menu dropdown-menu-end">
-              <li><a class="dropdown-item active" href="admin.html">Admin</a></li>
+              <li><a class="dropdown-item active" aria-current="page" href="admin.html">Admin</a></li>
               <li id="navSession"></li>
               <li><a class="dropdown-item" href="about.html">Sobre el proyecto</a></li>
             </ul>
@@ -42,22 +52,18 @@
   <main class="container mt-5 pt-5">
     
     <!-- Header -->
-    <div class="row mb-4">
-      <div class="col-12">
-        <div class="text-center">
-          <h1 class="text-danger fw-bold mb-2">
-            <span class="emoji">🔧</span> Panel de Administración
-          </h1>
-          <p class="text-white-50">Gestión y configuración del sistema</p>
-        </div>
-      </div>
+    <div class="text-center mb-4">
+      <h1 class="text-danger fw-bold mb-2">
+        <span class="emoji">🔧</span> Panel de Administración
+      </h1>
+      <p class="text-white-50 mb-0">Gestión y configuración del sistema</p>
     </div>
 
     <!-- Advertencia -->
     <div class="row mb-4">
-      <div class="col-lg-10 mx-auto">
+      <div class="col-12 col-lg-10 mx-auto">
         <div class="alert alert-danger" role="alert">
-          <h5 class="alert-heading">⚠️ Zona de Administración</h5>
+          <h2 class="alert-heading h5">⚠️ Zona de Administración</h2>
           <p class="mb-0">
             Las acciones realizadas aquí afectan a todos los usuarios. 
             Usa estas herramientas con precaución, ya que algunas acciones son irreversibles.
@@ -68,34 +74,34 @@
 
     <!-- Estadísticas del sistema -->
     <div class="row mb-4">
-      <div class="col-lg-10 mx-auto">
+      <div class="col-12 col-lg-10 mx-auto">
         <div class="card bg-dark border-info">
           <div class="card-header bg-info text-dark fw-bold">
             📊 Estadísticas del Sistema
           </div>
           <div class="card-body">
-            <div class="row g-3 text-center">
-              <div class="col-md-3">
+            <div class="row row-cols-2 row-cols-lg-4 g-3 text-center">
+              <div class="col">
                 <div class="stat-box">
-                  <h2 class="text-success fw-bold mb-1" id="totalUsuarios">0</h2>
+                  <p class="text-success fw-bold mb-1 display-6" id="totalUsuarios">0</p>
                   <p class="text-white-50 small mb-0">Usuarios Registrados</p>
                 </div>
               </div>
-              <div class="col-md-3">
+              <div class="col">
                 <div class="stat-box">
-                  <h2 class="text-warning fw-bold mb-1" id="totalEquipos">0</h2>
+                  <p class="text-warning fw-bold mb-1 display-6" id="totalEquipos">0</p>
                   <p class="text-white-50 small mb-0">Equipos Creados</p>
                 </div>
               </div>
-              <div class="col-md-3">
+              <div class="col">
                 <div class="stat-box">
-                  <h2 class="text-info fw-bold mb-1" id="totalJornadas">0</h2>
+                  <p class="text-info fw-bold mb-1 display-6" id="totalJornadas">0</p>
                   <p class="text-white-50 small mb-0">Jornadas Simuladas</p>
                 </div>
               </div>
-              <div class="col-md-3">
+              <div class="col">
                 <div class="stat-box">
-                  <h2 class="text-danger fw-bold mb-1" id="espacioUsado">0</h2>
+                  <p class="text-danger fw-bold mb-1 display-6" id="espacioUsado">0</p>
                   <p class="text-white-50 small mb-0">KB en localStorage</p>
                 </div>
               </div>
@@ -107,25 +113,25 @@
 
     <!-- Lista de usuarios -->
     <div class="row mb-4">
-      <div class="col-lg-10 mx-auto">
+      <div class="col-12 col-lg-10 mx-auto">
         <div class="card bg-dark border-success">
           <div class="card-header bg-success text-dark fw-bold d-flex justify-content-between align-items-center">
             <span>👥 Usuarios Registrados</span>
-            <button class="btn btn-sm btn-light" onclick="cargarDatos()">
+            <button class="btn btn-sm btn-light" onclick="cargarDatos()" type="button">
               🔄 Actualizar
             </button>
           </div>
           <div class="card-body">
             <div class="table-responsive">
-              <table class="table table-dark table-hover">
+              <table class="table table-dark table-hover mb-0">
                 <thead>
                   <tr>
-                    <th>Usuario</th>
-                    <th>Nombre</th>
-                    <th>Email</th>
-                    <th class="text-center">Equipos</th>
-                    <th class="text-center">Jornadas</th>
-                    <th class="text-end">Acciones</th>
+                    <th scope="col">Usuario</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Email</th>
+                    <th scope="col" class="text-center">Equipos</th>
+                    <th scope="col" class="text-center">Jornadas</th>
+                    <th scope="col" class="text-end">Acciones</th>
                   </tr>
                 </thead>
                 <tbody id="tablaUsuarios">
@@ -146,70 +152,62 @@
 
     <!-- Herramientas de gestión -->
     <div class="row mb-4">
-      <div class="col-lg-10 mx-auto">
+      <div class="col-12 col-lg-10 mx-auto">
         <div class="card bg-dark border-warning">
           <div class="card-header bg-warning text-dark fw-bold">
             🛠️ Herramientas de Gestión
           </div>
           <div class="card-body">
-            <div class="row g-3">
+            <div class="row row-cols-1 row-cols-md-2 g-3">
               
               <!-- Exportar datos -->
-              <div class="col-md-6">
-                <div class="tool-card p-3 border border-secondary rounded">
-                  <h6 class="text-warning mb-2">
-                    💾 Exportar Datos
-                  </h6>
+              <div class="col">
+                <div class="tool-card p-3 border border-secondary rounded h-100">
+                  <h2 class="text-warning mb-2 h6">💾 Exportar Datos</h2>
                   <p class="text-white-50 small mb-3">
                     Descarga una copia de seguridad de todos los datos del sistema en formato JSON
                   </p>
-                  <button class="btn btn-outline-success btn-sm w-100" onclick="exportarDatos()">
+                  <button class="btn btn-outline-success btn-sm w-100" onclick="exportarDatos()" type="button">
                     📥 Exportar Backup
                   </button>
                 </div>
               </div>
 
               <!-- Importar datos -->
-              <div class="col-md-6">
-                <div class="tool-card p-3 border border-secondary rounded">
-                  <h6 class="text-warning mb-2">
-                    📂 Importar Datos
-                  </h6>
+              <div class="col">
+                <div class="tool-card p-3 border border-secondary rounded h-100">
+                  <h2 class="text-warning mb-2 h6">📂 Importar Datos</h2>
                   <p class="text-white-50 small mb-3">
                     Restaura los datos desde un archivo de backup previamente exportado
                   </p>
                   <input type="file" id="fileImport" accept=".json" class="form-control form-control-sm bg-dark text-light border-warning mb-2">
-                  <button class="btn btn-outline-warning btn-sm w-100" onclick="importarDatos()">
+                  <button class="btn btn-outline-warning btn-sm w-100" onclick="importarDatos()" type="button">
                     📤 Importar Backup
                   </button>
                 </div>
               </div>
 
               <!-- Limpiar caché -->
-              <div class="col-md-6">
-                <div class="tool-card p-3 border border-secondary rounded">
-                  <h6 class="text-danger mb-2">
-                    🗑️ Limpiar Caché
-                  </h6>
+              <div class="col">
+                <div class="tool-card p-3 border border-secondary rounded h-100">
+                  <h2 class="text-danger mb-2 h6">🗑️ Limpiar Caché</h2>
                   <p class="text-white-50 small mb-3">
                     Elimina datos temporales y optimiza el almacenamiento (no afecta usuarios ni equipos)
                   </p>
-                  <button class="btn btn-outline-info btn-sm w-100" onclick="limpiarCache()">
+                  <button class="btn btn-outline-info btn-sm w-100" onclick="limpiarCache()" type="button">
                     🧹 Limpiar Caché
                   </button>
                 </div>
               </div>
 
               <!-- Resetear sistema -->
-              <div class="col-md-6">
-                <div class="tool-card p-3 border border-danger rounded">
-                  <h6 class="text-danger mb-2">
-                    ⚠️ Resetear Sistema
-                  </h6>
+              <div class="col">
+                <div class="tool-card p-3 border border-danger rounded h-100">
+                  <h2 class="text-danger mb-2 h6">⚠️ Resetear Sistema</h2>
                   <p class="text-white-50 small mb-3">
                     <strong>PELIGRO:</strong> Elimina TODOS los datos (usuarios, equipos, jornadas). No se puede deshacer.
                   </p>
-                  <button class="btn btn-danger btn-sm w-100" onclick="resetearSistema()">
+                  <button class="btn btn-danger btn-sm w-100" onclick="resetearSistema()" type="button">
                     🔥 Resetear Todo
                   </button>
                 </div>
@@ -223,28 +221,28 @@
 
     <!-- Información del navegador -->
     <div class="row mb-4">
-      <div class="col-lg-10 mx-auto">
+      <div class="col-12 col-lg-10 mx-auto">
         <div class="card bg-dark border-secondary">
           <div class="card-header bg-secondary text-dark fw-bold">
             💻 Información del Sistema
           </div>
           <div class="card-body">
             <div class="row g-3">
-              <div class="col-md-6">
+              <div class="col-12 col-md-6">
                 <p class="text-white-50 small mb-2"><strong>Navegador:</strong></p>
-                <p class="text-light" id="infoBrowser">-</p>
+                <p class="text-light mb-0" id="infoBrowser">-</p>
               </div>
-              <div class="col-md-6">
+              <div class="col-12 col-md-6">
                 <p class="text-white-50 small mb-2"><strong>localStorage disponible:</strong></p>
-                <p class="text-light" id="infoStorage">-</p>
+                <p class="text-light mb-0" id="infoStorage">-</p>
               </div>
-              <div class="col-md-6">
+              <div class="col-12 col-md-6">
                 <p class="text-white-50 small mb-2"><strong>Última actualización:</strong></p>
-                <p class="text-light" id="infoUpdate">-</p>
+                <p class="text-light mb-0" id="infoUpdate">-</p>
               </div>
-              <div class="col-md-6">
+              <div class="col-12 col-md-6">
                 <p class="text-white-50 small mb-2"><strong>Versión:</strong></p>
-                <p class="text-light">Fantasy League v1.0.0</p>
+                <p class="text-light mb-0">Fantasy League v1.0.0</p>
               </div>
             </div>
           </div>
@@ -255,13 +253,15 @@
   </main>
 
   <!-- FOOTER -->
-  <footer class="text-center py-4 bg-black mt-5">
-    <p class="text-light mb-0">© 2025 Fantasy League. Todos los derechos reservados ⚽</p>
+  <footer class="text-center py-4 bg-dark border-top border-success border-opacity-25 mt-5">
+    <div class="container">
+      <p class="text-light mb-0">© 2025 Fantasy League. Todos los derechos reservados ⚽</p>
+    </div>
   </footer>
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../assets/js/session.js"></script>
-<script src="../assets/js/admin.js"></script>
+  <script src="../assets/js/admin.js"></script>
 </body>
 </html>

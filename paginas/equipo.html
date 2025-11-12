@@ -10,23 +10,33 @@
 <body class="bg-dark text-light">
 
   <!-- NAVBAR -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-black fixed-top shadow-sm">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow">
     <div class="container">
       <a class="navbar-brand d-flex align-items-center fw-bold text-success" href="../index.html">
         <img src="../assets/imagenes/Logo del juego de Fantasy League.png" alt="Logo" class="logo-img me-2">
         Fantasy League
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="../index.html">Inicio</a></li>
-          <li class="nav-item"><a class="nav-link" href="seleccion.html">Seleccionar jugadores</a></li>
-          <li class="nav-item"><a class="nav-link active" href="equipo.html">Mi equipo</a></li>
-          <li class="nav-item"><a class="nav-link" href="ranking.html">Ranking</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="../index.html">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="seleccion.html">Seleccionar jugadores</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="equipo.html">Mi equipo</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="ranking.html">Ranking</a>
+          </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Más</a>
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Más
+            </a>
             <ul class="dropdown-menu dropdown-menu-end">
               <li><a class="dropdown-item" href="admin.html">Admin</a></li>
               <li id="navSession"></li>
@@ -44,18 +54,18 @@
     <!-- Header -->
     <div class="row mb-4">
       <div class="col-12">
-        <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3">
           <div>
-            <h1 class="text-success fw-bold mb-1">
+            <h1 class="text-success fw-bold mb-2">
               <span class="emoji">🏆</span> Mi Equipo
             </h1>
             <p class="text-white-50 mb-0">Gestiona tu equipo y simula jornadas</p>
           </div>
-          <div class="text-end">
-            <button class="btn btn-success btn-lg" id="btnSimularJornada">
+          <div>
+            <button class="btn btn-success btn-lg" id="btnSimularJornada" type="button">
               <span id="btnSimularText">🎲 Simular Jornada</span>
               <span id="btnSimularSpinner" class="d-none">
-                <span class="spinner-border spinner-border-sm me-2"></span>
+                <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
                 Simulando...
               </span>
             </button>
@@ -67,31 +77,31 @@
     <div class="row g-4">
       
       <!-- COLUMNA IZQUIERDA: Equipo -->
-      <div class="col-lg-8">
+      <div class="col-12 col-lg-8">
         
         <!-- Estadísticas de jornada -->
-        <div class="row g-3 mb-4">
-          <div class="col-md-4">
-            <div class="card bg-dark border-success">
+        <div class="row row-cols-1 row-cols-md-3 g-3 mb-4">
+          <div class="col">
+            <div class="card bg-dark border-success h-100">
               <div class="card-body text-center">
-                <h6 class="text-white-50 small mb-2">Jornada Actual</h6>
-                <h2 class="text-success fw-bold mb-0" id="jornadaActual">1</h2>
+                <h2 class="text-white-50 small mb-2">Jornada Actual</h2>
+                <p class="text-success fw-bold mb-0 display-6" id="jornadaActual">1</p>
               </div>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="card bg-dark border-info">
+          <div class="col">
+            <div class="card bg-dark border-info h-100">
               <div class="card-body text-center">
-                <h6 class="text-white-50 small mb-2">Jornadas Jugadas</h6>
-                <h2 class="text-info fw-bold mb-0" id="jornadasJugadas">0</h2>
+                <h2 class="text-white-50 small mb-2">Jornadas Jugadas</h2>
+                <p class="text-info fw-bold mb-0 display-6" id="jornadasJugadas">0</p>
               </div>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="card bg-dark border-warning">
+          <div class="col">
+            <div class="card bg-dark border-warning h-100">
               <div class="card-body text-center">
-                <h6 class="text-white-50 small mb-2">Puntos Acumulados</h6>
-                <h2 class="text-warning fw-bold mb-0" id="puntosAcumulados">0</h2>
+                <h2 class="text-white-50 small mb-2">Puntos Acumulados</h2>
+                <p class="text-warning fw-bold mb-0 display-6" id="puntosAcumulados">0</p>
               </div>
             </div>
           </div>
@@ -104,12 +114,12 @@
             <a href="seleccion.html" class="btn btn-sm btn-light">✏️ Modificar Equipo</a>
           </div>
           <div class="card-body" id="equipoContainer">
-            <!-- Se llena con JS -->
+            <!-- Loading inicial -->
             <div class="text-center py-5">
               <div class="spinner-border text-success" role="status">
                 <span class="visually-hidden">Cargando...</span>
               </div>
-              <p class="text-white-50 mt-2">Cargando equipo...</p>
+              <p class="text-white-50 mt-2 mb-0">Cargando equipo...</p>
             </div>
           </div>
         </div>
@@ -117,32 +127,31 @@
       </div>
 
       <!-- COLUMNA DERECHA: Historial -->
-      <div class="col-lg-4">
-        <div class="sticky-top" style="top: 80px;">
+      <div class="col-12 col-lg-4">
+        <div class="sticky-lg-top" style="top: 80px;">
           
           <!-- Card de historial -->
           <div class="card bg-dark border-info mb-3">
             <div class="card-header bg-info text-dark fw-bold d-flex justify-content-between align-items-center">
               <span>📅 Historial de Jornadas</span>
-              <button class="btn btn-sm btn-outline-light" id="btnResetearHistorial" title="Resetear historial (testing)">
+              <button class="btn btn-sm btn-outline-dark" id="btnResetearHistorial" type="button" title="Resetear historial (testing)" aria-label="Resetear historial">
                 🗑️
               </button>
             </div>
-            <div class="card-body" id="historialContainer" style="max-height: 500px; overflow-y: auto;">
-              <!-- Se llena con JS -->
-              <p class="text-white-50 text-center py-3">Cargando historial...</p>
+            <div class="card-body overflow-auto" id="historialContainer" style="max-height: 500px;">
+              <p class="text-white-50 text-center py-3 mb-0">Cargando historial...</p>
             </div>
           </div>
 
           <!-- Card de instrucciones -->
           <div class="card bg-dark border-secondary">
             <div class="card-body">
-              <h6 class="text-secondary mb-2 small fw-bold">💡 ¿Cómo funciona?</h6>
+              <h2 class="text-secondary mb-2 small fw-bold h6">💡 ¿Cómo funciona?</h2>
               <ul class="small text-white-50 mb-0 ps-3">
                 <li class="mb-2">Haz clic en "Simular Jornada" para generar estadísticas</li>
                 <li class="mb-2">Cada jugador obtendrá puntos según su desempeño simulado</li>
                 <li class="mb-2">Los puntos se acumulan en el ranking global</li>
-                <li>Las estadísticas son aleatorias pero realistas según la posición</li>
+                <li class="mb-0">Las estadísticas son aleatorias pero realistas según la posición</li>
               </ul>
             </div>
           </div>
@@ -154,26 +163,28 @@
   </main>
 
   <!-- FOOTER -->
-  <footer class="text-center py-4 bg-black mt-5">
-    <p class="text-light mb-0">© 2025 Fantasy League. Todos los derechos reservados ⚽</p>
+  <footer class="text-center py-4 bg-dark border-top border-success border-opacity-25 mt-5">
+    <div class="container">
+      <p class="text-light mb-0">© 2025 Fantasy League. Todos los derechos reservados ⚽</p>
+    </div>
   </footer>
 
   <!-- MODAL DE RESULTADOS -->
-  <div class="modal fade" id="resultadosModal" tabindex="-1">
+  <div class="modal fade" id="resultadosModal" tabindex="-1" aria-labelledby="resultadosModalTitle" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-scrollable">
       <div class="modal-content bg-dark text-light border-success">
         <div class="modal-header border-success">
-          <h5 class="modal-title text-success fw-bold" id="resultadosModalTitle">
+          <h2 class="modal-title text-success fw-bold h5" id="resultadosModalTitle">
             Resultados de Jornada
-          </h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+          </h2>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
         </div>
         <div class="modal-body" id="resultadosModalBody">
           <!-- Se llena con JS -->
         </div>
         <div class="modal-footer border-success">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn btn-success" id="btnSimularOtra" onclick="$('#resultadosModal').modal('hide'); simularJornada();">
+          <button type="button" class="btn btn-success" id="btnSimularOtra">
             🎲 Simular otra jornada
           </button>
         </div>
