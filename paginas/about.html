@@ -16,31 +16,21 @@
         <img src="../assets/imagenes/Logo del juego de Fantasy League.png" alt="Logo" class="logo-img me-2">
         Fantasy League
       </a>
-      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="../index.html">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="seleccion.html">Seleccionar jugadores</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="equipo.html">Mi equipo</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="ranking.html">Ranking</a>
-          </li>
+          <li class="nav-item"><a class="nav-link" href="../index.html">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="seleccion.html">Seleccionar jugadores</a></li>
+          <li class="nav-item"><a class="nav-link" href="equipo.html">Mi equipo</a></li>
+          <li class="nav-item"><a class="nav-link" href="ranking.html">Ranking</a></li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Más
-            </a>
+            <a class="nav-link dropdown-toggle active" href="#" data-bs-toggle="dropdown">Más</a>
             <ul class="dropdown-menu dropdown-menu-end">
               <li><a class="dropdown-item" href="admin.html">Admin</a></li>
               <li id="navSession"></li>
-              <li><a class="dropdown-item active" aria-current="page" href="about.html">Sobre el proyecto</a></li>
+              <li><a class="dropdown-item active" href="about.html">Sobre el proyecto</a></li>
             </ul>
           </li>
         </ul>
@@ -58,8 +48,107 @@
           <span class="emoji">⚽</span> Fantasy League
         </h1>
         <p class="lead text-white-50 mb-0">
-          Tu juego de fantasy fútbol donde armás tu equipo soñado y competís contra otros managers
+          Tu juego de fantasy fútbol donde armás tu equipo soñado y competís contra otros jugadores
         </p>
+      </div>
+    </div>
+
+    <!-- NUEVO: Glosario de términos -->
+    <div class="row mb-4">
+      <div class="col-12 col-lg-8 mx-auto">
+        <div class="card bg-dark border-info">
+          <div class="card-header bg-info text-dark fw-bold">
+            📖 Glosario de Términos (¿Qué significa cada cosa?)
+          </div>
+          <div class="card-body">
+            <div class="row g-4">
+              <div class="col-md-6">
+                <div class="d-flex gap-3">
+                  <div class="text-info fs-3">🏟️</div>
+                  <div>
+                    <h6 class="text-info mb-1">Jornada</h6>
+                    <p class="text-white-50 small mb-0">
+                      Es como una "fecha" de partidos. Cuando simulás una jornada, 
+                      tus 18 jugadores juegan un partido y suman puntos según cómo les va.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-md-6">
+                <div class="d-flex gap-3">
+                  <div class="text-warning fs-3">💰</div>
+                  <div>
+                    <h6 class="text-warning mb-1">Presupuesto</h6>
+                    <p class="text-white-50 small mb-0">
+                      Dinero virtual ($100 millones) que tenés para "comprar" jugadores. 
+                      Cada jugador cuesta diferente según su calidad.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-md-6">
+                <div class="d-flex gap-3">
+                  <div class="text-success fs-3">⚽</div>
+                  <div>
+                    <h6 class="text-success mb-1">Formación</h6>
+                    <p class="text-white-50 small mb-0">
+                      Cómo organizás tus jugadores en la cancha. Ejemplo: 4-4-2 significa 
+                      4 defensas, 4 mediocampistas y 2 delanteros.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-md-6">
+                <div class="d-flex gap-3">
+                  <div class="text-danger fs-3">🏆</div>
+                  <div>
+                    <h6 class="text-danger mb-1">Ranking</h6>
+                    <p class="text-white-50 small mb-0">
+                      Tabla que muestra quién tiene más puntos. Cuantas más jornadas 
+                      juegues y mejor sea tu equipo, más alto vas a estar.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-md-6">
+                <div class="d-flex gap-3">
+                  <div class="text-secondary fs-3">📊</div>
+                  <div>
+                    <h6 class="text-secondary mb-1">Puntos</h6>
+                    <p class="text-white-50 small mb-0">
+                      Lo que sumás cuando tus jugadores hacen goles, asistencias, 
+                      atajadas, etc. Perdés puntos si reciben tarjetas.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-md-6">
+                <div class="d-flex gap-3">
+                  <div class="text-primary fs-3">🎲</div>
+                  <div>
+                    <h6 class="text-primary mb-1">Simular</h6>
+                    <p class="text-white-50 small mb-0">
+                      Hacer que el juego genere resultados automáticamente. Es como 
+                      jugar un partido en modo rápido.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="alert alert-info mt-4 mb-0">
+              <small>
+                <strong>💡 Consejo:</strong> Si alguna vez no entendés algo, 
+                recordá que podés volver a esta página para consultar el glosario.
+              </small>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -68,18 +157,99 @@
       <div class="col-12 col-lg-8 mx-auto">
         <div class="card bg-dark border-success">
           <div class="card-header bg-success text-dark fw-bold">
-            📖 Sobre el Proyecto
+            📖 ¿De qué se trata?
           </div>
           <div class="card-body">
             <p class="text-light">
-              <strong>Fantasy League</strong> es un juego web de fútbol fantasy desarrollado como proyecto educativo. 
-              El objetivo es crear un equipo de 18 jugadores dentro de un presupuesto limitado y simular jornadas 
-              para acumular puntos según el rendimiento de tus jugadores.
+              <strong>Fantasy League</strong> es un juego web donde armás tu equipo de fútbol 
+              ideal con jugadores reales. El objetivo es elegir 18 jugadores dentro de un 
+              presupuesto de $100 millones (dinero virtual) y después simular jornadas 
+              para sumar puntos.
             </p>
             <p class="text-light mb-0">
-              El sistema genera estadísticas aleatorias pero realistas para cada jugador según su posición, 
-              y permite competir contra otros usuarios en un ranking global.
+              El sistema genera estadísticas realistas para cada jugador según su posición 
+              (los arqueros ataajan, los delanteros hacen goles, etc.) y te permite competir 
+              contra otros usuarios en un ranking global para ver quién es el mejor.
             </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sistema de puntos MEJORADO -->
+    <div class="row mb-4">
+      <div class="col-12 col-lg-8 mx-auto">
+        <div class="card bg-dark border-danger">
+          <div class="card-header bg-danger text-dark fw-bold">
+            ⚽ Sistema de Puntuación (¿Cómo sumo puntos?)
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-dark table-sm mb-0">
+                <thead>
+                  <tr>
+                    <th scope="col">Acción</th>
+                    <th scope="col" class="text-end">Puntos</th>
+                    <th scope="col" class="text-white-50 small">¿Por qué?</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>⚽ Gol de delantero</td>
+                    <td class="text-end text-success fw-bold">+5</td>
+                    <td class="text-white-50 small">Es su trabajo hacer goles</td>
+                  </tr>
+                  <tr>
+                    <td>⚽ Gol de mediocampista</td>
+                    <td class="text-end text-success fw-bold">+5</td>
+                    <td class="text-white-50 small">Anota menos seguido, vale más</td>
+                  </tr>
+                  <tr>
+                    <td>⚽ Gol de defensa</td>
+                    <td class="text-end text-success fw-bold">+5</td>
+                    <td class="text-white-50 small">Es muy raro, por eso vale mucho</td>
+                  </tr>
+                  <tr>
+                    <td>🎯 Asistencia</td>
+                    <td class="text-end text-success fw-bold">+3</td>
+                    <td class="text-white-50 small">Pase que termina en gol</td>
+                  </tr>
+                  <tr>
+                    <td>🧤 3 atajadas (arquero)</td>
+                    <td class="text-end text-success fw-bold">+1</td>
+                    <td class="text-white-50 small">Por cada 3 atajadas suma 1</td>
+                  </tr>
+                  <tr>
+                    <td>🛡️ No recibir goles</td>
+                    <td class="text-end text-success fw-bold">+4</td>
+                    <td class="text-white-50 small">Valla invicta (arquero/defensa)</td>
+                  </tr>
+                  <tr>
+                    <td>🥅 3+ goles recibidos</td>
+                    <td class="text-end text-danger fw-bold">-2</td>
+                    <td class="text-white-50 small">Mala defensa del equipo</td>
+                  </tr>
+                  <tr>
+                    <td>🟨 Tarjeta amarilla</td>
+                    <td class="text-end text-danger fw-bold">-1</td>
+                    <td class="text-white-50 small">Penalización por falta</td>
+                  </tr>
+                  <tr>
+                    <td>🟥 Tarjeta roja</td>
+                    <td class="text-end text-danger fw-bold">-3</td>
+                    <td class="text-white-50 small">Expulsión, penaliza mucho</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            
+            <div class="alert alert-warning mt-3 mb-0">
+              <small>
+                <strong>💡 Importante:</strong> Las estadísticas se generan automáticamente 
+                en cada simulación, pero respetan probabilidades realistas según la posición 
+                del jugador. Un delantero va a hacer más goles que un arquero, por ejemplo.
+              </small>
+            </div>
           </div>
         </div>
       </div>
@@ -98,70 +268,120 @@
                 <div class="d-flex align-items-start gap-3">
                   <div class="emoji fs-3">🎮</div>
                   <div class="flex-grow-1">
-                    <h2 class="text-info fw-bold mb-1 h6">Sistema de Selección</h2>
+                    <h6 class="text-info fw-bold mb-1">Fácil de usar</h6>
                     <p class="text-white-50 small mb-0">
-                      Elige 18 jugadores (2 arqueros, 6 defensas, 6 mediocampistas, 4 delanteros) 
-                      con un presupuesto de $100M
+                      Elegí 18 jugadores (2 arqueros, 6 defensas, 6 mediocampistas, 4 delanteros) 
+                      con $100M de presupuesto. Muy simple.
                     </p>
                   </div>
                 </div>
               </div>
+              
               <div class="col">
                 <div class="d-flex align-items-start gap-3">
                   <div class="emoji fs-3">🎲</div>
                   <div class="flex-grow-1">
-                    <h2 class="text-info fw-bold mb-1 h6">Simulación de Jornadas</h2>
+                    <h6 class="text-info fw-bold mb-1">Simulación automática</h6>
                     <p class="text-white-50 small mb-0">
-                      Simula partidos y obtén puntos según el rendimiento aleatorio de tus jugadores
+                      Apretás un botón y el juego genera resultados realistas. 
+                      Tus jugadores suman puntos según su rendimiento.
                     </p>
                   </div>
                 </div>
               </div>
+              
               <div class="col">
                 <div class="d-flex align-items-start gap-3">
                   <div class="emoji fs-3">🏆</div>
                   <div class="flex-grow-1">
-                    <h2 class="text-info fw-bold mb-1 h6">Ranking Global</h2>
+                    <h6 class="text-info fw-bold mb-1">Competí con otros</h6>
                     <p class="text-white-50 small mb-0">
-                      Compite contra otros usuarios y sube en la tabla de posiciones
+                      Tabla de posiciones en tiempo real. Subís en el ranking 
+                      cuando sumás más puntos que los demás.
                     </p>
                   </div>
                 </div>
               </div>
+              
               <div class="col">
                 <div class="d-flex align-items-start gap-3">
                   <div class="emoji fs-3">📊</div>
                   <div class="flex-grow-1">
-                    <h2 class="text-info fw-bold mb-1 h6">Estadísticas Detalladas</h2>
+                    <h6 class="text-info fw-bold mb-1">Estadísticas claras</h6>
                     <p class="text-white-50 small mb-0">
-                      Visualiza goles, asistencias, tarjetas y más de cada jugador
+                      Mirá goles, asistencias, tarjetas y más de cada jugador. 
+                      Todo muy visual y fácil de entender.
                     </p>
                   </div>
                 </div>
               </div>
+              
               <div class="col">
                 <div class="d-flex align-items-start gap-3">
                   <div class="emoji fs-3">🔍</div>
                   <div class="flex-grow-1">
-                    <h2 class="text-info fw-bold mb-1 h6">Filtros Avanzados</h2>
+                    <h6 class="text-info fw-bold mb-1">Buscador potente</h6>
                     <p class="text-white-50 small mb-0">
-                      Busca jugadores por nombre, equipo, posición y precio
+                      Filtrá jugadores por nombre, equipo, posición y precio. 
+                      Encontrá lo que buscás rápido.
                     </p>
                   </div>
                 </div>
               </div>
+              
               <div class="col">
                 <div class="d-flex align-items-start gap-3">
                   <div class="emoji fs-3">💾</div>
                   <div class="flex-grow-1">
-                    <h2 class="text-info fw-bold mb-1 h6">Sistema de Guardado</h2>
+                    <h6 class="text-info fw-bold mb-1">Se guarda solo</h6>
                     <p class="text-white-50 small mb-0">
-                      Guarda tu equipo y progreso en el navegador con localStorage
+                      Tu equipo y progreso se guardan automáticamente en tu navegador. 
+                      No perdés nada.
                     </p>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cómo jugar -->
+    <div class="row mb-4">
+      <div class="col-12 col-lg-8 mx-auto">
+        <div class="card bg-dark border-success">
+          <div class="card-header bg-success text-dark fw-bold">
+            🎯 Cómo jugar (Guía paso a paso)
+          </div>
+          <div class="card-body">
+            <ol class="text-light ps-4 mb-0">
+              <li class="mb-3">
+                <strong>Registrate o iniciá sesión</strong> con tu correo
+              </li>
+              <li class="mb-3">
+                <strong>Seleccioná 18 jugadores</strong> respetando los límites:
+                <ul class="small text-white-50 mt-2">
+                  <li>2 Arqueros 🧤</li>
+                  <li>6 Defensas 🛡️</li>
+                  <li>6 Mediocampistas ⚙️</li>
+                  <li>4 Delanteros ⚡</li>
+                </ul>
+              </li>
+              <li class="mb-3">
+                <strong>No te pases del presupuesto</strong> de $100M (cada jugador tiene su precio)
+              </li>
+              <li class="mb-3">
+                <strong>Guardá tu equipo</strong> cuando esté completo
+              </li>
+              <li class="mb-3">
+                <strong>Simulá jornadas</strong> para que tus jugadores jueguen y sumen puntos
+              </li>
+              <li class="mb-0">
+                <strong>Subí en el ranking</strong> acumulando más puntos que otros usuarios. 
+                ¡El que más puntos tiene es el campeón! 🏆
+              </li>
+            </ol>
           </div>
         </div>
       </div>
@@ -179,28 +399,28 @@
               <div class="col">
                 <div class="tech-badge">
                   <div class="emoji fs-2 mb-2">📄</div>
-                  <h2 class="text-warning mb-1 h6">HTML5</h2>
+                  <h6 class="text-warning mb-1">HTML5</h6>
                   <small class="text-white-50">Estructura</small>
                 </div>
               </div>
               <div class="col">
                 <div class="tech-badge">
                   <div class="emoji fs-2 mb-2">🎨</div>
-                  <h2 class="text-warning mb-1 h6">CSS3</h2>
+                  <h6 class="text-warning mb-1">CSS3</h6>
                   <small class="text-white-50">Estilos</small>
                 </div>
               </div>
               <div class="col">
                 <div class="tech-badge">
                   <div class="emoji fs-2 mb-2">⚡</div>
-                  <h2 class="text-warning mb-1 h6">JavaScript</h2>
+                  <h6 class="text-warning mb-1">JavaScript</h6>
                   <small class="text-white-50">Lógica</small>
                 </div>
               </div>
               <div class="col">
                 <div class="tech-badge">
                   <div class="emoji fs-2 mb-2">🅱️</div>
-                  <h2 class="text-warning mb-1 h6">Bootstrap 5</h2>
+                  <h6 class="text-warning mb-1">Bootstrap 5</h6>
                   <small class="text-white-50">Framework</small>
                 </div>
               </div>
@@ -208,106 +428,12 @@
             <hr class="border-warning border-opacity-25 my-4">
             <div class="text-center">
               <p class="text-white-50 small mb-2">
-                <strong>Almacenamiento:</strong> localStorage para guardar equipos, usuarios y jornadas
+                <strong>Almacenamiento:</strong> localStorage (guardado en tu navegador)
               </p>
               <p class="text-white-50 small mb-0">
                 <strong>Datos:</strong> JSON para jugadores y estadísticas
               </p>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Cómo jugar -->
-    <div class="row mb-4">
-      <div class="col-12 col-lg-8 mx-auto">
-        <div class="card bg-dark border-success">
-          <div class="card-header bg-success text-dark fw-bold">
-            🎯 Cómo Jugar
-          </div>
-          <div class="card-body">
-            <ol class="text-light ps-4 mb-0">
-              <li class="mb-3">
-                <strong>Regístrate o inicia sesión</strong> con tu usuario
-              </li>
-              <li class="mb-3">
-                <strong>Selecciona 18 jugadores</strong> respetando los límites por posición y el presupuesto de $100M
-              </li>
-              <li class="mb-3">
-                <strong>Guarda tu equipo</strong> cuando esté completo
-              </li>
-              <li class="mb-3">
-                <strong>Simula jornadas</strong> para que tus jugadores acumulen puntos según su rendimiento
-              </li>
-              <li class="mb-3">
-                <strong>Sube en el ranking</strong> acumulando más puntos que otros usuarios
-              </li>
-              <li class="mb-0">
-                <strong>¡Diviértete!</strong> Experimenta con diferentes formaciones y jugadores
-              </li>
-            </ol>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Sistema de puntos -->
-    <div class="row mb-4">
-      <div class="col-12 col-lg-8 mx-auto">
-        <div class="card bg-dark border-danger">
-          <div class="card-header bg-danger text-dark fw-bold">
-            ⚽ Sistema de Puntuación
-          </div>
-          <div class="card-body">
-            <div class="table-responsive">
-              <table class="table table-dark table-sm mb-0">
-                <thead>
-                  <tr>
-                    <th scope="col">Acción</th>
-                    <th scope="col" class="text-end">Puntos</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>⚽ Gol de delantero</td>
-                    <td class="text-end text-success">+4</td>
-                  </tr>
-                  <tr>
-                    <td>⚽ Gol de mediocampista</td>
-                    <td class="text-end text-success">+5</td>
-                  </tr>
-                  <tr>
-                    <td>⚽ Gol de defensa</td>
-                    <td class="text-end text-success">+6</td>
-                  </tr>
-                  <tr>
-                    <td>🎯 Asistencia</td>
-                    <td class="text-end text-success">+3</td>
-                  </tr>
-                  <tr>
-                    <td>🧤 Atajada (arquero)</td>
-                    <td class="text-end text-success">+1</td>
-                  </tr>
-                  <tr>
-                    <td>🥅 Gol recibido (arquero/defensa)</td>
-                    <td class="text-end text-danger">-1</td>
-                  </tr>
-                  <tr>
-                    <td>🟨 Tarjeta amarilla</td>
-                    <td class="text-end text-danger">-1</td>
-                  </tr>
-                  <tr>
-                    <td>🟥 Tarjeta roja</td>
-                    <td class="text-end text-danger">-3</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <p class="text-white-50 small mb-0 mt-3">
-              <strong>Nota:</strong> Las estadísticas son generadas aleatoriamente en cada simulación, 
-              pero respetan probabilidades realistas según la posición del jugador.
-            </p>
           </div>
         </div>
       </div>
@@ -325,7 +451,7 @@
               Proyecto desarrollado para el curso de <strong>Programación de Segundo</strong>
             </p>
             <p class="text-white-50 small mb-3">
-              Incluye sistema de autenticación, gestión de equipos, simulación de jornadas, 
+              Incluye sistema de login, gestión de equipos, simulación de jornadas, 
               ranking global y panel de administración.
             </p>
             <div class="d-flex flex-column flex-sm-row justify-content-center gap-3">
