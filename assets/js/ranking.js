@@ -1,5 +1,5 @@
 // ============================================
-// SISTEMA DE RANKING
+// SISTEMA DE RANKING (CORREGIDO)
 // ============================================
 
 let rankingData = [];
@@ -22,22 +22,30 @@ function cargarRanking() {
   try {
     rankingData = [];
     
-    // Obtener todos los usuarios registrados
-    const usuariosJSON = localStorage.getItem('usuariosFantasy');
+    // ✅ CORREGIDO: Usar el mismo nombre que login/signup
+    const usuariosJSON = localStorage.getItem('fantasyUsers');
     if (!usuariosJSON) {
+      console.log('No hay usuarios registrados');
+      mostrarLoading(false);
       mostrarSinDatos();
       return;
     }
     
     const usuarios = JSON.parse(usuariosJSON);
+    console.log('Usuarios encontrados:', usuarios.length);
     
     // Por cada usuario, buscar su historial de jornadas
     for (let i = 0; i < usuarios.length; i++) {
       const usuario = usuarios[i];
       
-      // Buscar historial de jornadas con el prefijo del usuario
-      const historialKey = `jornadas_historial_${usuario.username}`;
+      // ✅ CORREGIDO: Usar email como identificador (mismo que usa sistema-jornadas.js)
+      const identificador = usuario.email;
+      
+      // Buscar historial de jornadas con el email del usuario
+      const historialKey = `jornadas_historial_${identificador}`;
       const historialJSON = localStorage.getItem(historialKey);
+      
+      console.log(`Buscando historial para ${identificador}:`, historialKey, historialJSON ? 'ENCONTRADO' : 'NO ENCONTRADO');
       
       if (historialJSON) {
         const historial = JSON.parse(historialJSON);
@@ -54,16 +62,21 @@ function cargarRanking() {
         
         if (jornadasJugadas > 0) {
           rankingData.push({
-            usuario: usuario.username,
-            nombre: usuario.nombre || usuario.username,
+            usuario: identificador,
+            nombre: usuario.name || identificador,
             puntosTotal: puntosTotal,
             jornadasJugadas: jornadasJugadas,
             promedio: promedio,
             ultimaJornada: historial[historial.length - 1].fecha || 'N/A'
           });
         }
+      } else {
+        // Agregar usuario sin jornadas para que aparezca en estadísticas
+        console.log(`Usuario ${identificador} sin jornadas jugadas`);
       }
     }
+    
+    console.log('Datos del ranking:', rankingData);
     
     // Ordenar por puntos (mayor a menor)
     rankingData.sort((a, b) => b.puntosTotal - a.puntosTotal);
@@ -109,6 +122,7 @@ function mostrarRanking() {
   
   tbody.innerHTML = '';
   
+  // ✅ CORREGIDO: Obtener usuario actual por email
   const usuarioActual = localStorage.getItem('loggedUser');
   
   for (let i = 0; i < mostrar.length; i++) {
@@ -135,7 +149,7 @@ function mostrarRanking() {
       </td>
       <td>
         <div class="fw-semibold">${equipo.nombre}</div>
-        <small class="text-white-50">@${equipo.usuario}</small>
+        <small class="text-white-50">${equipo.usuario}</small>
         ${equipo.usuario === usuarioActual ? '<span class="badge bg-success ms-2">Tú</span>' : ''}
       </td>
       <td class="text-center">
@@ -208,7 +222,7 @@ function mostrarPodio() {
           <div class="card-body text-center">
             <div class="${tamañoMedalla} mb-2">${medallas[index]}</div>
             <h5 class="text-${colores[index]} fw-bold mb-2">${equipo.nombre}</h5>
-            <p class="text-white-50 small mb-3">@${equipo.usuario}</p>
+            <p class="text-white-50 small mb-3">${equipo.usuario}</p>
             <h3 class="text-success fw-bold mb-1">${equipo.puntosTotal.toFixed(1)}</h3>
             <small class="text-white-50">puntos</small>
             <hr class="border-${colores[index]} my-3">
@@ -233,7 +247,11 @@ function mostrarEstadisticas() {
   const totalJornadas = document.getElementById('totalJornadas');
   const puntosTotales = document.getElementById('puntosTotales');
   
-  totalEquipos.textContent = rankingData.length;
+  // ✅ CORREGIDO: Mostrar total de usuarios registrados (aunque no hayan jugado)
+  const usuariosJSON = localStorage.getItem('fantasyUsers');
+  const totalUsuariosRegistrados = usuariosJSON ? JSON.parse(usuariosJSON).length : 0;
+  
+  totalEquipos.textContent = totalUsuariosRegistrados;
   
   let sumaJornadas = 0;
   let sumaPuntos = 0;
