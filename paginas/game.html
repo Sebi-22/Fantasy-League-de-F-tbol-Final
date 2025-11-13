@@ -9,24 +9,34 @@
 </head>
 <body class="bg-dark text-light">
 
-  <!-- NAVBAR (similar a index) -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-black fixed-top shadow-sm">
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow">
     <div class="container">
       <a class="navbar-brand d-flex align-items-center fw-bold text-success" href="../index.html">
         <img src="../assets/imagenes/Logo del juego de Fantasy League.png" alt="Logo" class="logo-img me-2">
         Fantasy League
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="../index.html">Inicio</a></li>
-          <li class="nav-item"><a class="nav-link" href="seleccion.html">Seleccionar jugadores</a></li>
-          <li class="nav-item"><a class="nav-link" href="equipo.html">Mi equipo</a></li>
-          <li class="nav-item"><a class="nav-link" href="ranking.html">Ranking</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="../index.html">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="seleccion.html">Seleccionar jugadores</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="equipo.html">Mi equipo</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="ranking.html">Ranking</a>
+          </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Más</a>
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Más
+            </a>
             <ul class="dropdown-menu dropdown-menu-end">
               <li><a class="dropdown-item" href="admin.html">Admin</a></li>
               <li id="navSession"></li>
@@ -38,38 +48,42 @@
     </div>
   </nav>
 
-  <!-- Main content -->
-  <main class="container" style="padding-top: 100px;">
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="container mt-5 pt-5">
     <div class="row">
       <div class="col-12">
         <div class="card bg-dark border-success">
           <div class="card-body">
-            <h1 class="card-title text-success" id="pageTitle">Juego</h1>
-            <p class="card-text text-white-50" id="welcomeMsg">Cargando...</p>
+            <h1 class="card-title text-success mb-3" id="pageTitle">Juego</h1>
+            <p class="card-text text-white-50 mb-4" id="welcomeMsg">Cargando...</p>
 
-            <div id="gameArea" class="mt-4">
-              <!-- Zona de demostración: puedes extender aquí el contenido del juego -->
-              <div class="row g-3">
-                <div class="col-12 col-md-6">
-                  <div class="card bg-black border-success h-100">
+            <!-- Área de juego -->
+            <div id="gameArea">
+              <div class="row row-cols-1 row-cols-md-2 g-3">
+                
+                <!-- Card Mi equipo -->
+                <div class="col">
+                  <div class="card bg-dark border-success h-100">
                     <div class="card-body">
-                      <h5 class="text-success">Mi equipo</h5>
-                      <p class="text-white-50 small">Revisá y gestioná tu alineación.</p>
+                      <h2 class="text-success h5 mb-3">Mi equipo</h2>
+                      <p class="text-white-50 small mb-3">Revisá y gestioná tu alineación.</p>
                       <a href="equipo.html" class="btn btn-success">Ir a Mi equipo</a>
                     </div>
                   </div>
                 </div>
-                <div class="col-12 col-md-6">
-                  <div class="card bg-black border-success h-100">
+
+                <!-- Card Seleccionar jugadores -->
+                <div class="col">
+                  <div class="card bg-dark border-success h-100">
                     <div class="card-body">
-                      <h5 class="text-success">Seleccionar jugadores</h5>
-                      <p class="text-white-50 small">Explorá la base de datos y agregá jugadores.</p>
-                      <a href="/paginas/seleccion.html" class="btn btn-outline-success">Seleccionar</a>
+                      <h2 class="text-success h5 mb-3">Seleccionar jugadores</h2>
+                      <p class="text-white-50 small mb-3">Explorá la base de datos y agregá jugadores.</p>
+                      <a href="seleccion.html" class="btn btn-outline-success">Seleccionar</a>
                     </div>
                   </div>
                 </div>
-              </div>
 
+              </div>
             </div>
 
           </div>
@@ -78,7 +92,8 @@
     </div>
   </main>
 
-  <footer class="text-center py-4 py-md-5 bg-black mt-5">
+  <!-- FOOTER -->
+  <footer class="text-center py-4 py-md-5 bg-dark border-top border-success border-opacity-25 mt-5">
     <div class="container">
       <p class="text-light mb-0">© 2025 Fantasy League. Todos los derechos reservados ⚽</p>
     </div>
