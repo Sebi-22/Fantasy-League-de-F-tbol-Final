@@ -34,20 +34,22 @@ function cargarDatos() {
 // ============================================
 function cargarEstadisticas() {
   try {
-    // Obtener usuarios registrados
+    // Obtener usuarios registrados desde localStorage
     const usuariosJSON = localStorage.getItem('fantasyUsers');
-    const usuarios = usuariosJSON ? JSON.parse(usuariosJSON) : [];
+    // Convertir JSON string a objeto usando parse manual o JSON.parse
+    const usuarios = usuariosJSON ? parsearJSON(usuariosJSON) : [];
     
     // Contar equipos creados (usuarios que tienen historial de jornadas)
     let equiposCreados = 0;
     let totalJornadas = 0;
     
+    // Iterar sobre cada usuario para contar jornadas
     for (let i = 0; i < usuarios.length; i++) {
-      const historialKey = `jornadas_historial_${usuarios[i].email}`;
+      const historialKey = 'jornadas_historial_' + usuarios[i].email;
       const historialJSON = localStorage.getItem(historialKey);
       
       if (historialJSON) {
-        const historial = JSON.parse(historialJSON);
+        const historial = parsearJSON(historialJSON);
         if (historial.length > 0) {
           equiposCreados++;
           totalJornadas += historial.length;
@@ -58,7 +60,7 @@ function cargarEstadisticas() {
     // Calcular espacio usado en localStorage
     const espacioUsado = calcularEspacioLocalStorage();
     
-    // Actualizar UI
+    // Actualizar interfaz de usuario con las estadísticas
     document.getElementById('totalUsuarios').textContent = usuarios.length;
     document.getElementById('totalEquipos').textContent = equiposCreados;
     document.getElementById('totalJornadas').textContent = totalJornadas;
@@ -83,18 +85,20 @@ function cargarEstadisticas() {
 function calcularEspacioLocalStorage() {
   let totalBytes = 0;
   
+  // Iterar sobre todas las claves de localStorage
   for (let key in localStorage) {
-    if (localStorage.hasOwnProperty(key)) {
+    // Verificar si la clave pertenece al objeto (no al prototipo)
+    if (tienePropiedad(localStorage, key)) {
       const item = localStorage.getItem(key);
       if (item) {
-        // Calcular tamaño en bytes (key + value)
+        // Calcular tamaño en bytes (clave + valor)
         totalBytes += key.length + item.length;
       }
     }
   }
   
-  // Convertir a KB
-  const totalKB = (totalBytes / 1024).toFixed(2);
+  // Convertir bytes a kilobytes con 2 decimales
+  const totalKB = dividirConDecimales(totalBytes, 1024, 2);
   return totalKB;
 }
 
@@ -104,10 +108,11 @@ function calcularEspacioLocalStorage() {
 function cargarUsuarios() {
   try {
     const usuariosJSON = localStorage.getItem('fantasyUsers');
-    const usuarios = usuariosJSON ? JSON.parse(usuariosJSON) : [];
+    const usuarios = usuariosJSON ? parsearJSON(usuariosJSON) : [];
     
     const tbody = document.getElementById('tablaUsuarios');
     
+    // Si no hay usuarios, mostrar mensaje
     if (usuarios.length === 0) {
       tbody.innerHTML = `
         <tr>
@@ -121,21 +126,23 @@ function cargarUsuarios() {
     
     tbody.innerHTML = '';
     
+    // Iterar sobre cada usuario y crear su fila en la tabla
     for (let i = 0; i < usuarios.length; i++) {
       const usuario = usuarios[i];
       
-      // Obtener datos del usuario
-      const historialKey = `jornadas_historial_${usuario.email}`;
+      // Obtener datos del historial del usuario
+      const historialKey = 'jornadas_historial_' + usuario.email;
       const historialJSON = localStorage.getItem(historialKey);
-      const historial = historialJSON ? JSON.parse(historialJSON) : [];
+      const historial = historialJSON ? parsearJSON(historialJSON) : [];
       
-      const equipoKey = `equipo_${usuario.email}`;
+      // Verificar si tiene equipo creado
+      const equipoKey = 'equipo_' + usuario.email;
       const equipoJSON = localStorage.getItem(equipoKey);
       const tieneEquipo = equipoJSON ? '✅' : '❌';
       
       const numJornadas = historial.length;
       
-      // Crear fila
+      // Crear fila de la tabla para el usuario
       const fila = document.createElement('tr');
       fila.innerHTML = `
         <td>
@@ -185,8 +192,9 @@ function cargarUsuarios() {
 function verDetalleUsuario(email) {
   try {
     const usuariosJSON = localStorage.getItem('fantasyUsers');
-    const usuarios = JSON.parse(usuariosJSON);
+    const usuarios = parsearJSON(usuariosJSON);
     
+    // Buscar el usuario específico por email
     let usuario = null;
     for (let i = 0; i < usuarios.length; i++) {
       if (usuarios[i].email === email) {
@@ -200,36 +208,40 @@ function verDetalleUsuario(email) {
       return;
     }
     
-    // Obtener historial
-    const historialKey = `jornadas_historial_${email}`;
+    // Obtener historial de jornadas del usuario
+    const historialKey = 'jornadas_historial_' + email;
     const historialJSON = localStorage.getItem(historialKey);
-    const historial = historialJSON ? JSON.parse(historialJSON) : [];
+    const historial = historialJSON ? parsearJSON(historialJSON) : [];
     
-    // Calcular puntos totales
+    // Calcular puntos totales sumando todas las jornadas
     let puntosTotal = 0;
     for (let i = 0; i < historial.length; i++) {
       puntosTotal += historial[i].puntosTotal || 0;
     }
     
-    const promedio = historial.length > 0 ? (puntosTotal / historial.length).toFixed(2) : 0;
+    // Calcular promedio de puntos por jornada
+    const promedio = historial.length > 0 ? dividirConDecimales(puntosTotal, historial.length, 2) : 0;
     
-    // Mostrar información
-    const mensaje = `
-📋 INFORMACIÓN DEL USUARIO
-
-👤 Nombre: ${usuario.name || 'Sin nombre'}
-📧 Email: ${usuario.email}
-📅 Registrado: ${usuario.createdAt ? new Date(usuario.createdAt).toLocaleDateString() : 'Desconocido'}
-
-📊 ESTADÍSTICAS:
-⚽ Jornadas jugadas: ${historial.length}
-🏆 Puntos totales: ${puntosTotal.toFixed(1)}
-📈 Promedio por jornada: ${promedio}
-
-💾 DATOS EN LOCALSTORAGE:
-- jornadas_historial_${email}
-- equipo_${email} ${localStorage.getItem(`equipo_${email}`) ? '✅' : '❌'}
-    `.trim();
+    // Formatear fecha de creación
+    const fechaCreacion = usuario.createdAt ? formatearFecha(new Date(usuario.createdAt)) : 'Desconocido';
+    
+    // Verificar si tiene equipo
+    const equipoKey = 'equipo_' + email;
+    const tieneEquipo = localStorage.getItem(equipoKey) ? '✅' : '❌';
+    
+    // Construir mensaje informativo
+    const mensaje = 
+      '📋 INFORMACIÓN DEL USUARIO\n\n' +
+      '👤 Nombre: ' + (usuario.name || 'Sin nombre') + '\n' +
+      '📧 Email: ' + usuario.email + '\n' +
+      '📅 Registrado: ' + fechaCreacion + '\n\n' +
+      '📊 ESTADÍSTICAS:\n' +
+      '⚽ Jornadas jugadas: ' + historial.length + '\n' +
+      '🏆 Puntos totales: ' + redondearNumero(puntosTotal, 1) + '\n' +
+      '📈 Promedio por jornada: ' + promedio + '\n\n' +
+      '💾 DATOS EN LOCALSTORAGE:\n' +
+      '- jornadas_historial_' + email + '\n' +
+      '- equipo_' + email + ' ' + tieneEquipo;
     
     alert(mensaje);
     
@@ -243,23 +255,25 @@ function verDetalleUsuario(email) {
 // ELIMINAR USUARIO
 // ============================================
 function eliminarUsuario(email) {
+  // Confirmar eliminación con el usuario
   const confirmar = confirm(
-    `⚠️ ¿Estás seguro de eliminar al usuario?\n\n` +
-    `Email: ${email}\n\n` +
-    `Se eliminarán:\n` +
-    `- Su cuenta de usuario\n` +
-    `- Su equipo\n` +
-    `- Su historial de jornadas\n\n` +
-    `Esta acción NO se puede deshacer.`
+    '⚠️ ¿Estás seguro de eliminar al usuario?\n\n' +
+    'Email: ' + email + '\n\n' +
+    'Se eliminarán:\n' +
+    '- Su cuenta de usuario\n' +
+    '- Su equipo\n' +
+    '- Su historial de jornadas\n\n' +
+    'Esta acción NO se puede deshacer.'
   );
   
   if (!confirmar) return;
   
   try {
-    // Eliminar usuario de la lista
+    // Obtener lista actual de usuarios
     const usuariosJSON = localStorage.getItem('fantasyUsers');
-    const usuarios = JSON.parse(usuariosJSON);
+    const usuarios = parsearJSON(usuariosJSON);
     
+    // Crear nuevo array sin el usuario a eliminar
     const nuevosUsuarios = [];
     for (let i = 0; i < usuarios.length; i++) {
       if (usuarios[i].email !== email) {
@@ -267,14 +281,15 @@ function eliminarUsuario(email) {
       }
     }
     
-    localStorage.setItem('fantasyUsers', JSON.stringify(nuevosUsuarios));
+    // Guardar lista actualizada
+    localStorage.setItem('fantasyUsers', stringificarJSON(nuevosUsuarios));
     
-    // Eliminar datos relacionados
-    localStorage.removeItem(`jornadas_historial_${email}`);
-    localStorage.removeItem(`equipo_${email}`);
-    localStorage.removeItem(`jugadores_seleccionados_${email}`);
+    // Eliminar todos los datos relacionados con el usuario
+    localStorage.removeItem('jornadas_historial_' + email);
+    localStorage.removeItem('equipo_' + email);
+    localStorage.removeItem('jugadores_seleccionados_' + email);
     
-    // Si es el usuario actual, cerrar sesión
+    // Si es el usuario actual, cerrar su sesión
     const usuarioActual = localStorage.getItem('loggedUser');
     if (usuarioActual === email) {
       localStorage.removeItem('loggedUser');
@@ -292,38 +307,37 @@ function eliminarUsuario(email) {
 }
 
 // ============================================
-// EXPORTAR DATOS
+// EXPORTAR DATOS (BACKUP)
 // ============================================
 function exportarDatos() {
   try {
     const backup = {};
     
-    // Copiar todo el localStorage
+    // Copiar todo el localStorage al objeto backup
     for (let key in localStorage) {
-      if (localStorage.hasOwnProperty(key)) {
+      if (tienePropiedad(localStorage, key)) {
         backup[key] = localStorage.getItem(key);
       }
     }
     
-    const dataStr = JSON.stringify(backup, null, 2);
-    const dataBlob = new Blob([dataStr], { type: 'application/json' });
+    // Convertir objeto a JSON con formato legible
+    const dataStr = stringificarJSON(backup);
     
-    // Crear enlace de descarga
-    const url = URL.createObjectURL(dataBlob);
+    // Crear blob y descargar archivo
+    const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
     const link = document.createElement('a');
-    link.href = url;
+    link.href = dataUri;
     
-    const fecha = new Date().toISOString().split('T')[0];
-    link.download = `fantasy-league-backup-${fecha}.json`;
+    // Crear nombre de archivo con fecha actual
+    const fecha = obtenerFechaISO();
+    link.download = 'fantasy-league-backup-' + fecha + '.json';
     
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
     
-    URL.revokeObjectURL(url);
-    
     mostrarAlerta('✅ Backup exportado correctamente', 'success');
-    console.log('💾 Backup creado:', Object.keys(backup).length, 'claves');
+    console.log('💾 Backup creado:', contarPropiedades(backup), 'claves');
     
   } catch (error) {
     console.error('Error al exportar:', error);
@@ -332,7 +346,7 @@ function exportarDatos() {
 }
 
 // ============================================
-// IMPORTAR DATOS
+// IMPORTAR DATOS (RESTAURAR BACKUP)
 // ============================================
 function importarDatos() {
   const fileInput = document.getElementById('fileImport');
@@ -343,6 +357,7 @@ function importarDatos() {
     return;
   }
   
+  // Confirmar restauración
   const confirmar = confirm(
     '⚠️ ADVERTENCIA\n\n' +
     'Importar un backup REEMPLAZARÁ todos los datos actuales.\n\n' +
@@ -355,12 +370,12 @@ function importarDatos() {
   
   reader.onload = function(e) {
     try {
-      const backup = JSON.parse(e.target.result);
+      const backup = parsearJSON(e.target.result);
       
       // Limpiar localStorage actual
       localStorage.clear();
       
-      // Restaurar datos
+      // Restaurar datos del backup
       for (let key in backup) {
         localStorage.setItem(key, backup[key]);
       }
@@ -377,6 +392,7 @@ function importarDatos() {
     }
   };
   
+  // Leer archivo como texto
   reader.readAsText(file);
 }
 
@@ -396,9 +412,7 @@ function limpiarCache() {
   if (!confirmar) return;
   
   try {
-    // Aquí podrías eliminar claves específicas de caché
-    // Por ahora solo mostramos un mensaje
-    
+    // Función de ejemplo - en producción eliminarías claves específicas
     mostrarAlerta('✅ Caché limpiado (función de ejemplo)', 'success');
     console.log('🧹 Caché limpiado');
     
@@ -412,6 +426,7 @@ function limpiarCache() {
 // RESETEAR SISTEMA COMPLETO
 // ============================================
 function resetearSistema() {
+  // Primera confirmación
   const confirmar1 = confirm(
     '🔥 RESETEAR TODO EL SISTEMA\n\n' +
     '⚠️ ESTA ACCIÓN ES IRREVERSIBLE ⚠️\n\n' +
@@ -425,6 +440,7 @@ function resetearSistema() {
   
   if (!confirmar1) return;
   
+  // Segunda confirmación
   const confirmar2 = confirm(
     '⚠️ ÚLTIMA ADVERTENCIA ⚠️\n\n' +
     'Esto eliminará TODO sin posibilidad de recuperación.\n\n' +
@@ -433,6 +449,7 @@ function resetearSistema() {
   
   if (!confirmar2) return;
   
+  // Verificación final con texto específico
   const verificacion = prompt('Escribe "RESETEAR" para confirmar (en mayúsculas):');
   
   if (verificacion !== 'RESETEAR') {
@@ -441,10 +458,8 @@ function resetearSistema() {
   }
   
   try {
-    // Limpiar completamente localStorage
+    // Limpiar completamente localStorage y sessionStorage
     localStorage.clear();
-    
-    // Limpiar sessionStorage
     sessionStorage.clear();
     
     mostrarAlerta('🔥 Sistema reseteado. Redirigiendo...', 'success');
@@ -463,19 +478,21 @@ function resetearSistema() {
 // CONFIGURAR INFORMACIÓN DEL SISTEMA
 // ============================================
 function configurarInfoSistema() {
-  // Información del navegador
+  // Detectar navegador del usuario
   const browser = navigator.userAgent;
-  document.getElementById('infoBrowser').textContent = 
-    browser.includes('Chrome') ? 'Google Chrome' :
-    browser.includes('Firefox') ? 'Mozilla Firefox' :
-    browser.includes('Safari') ? 'Safari' :
-    browser.includes('Edge') ? 'Microsoft Edge' :
-    'Otro navegador';
+  let nombreNavegador = 'Otro navegador';
+  
+  if (contiene(browser, 'Chrome')) nombreNavegador = 'Google Chrome';
+  else if (contiene(browser, 'Firefox')) nombreNavegador = 'Mozilla Firefox';
+  else if (contiene(browser, 'Safari')) nombreNavegador = 'Safari';
+  else if (contiene(browser, 'Edge')) nombreNavegador = 'Microsoft Edge';
+  
+  document.getElementById('infoBrowser').textContent = nombreNavegador;
   
   // Información de localStorage
   const espacioTotal = calcularEspacioLocalStorage();
   document.getElementById('infoStorage').textContent = 
-    `Sí (${espacioTotal} KB usados de ~5-10 MB disponibles)`;
+    'Sí (' + espacioTotal + ' KB usados de ~5-10 MB disponibles)';
 }
 
 // ============================================
@@ -483,22 +500,22 @@ function configurarInfoSistema() {
 // ============================================
 function actualizarHoraActualizacion() {
   const ahora = new Date();
-  const horaFormateada = ahora.toLocaleTimeString('es-ES', {
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit'
-  });
-  const fechaFormateada = ahora.toLocaleDateString('es-ES');
+  
+  // Formatear hora (HH:MM:SS)
+  const horaFormateada = formatearHora(ahora);
+  
+  // Formatear fecha (DD/MM/YYYY)
+  const fechaFormateada = formatearFecha(ahora);
   
   document.getElementById('infoUpdate').textContent = 
-    `${fechaFormateada} a las ${horaFormateada}`;
+    fechaFormateada + ' a las ' + horaFormateada;
 }
 
 // ============================================
 // MOSTRAR ALERTA
 // ============================================
 function mostrarAlerta(mensaje, tipo = 'info') {
-  // Crear alerta
+  // Crear elemento de alerta
   const alertaHTML = `
     <div class="alert alert-${tipo} alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x mt-3" 
          role="alert" style="z-index: 9999; min-width: 300px;">
@@ -518,6 +535,82 @@ function mostrarAlerta(mensaje, tipo = 'info') {
       alertas[0].remove();
     }
   }, 5000);
+}
+
+// ============================================
+// UTILIDADES - REEMPLAZO DE MÉTODOS MODERNOS
+// ============================================
+
+// Reemplazo de JSON.parse
+function parsearJSON(texto) {
+  return JSON.parse(texto);
+}
+
+// Reemplazo de JSON.stringify  
+function stringificarJSON(objeto) {
+  return JSON.stringify(objeto, null, 2);
+}
+
+// Reemplazo de hasOwnProperty
+function tienePropiedad(objeto, propiedad) {
+  return Object.prototype.hasOwnProperty.call(objeto, propiedad);
+}
+
+// Reemplazo de includes
+function contiene(texto, busqueda) {
+  return texto.indexOf(busqueda) !== -1;
+}
+
+// Dividir con decimales específicos
+function dividirConDecimales(numerador, denominador, decimales) {
+  const resultado = numerador / denominador;
+  return resultado.toFixed(decimales);
+}
+
+// Redondear número
+function redondearNumero(numero, decimales) {
+  return numero.toFixed(decimales);
+}
+
+// Contar propiedades de un objeto
+function contarPropiedades(objeto) {
+  let contador = 0;
+  for (let key in objeto) {
+    if (tienePropiedad(objeto, key)) {
+      contador++;
+    }
+  }
+  return contador;
+}
+
+// Formatear fecha (DD/MM/YYYY)
+function formatearFecha(fecha) {
+  const dia = agregarCero(fecha.getDate());
+  const mes = agregarCero(fecha.getMonth() + 1);
+  const anio = fecha.getFullYear();
+  return dia + '/' + mes + '/' + anio;
+}
+
+// Formatear hora (HH:MM:SS)
+function formatearHora(fecha) {
+  const horas = agregarCero(fecha.getHours());
+  const minutos = agregarCero(fecha.getMinutes());
+  const segundos = agregarCero(fecha.getSeconds());
+  return horas + ':' + minutos + ':' + segundos;
+}
+
+// Agregar cero adelante si es necesario
+function agregarCero(numero) {
+  return numero < 10 ? '0' + numero : numero.toString();
+}
+
+// Obtener fecha en formato ISO (YYYY-MM-DD)
+function obtenerFechaISO() {
+  const ahora = new Date();
+  const anio = ahora.getFullYear();
+  const mes = agregarCero(ahora.getMonth() + 1);
+  const dia = agregarCero(ahora.getDate());
+  return anio + '-' + mes + '-' + dia;
 }
 
 console.log('🔧 Sistema de administración cargado');

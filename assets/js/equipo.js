@@ -33,7 +33,7 @@ function verificarSesion() {
 // ============================================
 function cargarEquipo() {
   const usuario = localStorage.getItem('loggedUser');
-  const equipoKey = `miEquipoFantasy_${usuario}`;
+  const equipoKey = 'miEquipoFantasy_' + usuario;
   let equipoGuardado = localStorage.getItem(equipoKey);
   
   // Si no existe con clave de usuario, intentar con clave global
@@ -47,7 +47,8 @@ function cargarEquipo() {
   }
 
   try {
-    miEquipo = JSON.parse(equipoGuardado);
+    // Parsear JSON a objeto
+    miEquipo = parsearJSON(equipoGuardado);
     console.log('✅ Equipo cargado:', miEquipo);
     mostrarEquipo();
   } catch (error) {
@@ -62,7 +63,7 @@ function cargarEquipo() {
 function inicializarSistema() {
   if (typeof SistemaJornadas !== 'undefined') {
     sistemaJornadas = new SistemaJornadas();
-    console.log(`✅ Sistema iniciado - Jornada actual: ${sistemaJornadas.jornadaActual}`);
+    console.log('✅ Sistema iniciado - Jornada actual: ' + sistemaJornadas.jornadaActual);
     actualizarInfoJornada();
     mostrarHistorial();
   } else {
@@ -98,7 +99,7 @@ function mostrarEquipo() {
   
   if (!container || !miEquipo) return;
 
-  // Agrupar por posición
+  // Agrupar jugadores por posición
   const porPosicion = {
     arquero: [],
     defensa: [],
@@ -106,77 +107,90 @@ function mostrarEquipo() {
     delantero: []
   };
 
-  miEquipo.jugadores.forEach(j => {
-    porPosicion[j.posicion].push(j);
-  });
+  // Clasificar cada jugador según su posición
+  for (let i = 0; i < miEquipo.jugadores.length; i++) {
+    const jugador = miEquipo.jugadores[i];
+    porPosicion[jugador.posicion].push(jugador);
+  }
 
   let html = '<div class="row g-3">';
 
-  // Mostrar por posición
-  Object.keys(porPosicion).forEach(posicion => {
-    if (porPosicion[posicion].length > 0) {
-      html += `
-        <div class="col-12">
-          <h5 class="text-${obtenerColorPosicion(posicion)} mb-3">
-            ${obtenerEmojiPosicion(posicion)} ${capitalizar(posicion)}s
-          </h5>
-          <div class="row g-3">
-      `;
+  // Definir orden de posiciones a mostrar
+  const posiciones = ['arquero', 'defensa', 'mediocampista', 'delantero'];
 
-      porPosicion[posicion].forEach(jugador => {
+  // Mostrar cada posición con sus jugadores
+  for (let p = 0; p < posiciones.length; p++) {
+    const posicion = posiciones[p];
+    const jugadoresPosicion = porPosicion[posicion];
+    
+    if (jugadoresPosicion.length > 0) {
+      html += '<div class="col-12">';
+      html += '<h5 class="text-' + obtenerColorPosicion(posicion) + ' mb-3">';
+      html += obtenerEmojiPosicion(posicion) + ' ' + capitalizar(posicion) + 's';
+      html += '</h5>';
+      html += '<div class="row g-3">';
+
+      // Iterar sobre cada jugador de esta posición
+      for (let j = 0; j < jugadoresPosicion.length; j++) {
+        const jugador = jugadoresPosicion[j];
+        
+        // Obtener totales del jugador si existen
         const totales = sistemaJornadas ? sistemaJornadas.calcularTotalesJugador(jugador.id) : null;
         
-        html += `
-          <div class="col-md-6 col-lg-4">
-            <div class="card bg-dark border-${obtenerColorPosicion(posicion)} h-100">
-              <div class="card-body">
-                <!-- FOTO DEL JUGADOR -->
-                <div class="text-center mb-3">
-                  <img 
-                    src="../${jugador.foto}" 
-                    alt="${jugador.nombre}" 
-                    class="img-fluid rounded-circle border border-${obtenerColorPosicion(posicion)} border-3"
-                    style="width: 100px; height: 100px; object-fit: cover;"
-                    onerror="this.src='../assets/imagenes/default-player.png'"
-                  >
-                </div>
-                
-                <div class="d-flex justify-content-between align-items-start mb-2">
-                  <h6 class="card-title mb-0">${jugador.nombre}</h6>
-                  <span class="badge bg-${obtenerColorPosicion(posicion)}">
-                    ${jugador.posicion.substring(0, 3).toUpperCase()}
-                  </span>
-                </div>
-                
-                <div class="text-center mb-2">
-                  <span class="badge bg-secondary">${jugador.equipo}</span>
-                </div>
-                
-                <p class="text-center text-white-50 small mb-2 fw-semibold">
-                  ${jugador.nombre}
-                </p>
-                
-                <div class="d-flex justify-content-between align-items-center">
-                  <span class="text-warning fw-bold">💰 $${jugador.precio}M</span>
-                  ${totales ? `
-                    <span class="badge bg-success">
-                      ${totales.puntosTotal} pts (${totales.jornadasJugadas}J)
-                    </span>
-                  ` : `
-                    <span class="badge bg-secondary">
-                      ${jugador.puntosPromedio} pts prom.
-                    </span>
-                  `}
-                </div>
-              </div>
-            </div>
-          </div>
-        `;
-      });
+        html += '<div class="col-md-6 col-lg-4">';
+        html += '<div class="card bg-dark border-' + obtenerColorPosicion(posicion) + ' h-100">';
+        html += '<div class="card-body">';
+        
+        // FOTO DEL JUGADOR
+        html += '<div class="text-center mb-3">';
+        html += '<img src="../' + jugador.foto + '" ';
+        html += 'alt="' + jugador.nombre + '" ';
+        html += 'class="img-fluid rounded-circle border border-' + obtenerColorPosicion(posicion) + ' border-3" ';
+        html += 'style="width: 100px; height: 100px; object-fit: cover;" ';
+        html += 'onerror="this.src=\'../assets/imagenes/default-player.png\'">';
+        html += '</div>';
+        
+        // Nombre y posición
+        html += '<div class="d-flex justify-content-between align-items-start mb-2">';
+        html += '<h6 class="card-title mb-0">' + jugador.nombre + '</h6>';
+        html += '<span class="badge bg-' + obtenerColorPosicion(posicion) + '">';
+        html += extraerIniciales(jugador.posicion, 3);
+        html += '</span>';
+        html += '</div>';
+        
+        // Equipo
+        html += '<div class="text-center mb-2">';
+        html += '<span class="badge bg-secondary">' + jugador.equipo + '</span>';
+        html += '</div>';
+        
+        // Nombre completo
+        html += '<p class="text-center text-white-50 small mb-2 fw-semibold">';
+        html += jugador.nombre;
+        html += '</p>';
+        
+        // Precio y estadísticas
+        html += '<div class="d-flex justify-content-between align-items-center">';
+        html += '<span class="text-warning fw-bold">💰 $' + jugador.precio + 'M</span>';
+        
+        if (totales) {
+          html += '<span class="badge bg-success">';
+          html += totales.puntosTotal + ' pts (' + totales.jornadasJugadas + 'J)';
+          html += '</span>';
+        } else {
+          html += '<span class="badge bg-secondary">';
+          html += jugador.puntosPromedio + ' pts prom.';
+          html += '</span>';
+        }
+        
+        html += '</div>';
+        html += '</div>';
+        html += '</div>';
+        html += '</div>';
+      }
 
       html += '</div></div>';
     }
-  });
+  }
 
   html += '</div>';
   container.innerHTML = html;
@@ -196,20 +210,21 @@ function simularJornada() {
     return;
   }
 
-  // Confirmar simulación
+  // Confirmar simulación con el usuario
   const confirmar = confirm(
-    `¿Simular Jornada ${sistemaJornadas.jornadaActual}?\n\n` +
-    `Se generarán estadísticas para tus ${miEquipo.jugadores.length} jugadores.`
+    '¿Simular Jornada ' + sistemaJornadas.jornadaActual + '?\n\n' +
+    'Se generarán estadísticas para tus ' + miEquipo.jugadores.length + ' jugadores.'
   );
 
   if (!confirmar) return;
 
-  // Mostrar loading
+  // Mostrar indicador de carga
   mostrarLoading(true);
 
   // Simular con delay para efecto visual
   setTimeout(() => {
     try {
+      // Ejecutar simulación
       const resultado = sistemaJornadas.simularJornada(miEquipo.jugadores);
       
       if (resultado) {
@@ -218,9 +233,9 @@ function simularJornada() {
         mostrarHistorial();
         mostrarEquipo(); // Actualizar cards con nuevos totales
         
-        // Toast de éxito
+        // Mostrar notificación de éxito
         mostrarToast(
-          `✅ Jornada ${resultado.numeroJornada} simulada - ${resultado.puntosTotal} puntos totales`,
+          '✅ Jornada ' + resultado.numeroJornada + ' simulada - ' + resultado.puntosTotal + ' puntos totales',
           'success'
         );
       }
@@ -241,78 +256,85 @@ function mostrarResultadosJornada(resultado) {
   const modalBody = document.getElementById('resultadosModalBody');
   const modalTitle = document.getElementById('resultadosModalTitle');
 
-  modalTitle.textContent = `Resultados Jornada ${resultado.numeroJornada}`;
+  modalTitle.textContent = 'Resultados Jornada ' + resultado.numeroJornada;
 
-  let html = `
-    <div class="alert alert-success mb-3">
-      <h5 class="mb-2">🎉 Puntos Totales: ${resultado.puntosTotal}</h5>
-      <small>Promedio por jugador: ${(resultado.puntosTotal / resultado.resultados.length).toFixed(2)}</small>
-    </div>
-  `;
+  // Calcular promedio por jugador
+  const promedio = dividirConDecimales(resultado.puntosTotal, resultado.resultados.length, 2);
 
-  // Ordenar por puntos (mayor a menor)
-  const ordenados = [...resultado.resultados].sort((a, b) => b.puntos - a.puntos);
+  let html = '<div class="alert alert-success mb-3">';
+  html += '<h5 class="mb-2">🎉 Puntos Totales: ' + resultado.puntosTotal + '</h5>';
+  html += '<small>Promedio por jugador: ' + promedio + '</small>';
+  html += '</div>';
+
+  // Ordenar resultados por puntos (mayor a menor)
+  const ordenados = ordenarPorPuntos(resultado.resultados);
 
   // Top 3 jugadores
   html += '<h6 class="text-success mb-3">⭐ Top 3 Jugadores</h6>';
-  ordenados.slice(0, 3).forEach((r, index) => {
-    const medalla = ['🥇', '🥈', '🥉'][index];
-    const colorBorde = ['success', 'secondary', 'warning'][index];
-    const jugadorData = miEquipo.jugadores.find(j => j.id === r.jugadorId);
+  
+  const medallas = ['🥇', '🥈', '🥉'];
+  const coloresBorde = ['success', 'secondary', 'warning'];
+  
+  // Mostrar solo los primeros 3
+  const top3 = obtenerPrimeros(ordenados, 3);
+  
+  for (let i = 0; i < top3.length; i++) {
+    const r = top3[i];
+    const medalla = medallas[i];
+    const colorBorde = coloresBorde[i];
     
-    html += `
-      <div class="card bg-dark border-${colorBorde} mb-2">
-        <div class="card-body py-2">
-          <div class="d-flex align-items-center justify-content-between">
-            <div class="d-flex align-items-center gap-2">
-              ${jugadorData && jugadorData.foto ? `
-                <img 
-                  src="../${jugadorData.foto}" 
-                  alt="${r.nombre}" 
-                  class="rounded-circle border border-${colorBorde} border-2"
-                  style="width: 50px; height: 50px; object-fit: cover;"
-                  onerror="this.style.display='none'"
-                >
-              ` : ''}
-              <div>
-                <div class="fw-bold">${medalla} ${r.nombre}</div>
-                <small class="text-white-50">${formatearEstadisticas(r.estadisticas)}</small>
-              </div>
-            </div>
-            <span class="badge bg-${colorBorde} fs-6">${r.puntos} pts</span>
-          </div>
-        </div>
-      </div>
-    `;
-  });
+    // Buscar datos del jugador
+    const jugadorData = buscarJugadorPorId(miEquipo.jugadores, r.jugadorId);
+    
+    html += '<div class="card bg-dark border-' + colorBorde + ' mb-2">';
+    html += '<div class="card-body py-2">';
+    html += '<div class="d-flex align-items-center justify-content-between">';
+    html += '<div class="d-flex align-items-center gap-2">';
+    
+    // Foto si está disponible
+    if (jugadorData && jugadorData.foto) {
+      html += '<img src="../' + jugadorData.foto + '" ';
+      html += 'alt="' + r.nombre + '" ';
+      html += 'class="rounded-circle border border-' + colorBorde + ' border-2" ';
+      html += 'style="width: 50px; height: 50px; object-fit: cover;" ';
+      html += 'onerror="this.style.display=\'none\'">';
+    }
+    
+    html += '<div>';
+    html += '<div class="fw-bold">' + medalla + ' ' + r.nombre + '</div>';
+    html += '<small class="text-white-50">' + formatearEstadisticas(r.estadisticas) + '</small>';
+    html += '</div>';
+    html += '</div>';
+    html += '<span class="badge bg-' + colorBorde + ' fs-6">' + r.puntos + ' pts</span>';
+    html += '</div>';
+    html += '</div>';
+    html += '</div>';
+  }
 
-  // Todos los resultados
+  // Todos los resultados en tabla
   html += '<h6 class="text-info mt-4 mb-3">📊 Todos los Resultados</h6>';
   html += '<div class="table-responsive">';
   html += '<table class="table table-dark table-sm table-striped">';
-  html += `
-    <thead>
-      <tr>
-        <th>Jugador</th>
-        <th>Pos</th>
-        <th class="text-end">Puntos</th>
-      </tr>
-    </thead>
-    <tbody>
-  `;
+  html += '<thead>';
+  html += '<tr>';
+  html += '<th>Jugador</th>';
+  html += '<th>Pos</th>';
+  html += '<th class="text-end">Puntos</th>';
+  html += '</tr>';
+  html += '</thead>';
+  html += '<tbody>';
 
-  ordenados.forEach(r => {
-    html += `
-      <tr>
-        <td>
-          ${obtenerEmojiPosicion(r.posicion)} ${r.nombre}
-          <br><small class="text-white-50">${formatearEstadisticas(r.estadisticas)}</small>
-        </td>
-        <td><span class="badge bg-secondary">${r.posicion.substring(0, 3).toUpperCase()}</span></td>
-        <td class="text-end fw-bold">${r.puntos}</td>
-      </tr>
-    `;
-  });
+  for (let i = 0; i < ordenados.length; i++) {
+    const r = ordenados[i];
+    html += '<tr>';
+    html += '<td>';
+    html += obtenerEmojiPosicion(r.posicion) + ' ' + r.nombre;
+    html += '<br><small class="text-white-50">' + formatearEstadisticas(r.estadisticas) + '</small>';
+    html += '</td>';
+    html += '<td><span class="badge bg-secondary">' + extraerIniciales(r.posicion, 3) + '</span></td>';
+    html += '<td class="text-end fw-bold">' + r.puntos + '</td>';
+    html += '</tr>';
+  }
 
   html += '</tbody></table></div>';
 
@@ -326,14 +348,14 @@ function mostrarResultadosJornada(resultado) {
 function formatearEstadisticas(stats) {
   const partes = [];
   
-  if (stats.goles > 0) partes.push(`⚽ ${stats.goles}G`);
-  if (stats.asistencias > 0) partes.push(`🎯 ${stats.asistencias}A`);
-  if (stats.atajadas > 0) partes.push(`🧤 ${stats.atajadas} atajadas`);
-  if (stats.golesRecibidos !== undefined) partes.push(`🥅 ${stats.golesRecibidos} recibidos`);
-  if (stats.tarjetasAmarillas > 0) partes.push(`🟨 ${stats.tarjetasAmarillas}`);
-  if (stats.tarjetasRojas > 0) partes.push(`🟥 ${stats.tarjetasRojas}`);
+  if (stats.goles > 0) partes.push('⚽ ' + stats.goles + 'G');
+  if (stats.asistencias > 0) partes.push('🎯 ' + stats.asistencias + 'A');
+  if (stats.atajadas > 0) partes.push('🧤 ' + stats.atajadas + ' atajadas');
+  if (stats.golesRecibidos !== undefined) partes.push('🥅 ' + stats.golesRecibidos + ' recibidos');
+  if (stats.tarjetasAmarillas > 0) partes.push('🟨 ' + stats.tarjetasAmarillas);
+  if (stats.tarjetasRojas > 0) partes.push('🟥 ' + stats.tarjetasRojas);
   
-  return partes.length > 0 ? partes.join(' • ') : 'Sin estadísticas destacadas';
+  return partes.length > 0 ? unirConSeparador(partes, ' • ') : 'Sin estadísticas destacadas';
 }
 
 // ============================================
@@ -355,8 +377,12 @@ function actualizarInfoJornada() {
   }
 
   if (puntosAcumuladosSpan && miEquipo) {
-    const puntosTotal = historial.reduce((total, j) => total + (j.puntosTotal || 0), 0);
-    puntosAcumuladosSpan.textContent = puntosTotal.toFixed(1);
+    // Sumar todos los puntos del historial
+    let puntosTotal = 0;
+    for (let i = 0; i < historial.length; i++) {
+      puntosTotal += historial[i].puntosTotal || 0;
+    }
+    puntosAcumuladosSpan.textContent = redondearNumero(puntosTotal, 1);
   }
 }
 
@@ -382,29 +408,30 @@ function mostrarHistorial() {
   let html = '<div class="list-group">';
 
   // Mostrar últimas 10 jornadas (más recientes primero)
-  historial.slice(-10).reverse().forEach(jornada => {
-    const fecha = new Date(jornada.fecha).toLocaleDateString('es-AR', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric'
-    });
+  const ultimas10 = obtenerUltimos(historial, 10);
+  const invertidas = invertirArray(ultimas10);
 
-    html += `
-      <div class="list-group-item bg-dark border-success mb-2">
-        <div class="d-flex justify-content-between align-items-center">
-          <div>
-            <h6 class="mb-1">Jornada ${jornada.numeroJornada}</h6>
-            <small class="text-white-50">${fecha}</small>
-          </div>
-          <div class="text-end">
-            <span class="badge bg-success fs-6">${jornada.puntosTotal} pts</span>
-            <br>
-            <small class="text-white-50">${jornada.resultados.length} jugadores</small>
-          </div>
-        </div>
-      </div>
-    `;
-  });
+  for (let i = 0; i < invertidas.length; i++) {
+    const jornada = invertidas[i];
+    
+    // Formatear fecha
+    const fecha = new Date(jornada.fecha);
+    const fechaTexto = formatearFechaCorta(fecha);
+
+    html += '<div class="list-group-item bg-dark border-success mb-2">';
+    html += '<div class="d-flex justify-content-between align-items-center">';
+    html += '<div>';
+    html += '<h6 class="mb-1">Jornada ' + jornada.numeroJornada + '</h6>';
+    html += '<small class="text-white-50">' + fechaTexto + '</small>';
+    html += '</div>';
+    html += '<div class="text-end">';
+    html += '<span class="badge bg-success fs-6">' + jornada.puntosTotal + ' pts</span>';
+    html += '<br>';
+    html += '<small class="text-white-50">' + jornada.resultados.length + ' jugadores</small>';
+    html += '</div>';
+    html += '</div>';
+    html += '</div>';
+  }
 
   html += '</div>';
   container.innerHTML = html;
@@ -479,10 +506,142 @@ function obtenerColorPosicion(posicion) {
 }
 
 function capitalizar(texto) {
-  return texto.charAt(0).toUpperCase() + texto.slice(1);
+  if (!texto || texto.length === 0) return '';
+  return texto[0].toUpperCase() + extraerDesde(texto, 1);
 }
 
 function mostrarToast(mensaje, tipo = 'success') {
   // Implementar según tu sistema de toasts
-  console.log(`[${tipo}] ${mensaje}`);
+  console.log('[' + tipo + '] ' + mensaje);
+}
+
+// ============================================
+// FUNCIONES HELPER - REEMPLAZO DE MÉTODOS MODERNOS
+// ============================================
+
+// Parsear JSON
+function parsearJSON(texto) {
+  return JSON.parse(texto);
+}
+
+// Dividir con decimales
+function dividirConDecimales(numerador, denominador, decimales) {
+  const resultado = numerador / denominador;
+  return resultado.toFixed(decimales);
+}
+
+// Redondear número
+function redondearNumero(numero, decimales) {
+  return numero.toFixed(decimales);
+}
+
+// Ordenar array por puntos (mayor a menor)
+function ordenarPorPuntos(array) {
+  const copia = [];
+  for (let i = 0; i < array.length; i++) {
+    copia.push(array[i]);
+  }
+  
+  // Bubble sort descendente por puntos
+  for (let i = 0; i < copia.length - 1; i++) {
+    for (let j = 0; j < copia.length - i - 1; j++) {
+      if (copia[j].puntos < copia[j + 1].puntos) {
+        const temp = copia[j];
+        copia[j] = copia[j + 1];
+        copia[j + 1] = temp;
+      }
+    }
+  }
+  
+  return copia;
+}
+
+// Obtener primeros N elementos
+function obtenerPrimeros(array, cantidad) {
+  const resultado = [];
+  const limite = array.length < cantidad ? array.length : cantidad;
+  
+  for (let i = 0; i < limite; i++) {
+    resultado.push(array[i]);
+  }
+  
+  return resultado;
+}
+
+// Obtener últimos N elementos
+function obtenerUltimos(array, cantidad) {
+  const resultado = [];
+  const inicio = array.length - cantidad;
+  const desde = inicio > 0 ? inicio : 0;
+  
+  for (let i = desde; i < array.length; i++) {
+    resultado.push(array[i]);
+  }
+  
+  return resultado;
+}
+
+// Invertir array
+function invertirArray(array) {
+  const resultado = [];
+  for (let i = array.length - 1; i >= 0; i--) {
+    resultado.push(array[i]);
+  }
+  return resultado;
+}
+
+// Buscar jugador por ID
+function buscarJugadorPorId(jugadores, id) {
+  for (let i = 0; i < jugadores.length; i++) {
+    if (jugadores[i].id === id) {
+      return jugadores[i];
+    }
+  }
+  return null;
+}
+
+// Unir array con separador
+function unirConSeparador(array, separador) {
+  if (array.length === 0) return '';
+  
+  let resultado = array[0];
+  for (let i = 1; i < array.length; i++) {
+    resultado += separador + array[i];
+  }
+  
+  return resultado;
+}
+
+// Extraer iniciales de texto
+function extraerIniciales(texto, cantidad) {
+  let resultado = '';
+  const limite = texto.length < cantidad ? texto.length : cantidad;
+  
+  for (let i = 0; i < limite; i++) {
+    resultado += texto[i];
+  }
+  
+  return resultado.toUpperCase();
+}
+
+// Extraer desde posición
+function extraerDesde(texto, desde) {
+  let resultado = '';
+  for (let i = desde; i < texto.length; i++) {
+    resultado += texto[i];
+  }
+  return resultado;
+}
+
+// Formatear fecha corta (DD/MM/YYYY)
+function formatearFechaCorta(fecha) {
+  const dia = agregarCero(fecha.getDate());
+  const mes = agregarCero(fecha.getMonth() + 1);
+  const anio = fecha.getFullYear();
+  return dia + '/' + mes + '/' + anio;
+}
+
+// Agregar cero adelante
+function agregarCero(numero) {
+  return numero < 10 ? '0' + numero : numero.toString();
 }

@@ -322,6 +322,7 @@ html {
   animation: statFadeIn 0.8s ease-out backwards;
   position: relative;
   overflow: hidden;
+  margin-bottom: 15%;
 }
 
 .stat-card::before {

@@ -4,6 +4,7 @@
 
 class SistemaLogin {
   constructor() {
+    // Usuarios de demostración predefinidos
     this.usuariosDemo = [
       {
         email: 'demo@fantasyliga.com',
@@ -13,33 +14,40 @@ class SistemaLogin {
     ];
   }
 
-  // Obtener usuarios guardados
+  // ============================================
+  // OBTENER USUARIOS GUARDADOS EN LOCALSTORAGE
+  // ============================================
   obtenerUsuariosGuardados() {
     const usuariosTexto = localStorage.getItem('fantasyUsers');
     if (usuariosTexto) {
-      // Convertir texto a array de objetos
-      const usuarios = JSON.parse(usuariosTexto);
+      // Convertir texto JSON a array de objetos
+      const usuarios = this.parsearJSON(usuariosTexto);
       return usuarios;
     }
     return this.usuariosDemo;
   }
 
-  // Guardar usuarios
+  // ============================================
+  // GUARDAR USUARIOS EN LOCALSTORAGE
+  // ============================================
   guardarUsuarios(usuarios) {
-    // Convertir array a texto
-    const usuariosTexto = JSON.stringify(usuarios);
+    // Convertir array a texto JSON
+    const usuariosTexto = this.stringificarJSON(usuarios);
     localStorage.setItem('fantasyUsers', usuariosTexto);
   }
 
-  // Validar email
+  // ============================================
+  // VALIDAR EMAIL
+  // ============================================
   validarEmail(email) {
     // Verificar si tiene @ y punto
-    if (email.indexOf('@') === -1) return false;
-    if (email.indexOf('.') === -1) return false;
+    if (this.buscarCaracter(email, '@') === -1) return false;
+    if (this.buscarCaracter(email, '.') === -1) return false;
     
-    const partes = email.split('@');
-    const antesArroba = partes[0];
-    const despuesArroba = partes[1];
+    // Dividir por @ para validar partes
+    const indiceSeparador = this.buscarCaracter(email, '@');
+    const antesArroba = this.extraerHasta(email, indiceSeparador);
+    const despuesArroba = this.extraerDesde(email, indiceSeparador + 1);
     
     if (antesArroba.length === 0) return false;
     if (!despuesArroba || despuesArroba.length === 0) return false;
@@ -47,7 +55,9 @@ class SistemaLogin {
     return true;
   }
 
-  // Quitar espacios del inicio y final de un texto
+  // ============================================
+  // QUITAR ESPACIOS DEL INICIO Y FINAL
+  // ============================================
   quitarEspacios(texto) {
     let inicio = 0;
     let fin = texto.length - 1;
@@ -71,7 +81,9 @@ class SistemaLogin {
     return resultado;
   }
 
-  // Mostrar error en campo
+  // ============================================
+  // MOSTRAR ERROR EN CAMPO
+  // ============================================
   mostrarErrorCampo(campoId, mensaje) {
     const campo = document.getElementById(campoId);
     const errorDiv = document.getElementById(campoId + 'Error');
@@ -82,7 +94,9 @@ class SistemaLogin {
     }
   }
 
-  // Limpiar error de campo
+  // ============================================
+  // LIMPIAR ERROR DE CAMPO
+  // ============================================
   limpiarErrorCampo(campoId) {
     const campo = document.getElementById(campoId);
     const errorDiv = document.getElementById(campoId + 'Error');
@@ -93,7 +107,9 @@ class SistemaLogin {
     }
   }
 
-  // Mostrar alerta
+  // ============================================
+  // MOSTRAR ALERTA
+  // ============================================
   mostrarAlerta(mensaje, tipo = 'danger') {
     const alerta = document.getElementById('loginAlert');
     alerta.className = 'alert alert-' + tipo;
@@ -106,7 +122,9 @@ class SistemaLogin {
     }, 5000);
   }
 
-  // Configurar botón para ver/ocultar contraseña
+  // ============================================
+  // CONFIGURAR BOTÓN PARA VER/OCULTAR CONTRASEÑA
+  // ============================================
   configurarTogglePassword() {
     const botonToggle = document.getElementById('togglePassword');
     const inputPassword = document.getElementById('password');
@@ -121,7 +139,9 @@ class SistemaLogin {
     }
   }
 
-  // Manejar el login
+  // ============================================
+  // MANEJAR EL LOGIN
+  // ============================================
   procesarLogin(evento) {
     evento.preventDefault();
     
@@ -130,7 +150,7 @@ class SistemaLogin {
     this.limpiarErrorCampo('password');
     document.getElementById('loginAlert').classList.add('d-none');
     
-    // Obtener valores
+    // Obtener valores de los campos
     const emailSinLimpiar = document.getElementById('email').value;
     const email = this.quitarEspacios(emailSinLimpiar);
     const password = document.getElementById('password').value;
@@ -154,7 +174,7 @@ class SistemaLogin {
     
     if (hayError) return;
     
-    // Mostrar loading
+    // Mostrar loading en botón
     const botonLogin = document.getElementById('loginBtn');
     const textoBoton = document.getElementById('loginBtnText');
     const spinnerBoton = document.getElementById('loginBtnSpinner');
@@ -168,7 +188,7 @@ class SistemaLogin {
     setTimeout(function() {
       const usuarios = self.obtenerUsuariosGuardados();
       
-      // Buscar usuario que coincida
+      // Buscar usuario que coincida con email y password
       let usuarioEncontrado = null;
       for (let i = 0; i < usuarios.length; i++) {
         if (usuarios[i].email === email && usuarios[i].password === password) {
@@ -178,7 +198,7 @@ class SistemaLogin {
       }
       
       if (usuarioEncontrado) {
-        // Login exitoso
+        // Login exitoso - crear sesión
         const fechaActual = new Date();
         const datosSesion = {
           email: usuarioEncontrado.email,
@@ -188,9 +208,10 @@ class SistemaLogin {
           username: usuarioEncontrado.username
         };
         
-        // Convertir objeto a texto
-        const textoSesion = JSON.stringify(datosSesion);
+        // Convertir objeto a texto JSON
+        const textoSesion = self.stringificarJSON(datosSesion);
         
+        // Guardar según la opción "Recordarme"
         if (recordarme) {
           localStorage.setItem('fantasySession', textoSesion);
         } else {
@@ -217,7 +238,9 @@ class SistemaLogin {
     }, 1500);
   }
 
-  // Recuperar contraseña
+  // ============================================
+  // RECUPERAR CONTRASEÑA
+  // ============================================
   procesarRecuperacion() {
     const emailRecuperarSinLimpiar = document.getElementById('recoverEmail').value;
     const emailRecuperar = this.quitarEspacios(emailRecuperarSinLimpiar);
@@ -246,7 +269,9 @@ class SistemaLogin {
     }, 1500);
   }
 
-  // Verificar si ya hay sesión activa
+  // ============================================
+  // VERIFICAR SI YA HAY SESIÓN ACTIVA
+  // ============================================
   verificarSesionExistente() {
     const sesionStorage = sessionStorage.getItem('fantasySession');
     const sesionLocal = localStorage.getItem('fantasySession');
@@ -255,7 +280,8 @@ class SistemaLogin {
     
     if (sesion) {
       try {
-        const datosSesion = JSON.parse(sesion);
+        // Convertir texto a objeto
+        const datosSesion = this.parsearJSON(sesion);
         if (datosSesion.loggedIn) {
           window.location.href = 'game.html';
         }
@@ -265,23 +291,26 @@ class SistemaLogin {
     }
   }
 
-  // Manejar parámetros de la URL
+  // ============================================
+  // MANEJAR PARÁMETROS DE LA URL
+  // ============================================
   manejarParametrosURL() {
     const url = window.location.search;
     if (!url) return;
     
     // Extraer parámetros manualmente
     const parametros = {};
-    const textoSinInterrogacion = url.substring(1);
-    const partes = textoSinInterrogacion.split('&');
+    const textoSinInterrogacion = this.extraerDesde(url, 1);
+    const partes = this.dividirPor(textoSinInterrogacion, '&');
     
     for (let i = 0; i < partes.length; i++) {
-      const par = partes[i].split('=');
+      const par = this.dividirPor(partes[i], '=');
       if (par.length === 2) {
         parametros[par[0]] = decodeURIComponent(par[1]);
       }
     }
     
+    // Prellenar email si viene en URL
     if (parametros.email) {
       const emailInput = document.getElementById('email');
       if (emailInput) {
@@ -289,12 +318,15 @@ class SistemaLogin {
       }
     }
     
+    // Mostrar mensaje si viene de registro
     if (parametros.registered === 'true') {
       this.mostrarAlerta('¡Registro exitoso! Ahora inicia sesión con tu nueva cuenta', 'success');
     }
   }
 
-  // Inicializar sistema
+  // ============================================
+  // INICIALIZAR SISTEMA
+  // ============================================
   inicializar() {
     // Verificar sesión existente
     this.verificarSesionExistente();
@@ -302,7 +334,7 @@ class SistemaLogin {
     // Manejar parámetros de URL
     this.manejarParametrosURL();
     
-    // Setup del formulario
+    // Setup del formulario de login
     const formularioLogin = document.getElementById('loginForm');
     if (formularioLogin) {
       const self = this;
@@ -345,6 +377,69 @@ class SistemaLogin {
     if (!usuarios) {
       this.guardarUsuarios(this.usuariosDemo);
     }
+  }
+
+  // ============================================
+  // UTILIDADES - REEMPLAZO DE MÉTODOS MODERNOS
+  // ============================================
+
+  // Parsear JSON
+  parsearJSON(texto) {
+    return JSON.parse(texto);
+  }
+
+  // Stringificar JSON
+  stringificarJSON(objeto) {
+    return JSON.stringify(objeto);
+  }
+
+  // Buscar posición de carácter
+  buscarCaracter(texto, caracter) {
+    for (let i = 0; i < texto.length; i++) {
+      if (texto[i] === caracter) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  // Extraer desde posición hasta el final
+  extraerDesde(texto, desde) {
+    let resultado = '';
+    for (let i = desde; i < texto.length; i++) {
+      resultado += texto[i];
+    }
+    return resultado;
+  }
+
+  // Extraer desde inicio hasta posición
+  extraerHasta(texto, hasta) {
+    let resultado = '';
+    for (let i = 0; i < hasta && i < texto.length; i++) {
+      resultado += texto[i];
+    }
+    return resultado;
+  }
+
+  // Dividir texto por separador
+  dividirPor(texto, separador) {
+    const resultado = [];
+    let actual = '';
+    
+    for (let i = 0; i < texto.length; i++) {
+      if (texto[i] === separador) {
+        resultado.push(actual);
+        actual = '';
+      } else {
+        actual += texto[i];
+      }
+    }
+    
+    if (actual.length > 0 || texto.length > 0) {
+      resultado.push(actual);
+    }
+    
+    return resultado;
   }
 }
 
