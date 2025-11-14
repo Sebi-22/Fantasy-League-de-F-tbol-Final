@@ -1385,7 +1385,6 @@ footer p:hover {
     transform: translate3d(4px, 0, 0);
   }
 }
-
 /* ============================================
    MEDIA QUERIES (Bootstrap breakpoints)
    ============================================ */
@@ -1395,7 +1394,6 @@ footer p:hover {
     padding: 3rem;
     border-radius: 30px;
   }
-
   .auth-logo {
     width: 80px;
     height: 80px;
@@ -1406,66 +1404,51 @@ footer p:hover {
   .hero-section h1 {
     font-size: 2.5rem;
   }
-
   .stat-card {
     padding: 1rem;
   }
-
   .stat-card h3 {
     font-size: 2rem;
   }
-
   .feature-card {
     padding: 2rem;
   }
-
   .feature-number {
     font-size: 3rem;
   }
-
   .mini-icon {
     font-size: 2rem;
   }
-
   .cta-box {
     padding: 2rem;
   }
-
   .auth-card {
     padding: 2rem 1.5rem;
     border-radius: 20px;
   }
-
   .auth-logo {
     width: 60px;
     height: 60px;
   }
-
   .selection-header h1 {
     font-size: 1.5rem;
   }
-
   .table {
     font-size: 0.85rem;
   }
-
   .table td {
     padding: 0.5rem;
   }
-
   .player-item {
     padding: 0.5rem;
   }
-
   .position-badge {
     padding: 0.5rem;
   }
-
   .position-badge .emoji {
     font-size: 1.2rem;
   }
 }
-
 /* LG: ≥992px */
 @media (min-width: 992px) {
   .py-lg-6 {
