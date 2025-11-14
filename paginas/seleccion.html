@@ -9,12 +9,11 @@
 </head>
 <body class="bg-dark text-light">
 
-
-  <!-- NAVBAR -->
+  <!-- NAVBAR - ✅ RUTAS CORREGIDAS -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-black fixed-top shadow-sm">
     <div class="container">
-      <a class="navbar-brand d-flex align-items-center fw-bold text-success" href="index.html">
-        <img src="/assets/imagenes/Logo del juego de Fantasy League.png" alt="Logo" class="logo-img me-2">
+      <a class="navbar-brand d-flex align-items-center fw-bold text-success" href="../index.html">
+        <img src="../assets/imagenes/Logo del juego de Fantasy League.png" alt="Logo" class="logo-img me-2">
         Fantasy League
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -22,16 +21,16 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="/index.html">Inicio</a></li>
-          <li class="nav-item"><a class="nav-link active" href="/paginas/seleccion.html">Seleccionar jugadores</a></li>
-          <li class="nav-item"><a class="nav-link" href="/paginas/equipo.html">Mi equipo</a></li>
-          <li class="nav-item"><a class="nav-link" href="/paginas/ranking.html">Ranking</a></li>
+          <li class="nav-item"><a class="nav-link" href="../index.html">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link active" href="seleccion.html">Seleccionar jugadores</a></li>
+          <li class="nav-item"><a class="nav-link" href="equipo.html">Mi equipo</a></li>
+          <li class="nav-item"><a class="nav-link" href="ranking.html">Ranking</a></li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Más</a>
             <ul class="dropdown-menu dropdown-menu-end">  
-              <li><a class="dropdown-item" href="/paginas/admin.html">Admin</a></li>
+              <li><a class="dropdown-item" href="admin.html">Admin</a></li>
               <li id="navSession"></li>
-              <li><a class="dropdown-item" href="/paginas/about.html">Sobre el proyecto</a></li>
+              <li><a class="dropdown-item" href="about.html">Sobre el proyecto</a></li>
             </ul>
           </li>
         </ul>
@@ -65,6 +64,7 @@
                   class="form-control bg-dark text-light border-success" 
                   id="buscarJugador" 
                   placeholder="Buscar por nombre..."
+                  aria-label="Buscar jugador"
                 >
               </div>
             </div>
@@ -75,7 +75,6 @@
         <div class="card bg-dark border-success mb-4">
           <div class="card-body">
             <div class="row g-3">
-              <!-- Filtro por posición -->
               <div class="col-md-3 col-6">
                 <label class="form-label text-white small">Posición:</label>
                 <select id="filtroPosicion" class="form-select form-select-sm bg-dark text-light border-success">
@@ -87,16 +86,13 @@
                 </select>
               </div>
 
-              <!-- Filtro por equipo -->
               <div class="col-md-3 col-6">
                 <label class="form-label text-white small">Equipo:</label>
                 <select id="filtroEquipo" class="form-select form-select-sm bg-dark text-light border-success">
                   <option value="">Todos</option>
-                  <!-- Se llena dinámicamente -->
                 </select>
               </div>
 
-              <!-- Ordenar por -->
               <div class="col-md-3 col-6">
                 <label class="form-label text-white small">Ordenar por:</label>
                 <select id="ordenar" class="form-select form-select-sm bg-dark text-light border-success">
@@ -107,9 +103,8 @@
                 </select>
               </div>
 
-              <!-- Botón limpiar filtros -->
               <div class="col-md-3 col-6 d-flex align-items-end">
-                <button class="btn btn-outline-warning btn-sm w-100" id="limpiarFiltros">
+                <button class="btn btn-outline-warning btn-sm w-100" id="limpiarFiltros" type="button">
                   🔄 Limpiar filtros
                 </button>
               </div>
@@ -155,7 +150,7 @@
             <div id="sinResultados" class="text-center py-5 d-none">
               <div class="text-white-50 mb-3" style="font-size: 3rem;">😕</div>
               <p class="text-white-50">No se encontraron jugadores</p>
-              <button class="btn btn-outline-success btn-sm" id="limpiarBusqueda">
+              <button class="btn btn-outline-success btn-sm" id="limpiarBusqueda" type="button">
                 Limpiar búsqueda
               </button>
             </div>
@@ -205,6 +200,9 @@
                     role="progressbar" 
                     id="presupuestoBar"
                     style="width: 100%"
+                    aria-valuenow="100"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
                   ></div>
                 </div>
                 <small class="text-white-50 d-block mt-1">
@@ -226,6 +224,9 @@
                     role="progressbar" 
                     id="jugadoresBar"
                     style="width: 0%"
+                    aria-valuenow="0"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
                   ></div>
                 </div>
               </div>
@@ -234,7 +235,7 @@
 
               <!-- Contadores por posición -->
               <div class="mb-3">
-                <h6 class="text-info mb-3 small fw-bold">Posiciones:</h6>
+                <h2 class="text-info mb-3 small fw-bold h6">Posiciones:</h2>
                 <div class="row g-2">
                   <div class="col-6">
                     <div class="position-badge arquero">
@@ -279,12 +280,12 @@
 
               <!-- Lista de jugadores seleccionados -->
               <div class="mb-3">
-                <h6 class="text-info mb-3 small fw-bold d-flex justify-content-between align-items-center">
+                <h2 class="text-info mb-3 small fw-bold d-flex justify-content-between align-items-center h6">
                   <span>Jugadores seleccionados:</span>
-                  <button class="btn btn-outline-danger btn-sm" id="btnLimpiar" style="font-size: 0.7rem; padding: 0.2rem 0.5rem;">
+                  <button class="btn btn-outline-danger btn-sm" id="btnLimpiar" style="font-size: 0.7rem; padding: 0.2rem 0.5rem;" type="button">
                     🗑️ Limpiar
                   </button>
-                </h6>
+                </h2>
                 <div id="listaJugadoresSeleccionados" class="players-list">
                   <p class="text-white-50 text-center small py-3 mb-0">
                     Sin jugadores aún
@@ -294,7 +295,7 @@
 
               <!-- Botón guardar -->
               <div class="d-grid">
-                <button id="btnGuardarEquipo" class="btn btn-success py-3 fw-bold" disabled>
+                <button id="btnGuardarEquipo" class="btn btn-success py-3 fw-bold" disabled type="button">
                   💾 Guardar Equipo
                 </button>
               </div>
@@ -310,7 +311,7 @@
           <!-- Card de ayuda -->
           <div class="card bg-dark border-secondary">
             <div class="card-body">
-              <h6 class="text-secondary mb-2 small fw-bold">💡 Consejos</h6>
+              <h2 class="text-secondary mb-2 small fw-bold h6">💡 Consejos</h2>
               <ul class="small text-white-50 mb-0 ps-3">
                 <li>Usá filtros para encontrar jugadores rápido</li>
                 <li>Equilibrá estrellas con jugadores económicos</li>
@@ -337,14 +338,14 @@
         <div class="toast-body" id="toastMessage">
           Mensaje
         </div>
-        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Cerrar"></button>
       </div>
     </div>
   </div>
 
+  <!-- Scripts en ORDEN CORRECTO -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="../assets/js/sistema-puntos.js"></script>
-  <script src="../assets/js/seleccion.js"></script>
   <script src="../assets/js/session.js"></script>
+  <script src="../assets/js/seleccion.js"></script>
 </body>
 </html>

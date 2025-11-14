@@ -134,7 +134,7 @@ class GestorSeleccion {
             <div class="me-2" style="font-size: 1.5rem;">${this.obtenerEmojiPosicion(jugador.posicion)}</div>
             <div>
               <div class="fw-semibold">${jugador.nombre}</div>
-              <small class="text-muted">${jugador.nacionalidad || 'N/A'}</small>
+              <small class="text-light">${jugador.nacionalidad || 'N/A'}</small>
             </div>
           </div>
         </td>

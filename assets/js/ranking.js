@@ -149,7 +149,7 @@ function mostrarRanking() {
       </td>
       <td>
         <div class="fw-semibold">${equipo.nombre}</div>
-        <small class="text-white-50">${equipo.usuario}</small>
+        <small class="text-dark-50">${equipo.usuario}</small>
         ${equipo.usuario === usuarioActual ? '<span class="badge bg-success ms-2">Tú</span>' : ''}
       </td>
       <td class="text-center">
@@ -158,7 +158,7 @@ function mostrarRanking() {
       <td class="text-end fw-bold text-success">
         ${equipo.puntosTotal.toFixed(1)}
       </td>
-      <td class="text-end text-white-50">
+      <td class="text-end text-dark-50">
         ${equipo.promedio.toFixed(2)}
       </td>
     `;
@@ -205,7 +205,7 @@ function mostrarPodio() {
         <div class="col-md-4 order-${ordenes[i]}">
           <div class="card bg-dark border-secondary opacity-50">
             <div class="card-body py-4">
-              <p class="text-white-50">Sin datos</p>
+              <p class="text-dark-50">Sin datos</p>
             </div>
           </div>
         </div>
@@ -224,9 +224,9 @@ function mostrarPodio() {
             <h5 class="text-${colores[index]} fw-bold mb-2">${equipo.nombre}</h5>
             <p class="text-white-50 small mb-3">${equipo.usuario}</p>
             <h3 class="text-success fw-bold mb-1">${equipo.puntosTotal.toFixed(1)}</h3>
-            <small class="text-white-50">puntos</small>
+            <small class="text-dark-50">puntos</small>
             <hr class="border-${colores[index]} my-3">
-            <small class="text-white-50">
+            <small class="text-dark-50">
               ${equipo.jornadasJugadas} jornadas<br>
               Promedio: ${equipo.promedio.toFixed(2)}
             </small>
